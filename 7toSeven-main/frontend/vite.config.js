@@ -8,7 +8,8 @@ export default defineConfig({
   define: {
     'process.env': {
       ...process.env,
-      REACT_APP_BACKEND_URL: 'http://127.0.0.1:8000'
+      REACT_APP_BACKEND_URL: process.env.REACT_APP_BACKEND_URL || 'http://127.0.0.1:8000',
+      REACT_APP_RAZORPAY_KEY_ID: process.env.REACT_APP_RAZORPAY_KEY_ID
     }
   },
   resolve: {

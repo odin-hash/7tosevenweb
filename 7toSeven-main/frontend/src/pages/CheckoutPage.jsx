@@ -21,17 +21,67 @@ export default function CheckoutPage() {
     if (items.length === 0) return;
     setSubmitting(true);
     try {
-      const res = await axios.post(`${API}/orders`, {
-        ...form,
+      // Step 1: Tell backend to generate a Razorpay order ID
+      const orderPayload = {
         items: items.map(i => ({
           product_id: i.product_id, product_name: i.product_name,
           size: i.size, quantity: i.quantity, price: i.price, image: i.image,
-        })),
+        }))
+      };
+
+      const razorpayRes = await axios.post(`${API}/create-razorpay-order`, orderPayload);
+      const { id: razorpay_order_id, amount, currency } = razorpayRes.data;
+
+      // Step 2: Open Razorpay Payment Popup
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID, // Passed through Vite
+        amount: amount,
+        currency: currency,
+        name: "7toSEVEN",
+        description: "Official Order Checkout",
+        order_id: razorpay_order_id,
+        handler: async function (response) {
+          // Step 3: Send verification to backend and final database save
+          setSubmitting(true);
+          try {
+            const res = await axios.post(`${API}/orders`, {
+              ...form,
+              ...orderPayload,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature
+            });
+            clearCart();
+            navigate(`/order-confirmed?id=${res.data.order_id}`);
+          } catch (verifyErr) {
+            console.error('Verification failed:', verifyErr);
+            alert("Payment verification failed. Please contact support.");
+            setSubmitting(false);
+          }
+        },
+        prefill: {
+          name: form.customer_name,
+          email: form.customer_email,
+          contact: form.customer_phone
+        },
+        theme: {
+          color: "#000000" // Native fast black
+        }
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.on('payment.failed', function (response){
+        console.error(response.error);
+        alert("Payment failed: " + response.error.description);
       });
-      clearCart();
-      navigate(`/order-confirmed?id=${res.data.order_id}`);
-    } catch (err) { console.error('Order failed:', err); }
-    finally { setSubmitting(false); }
+      rzp1.open();
+
+    } catch (err) { 
+      console.error('Razorpay initiation failed:', err); 
+      alert("Checkout unavailable. Please try again.");
+    } finally { 
+      setSubmitting(false); // We enable the button behind the popup
+    }
   };
 
   if (items.length === 0) {

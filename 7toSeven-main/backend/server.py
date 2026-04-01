@@ -9,12 +9,18 @@ from pydantic import BaseModel
 from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
+import razorpay
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 SUPABASE_URL = os.environ.get('SUPABASE_URL', '')
 SUPABASE_KEY = os.environ.get('SUPABASE_KEY', '')
+
+RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID', '')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', '')
+
+razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET)) if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET else None
 
 HEADERS = {
     "apikey": SUPABASE_KEY,
@@ -81,6 +87,12 @@ class OrderCreate(BaseModel):
     city: str
     state: str
     pincode: str
+    razorpay_payment_id: Optional[str] = None
+    razorpay_order_id: Optional[str] = None
+    razorpay_signature: Optional[str] = None
+
+class RazorpayOrderRequest(BaseModel):
+    items: List[OrderItemModel]
 
 
 # ── API ROUTES ─────────────────────────────────────────────────────
@@ -156,12 +168,45 @@ async def get_drop_stories():
     }
 
 
+@api_router.post("/create-razorpay-order")
+async def create_razorpay_order(req: RazorpayOrderRequest):
+    subtotal = sum(item.price * item.quantity for item in req.items)
+    shipping_fee = 0 if subtotal >= 999 else 99
+    total = subtotal + shipping_fee
+    
+    if not razorpay_client:
+        raise HTTPException(status_code=500, detail="Razorpay is not configured on the backend.")
+        
+    try:
+        order_data = {
+            "amount": int(total * 100), # Amount in paise
+            "currency": "INR",
+            "receipt": "rcpt_" + str(uuid.uuid4())[:8]
+        }
+        rzp_order = razorpay_client.order.create(data=order_data)
+        return {"id": rzp_order["id"], "amount": rzp_order["amount"], "currency": rzp_order["currency"]}
+    except Exception as e:
+        logger.error(f"Razorpay error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to create Razorpay order")
+
 @api_router.post("/orders")
 async def create_order(order: OrderCreate):
     order_number = str(uuid.uuid4())[:8].upper()
     subtotal = sum(item.price * item.quantity for item in order.items)
     shipping_fee = 0 if subtotal >= 999 else 99
     total = subtotal + shipping_fee
+
+    # Verify Razorpay Signature if Razorpay is configured
+    if razorpay_client and order.razorpay_payment_id and order.razorpay_signature and order.razorpay_order_id:
+        try:
+            razorpay_client.utility.verify_payment_signature({
+                'razorpay_order_id': order.razorpay_order_id,
+                'razorpay_payment_id': order.razorpay_payment_id,
+                'razorpay_signature': order.razorpay_signature
+            })
+        except Exception as e:
+            logger.error(f"Payment verification failed: {str(e)}")
+            raise HTTPException(status_code=400, detail="Payment verification failed")
 
     order_doc = {
         "order_number": order_number,
@@ -178,7 +223,9 @@ async def create_order(order: OrderCreate):
         "subtotal": float(subtotal),
         "shipping_fee": float(shipping_fee),
         "total": float(total),
-        "status": "pending",
+        "status": "paid" if order.razorpay_payment_id else "pending",
+        "razorpay_payment_id": order.razorpay_payment_id,
+        "razorpay_order_id": order.razorpay_order_id,
     }
 
     # Attempt Supabase insert
