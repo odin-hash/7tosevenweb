@@ -29,6 +29,14 @@ function ScrollToTop() {
 }
 
 function App() {
+  useEffect(() => {
+    console.log(
+      "%c7toSEVEN \n%cLooking under the hood? We like that. \nIf you're a developer exploring our code, you're awesome!",
+      "color: black; background: white; font-family: sans-serif; font-size: 3em; font-weight: bolder; padding: 10px; border-radius: 5px;",
+      "font-family: sans-serif; font-size: 1.2em; color: #888; font-style: italic;"
+    );
+  }, []);
+
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
       <div className="App">
