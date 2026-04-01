@@ -171,7 +171,7 @@ async def get_drop_stories():
 @api_router.post("/create-razorpay-order")
 async def create_razorpay_order(req: RazorpayOrderRequest):
     subtotal = sum(item.price * item.quantity for item in req.items)
-    shipping_fee = 0 if subtotal >= 999 else 99
+    shipping_fee = 0 if subtotal >= 899 else 99
     total = subtotal + shipping_fee
     
     if not razorpay_client:
@@ -193,7 +193,7 @@ async def create_razorpay_order(req: RazorpayOrderRequest):
 async def create_order(order: OrderCreate):
     order_number = str(uuid.uuid4())[:8].upper()
     subtotal = sum(item.price * item.quantity for item in order.items)
-    shipping_fee = 0 if subtotal >= 999 else 99
+    shipping_fee = 0 if subtotal >= 899 else 99
     total = subtotal + shipping_fee
 
     # Verify Razorpay Signature if Razorpay is configured

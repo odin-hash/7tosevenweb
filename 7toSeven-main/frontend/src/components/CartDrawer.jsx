@@ -106,9 +106,9 @@ export default function CartDrawer() {
         {/* Footer */}
         {items.length > 0 && (
           <div className="p-6 pt-4 space-y-4 border-t border-black/5 dark:border-white/[0.04]">
-            {subtotal < 999 ? (
+            {subtotal < 899 ? (
               <p data-testid="cart-shipping-msg" className="text-[10px] text-center text-black/30 dark:text-white/30 uppercase tracking-wider">
-                Add {'\u20B9'}{(999 - subtotal).toLocaleString('en-IN')} more for free shipping
+                Add {'\u20B9'}{(899 - subtotal).toLocaleString('en-IN')} more for free shipping
               </p>
             ) : (
               <p data-testid="cart-free-shipping" className="text-[10px] text-center text-black/50 dark:text-white/50 uppercase tracking-wider">

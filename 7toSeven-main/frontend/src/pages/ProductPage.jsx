@@ -190,7 +190,7 @@ export default function ProductPage() {
                     Shipping & Returns
                   </AccordionTrigger>
                   <AccordionContent className="text-sm text-black/40 dark:text-white/40 leading-relaxed pb-5">
-                    Free shipping on orders above {'\u20B9'}999. Standard delivery in 5-7 business days.
+                    Free shipping on orders above {'\u20B9'}899. Standard delivery in 5-7 business days.
                     Easy returns within 7 days of delivery. Items must be unworn with tags attached.
                   </AccordionContent>
                 </AccordionItem>
