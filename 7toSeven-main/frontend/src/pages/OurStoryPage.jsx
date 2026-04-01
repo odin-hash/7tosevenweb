@@ -38,7 +38,7 @@ export default function OurStoryPage() {
               </p>
             </div>
             <div className="aspect-[4/5] overflow-hidden rounded-2xl">
-              <img src="/story-origin-2.png" alt="Premium Raw Denim" fetchPriority="high" className="w-full h-full object-cover" />
+              <img src="/story-origin-2.jpg" alt="Premium Raw Denim" fetchPriority="high" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ export default function OurStoryPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="aspect-[4/5] overflow-hidden rounded-2xl order-2 lg:order-1">
-              <img src="/story-process-2.png" alt="Tailor working on Heavyweight process" fetchPriority="high" className="w-full h-full object-cover" />
+              <img src="/story-process-2.jpg" alt="Tailor working on Heavyweight process" fetchPriority="high" className="w-full h-full object-cover" />
             </div>
             <div className="order-1 lg:order-2">
               <p className="text-[10px] uppercase tracking-[0.3em] text-black/30 dark:text-white/30 mb-4">Chapter 02</p>

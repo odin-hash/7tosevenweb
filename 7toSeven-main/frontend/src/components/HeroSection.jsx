@@ -12,13 +12,20 @@ export default function HeroSection() {
   return (
     <section data-testid="hero-section" className="relative w-full min-h-[100dvh] flex flex-col justify-end pt-32 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
       {/* Background Image Container */}
-      <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
-        {/* Single master transparent PNG perfectly aligned and CSS styled for mode */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Dark Mode Background */}
         <img
-          src="/hero-image-transparent.png"
-          alt="7toSEVEN Drop 001"
+          src="/hero-image.jpg"
+          alt="7toSEVEN Drop 001 - Dark Mode"
           fetchPriority="high"
-          className="w-full h-full object-cover object-center transition-all duration-700 dark:brightness-75 dark:contrast-125"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-0 dark:opacity-100 transition-opacity duration-1000"
+        />
+        {/* Light Mode Background */}
+        <img
+          src="/hero-image-light.jpg"
+          alt="7toSEVEN Drop 001 - Light Mode"
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-100 dark:opacity-0 transition-opacity duration-1000"
         />
         
         {/* Gradients */}
