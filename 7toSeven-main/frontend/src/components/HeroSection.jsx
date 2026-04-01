@@ -9,19 +9,26 @@ export default function HeroSection() {
   
   useEffect(() => setMounted(true), []);
 
-  // Compute actual theme
-  const currentTheme = theme === 'system' ? systemTheme : theme;
-  const heroImageSrc = mounted && currentTheme === 'light' ? "/hero-image-light.jpg" : "/hero-image.jpg";
-
   return (
     <section data-testid="hero-section" className="relative w-full min-h-[100dvh] flex flex-col justify-end pt-32 bg-white dark:bg-black transition-colors duration-500">
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      {/* Background Image Container */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Dark Mode Background */}
         <img
-          src={heroImageSrc}
-          alt="7toSEVEN Drop 001"
-          className="w-full h-full object-cover object-center transition-opacity duration-1000"
+          src="/hero-image.jpg"
+          alt="7toSEVEN Drop 001 - Dark Mode"
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-0 dark:opacity-100 transition-opacity duration-1000"
         />
+        {/* Light Mode Background */}
+        <img
+          src="/hero-image-light.jpg"
+          alt="7toSEVEN Drop 001 - Light Mode"
+          fetchPriority="high"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-100 dark:opacity-0 transition-opacity duration-1000"
+        />
+        
+        {/* Gradients */}
         <div className="absolute inset-0 bg-white/20 dark:bg-black/50 transition-colors duration-500" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#F9F9F9] via-[#F9F9F9]/40 to-transparent dark:from-[#0A0A0A] dark:via-[#0A0A0A]/20 transition-colors duration-500" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#F9F9F9]/90 via-[#F9F9F9]/20 to-transparent dark:from-[#0A0A0A]/80 dark:via-transparent transition-colors duration-500" />
