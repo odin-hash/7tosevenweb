@@ -9,7 +9,7 @@ const ICON_LOGO = "/logo-icon.png";
 export default function Navbar() {
   const { setIsCartOpen, itemCount, isCartOpen } = useCart();
   const location = useLocation();
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -25,7 +25,7 @@ export default function Navbar() {
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -42,7 +42,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-5 md:px-8 h-14 md:h-16">
           {/* Left — Icon logo (lightning bolt) */}
           <Link to="/" data-testid="nav-logo" className="shrink-0 flex items-center">
-            <img src={ICON_LOGO} alt="7toSEVEN" className={`h-4 sm:h-5 md:h-6 lg:h-7 w-auto object-contain transition-all duration-500 ${theme !== 'dark' ? 'invert' : ''}`} />
+            <img src={ICON_LOGO} alt="7toSEVEN" className={`h-4 sm:h-5 md:h-6 lg:h-7 w-auto object-contain transition-all duration-500 ${resolvedTheme !== 'dark' ? 'invert' : ''}`} />
           </Link>
 
           {/* Center — Links (desktop) */}
@@ -65,7 +65,7 @@ export default function Navbar() {
                 {/* Subtle pulsing indicator to draw attention */}
                 <span className="absolute inline-flex h-[130%] w-[130%] rounded-full bg-black/10 dark:bg-white/10 opacity-75 group-hover:animate-ping animate-pulse"></span>
                 <button onClick={toggleTheme} className="relative z-10 text-[#111]/70 hover:text-black dark:text-white/70 dark:hover:text-white transition-all duration-300 bg-[#111]/5 dark:bg-white/10 p-1.5 rounded-full">
-                  {theme === 'dark' ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
+                  {resolvedTheme === 'dark' ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
                 </button>
               </div>
             )}

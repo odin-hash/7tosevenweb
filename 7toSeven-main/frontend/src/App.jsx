@@ -30,7 +30,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
       <div className="App">
         <BrowserRouter>
           <ScrollToTop />
