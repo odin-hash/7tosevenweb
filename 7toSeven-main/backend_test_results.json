@@ -1,0 +1,155 @@
+{
+  "summary": {
+    "total_tests": 16,
+    "passed_tests": 16,
+    "failed_tests": 0,
+    "success_rate": 100.0
+  },
+  "test_results": [
+    {
+      "name": "API Root",
+      "method": "GET",
+      "endpoint": "",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 45
+    },
+    {
+      "name": "Get All Products",
+      "method": "GET",
+      "endpoint": "products",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 5247
+    },
+    {
+      "name": "Category Filter - Tees",
+      "method": "GET",
+      "endpoint": "products?category=tees",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 2004
+    },
+    {
+      "name": "Category Filter - Hoodies",
+      "method": "GET",
+      "endpoint": "products?category=hoodies",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 1331
+    },
+    {
+      "name": "Sort - Price Low to High",
+      "method": "GET",
+      "endpoint": "products?sort=price-low",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 5247
+    },
+    {
+      "name": "Sort - Price High to Low",
+      "method": "GET",
+      "endpoint": "products?sort=price-high",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 5247
+    },
+    {
+      "name": "Sort - Newest",
+      "method": "GET",
+      "endpoint": "products?sort=newest",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 5247
+    },
+    {
+      "name": "Featured Products",
+      "method": "GET",
+      "endpoint": "products?featured=true",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 3283
+    },
+    {
+      "name": "Size Filter - M",
+      "method": "GET",
+      "endpoint": "products?size=M",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 5247
+    },
+    {
+      "name": "Get Single Product",
+      "method": "GET",
+      "endpoint": "products/shadow-oversized-tee",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 2003
+    },
+    {
+      "name": "Get Non-existent Product",
+      "method": "GET",
+      "endpoint": "products/non-existent-product",
+      "expected_status": 404,
+      "actual_status": 404,
+      "success": true,
+      "response_size": 30
+    },
+    {
+      "name": "Get Collections",
+      "method": "GET",
+      "endpoint": "collections",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 663
+    },
+    {
+      "name": "Get Drop Stories",
+      "method": "GET",
+      "endpoint": "drop-stories",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 789
+    },
+    {
+      "name": "Create Order",
+      "method": "POST",
+      "endpoint": "orders",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 720
+    },
+    {
+      "name": "Get Order",
+      "method": "GET",
+      "endpoint": "orders/E364EE22",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_size": 720
+    },
+    {
+      "name": "Get Non-existent Order",
+      "method": "GET",
+      "endpoint": "orders/INVALID123",
+      "expected_status": 404,
+      "actual_status": 404,
+      "success": true,
+      "response_size": 28
+    }
+  ],
+  "timestamp": "2026-03-30T06:11:27.098734"
+}

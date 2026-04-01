@@ -1,0 +1,114 @@
+{
+  "project_name": "7toSEVEN",
+  "theme": "dark",
+  "archetype": "Brutalist Luxury / Swiss High-Contrast",
+  "design_philosophy": "Dark, minimal, aggressive aesthetic. No border radius anywhere. No gradients. No shadows. A raw, structural, grid-focused design inspired by high-end streetwear.",
+  "typography": {
+    "primary_font": "Impact, sans-serif",
+    "secondary_font": "Arial, sans-serif",
+    "rules": {
+      "headings": "MUST use Impact font, uppercase only. Tight tracking (tracking-tight or tracking-tighter).",
+      "body": "MUST use Arial font. Clean, readable, geometric.",
+      "scales": {
+        "h1": "text-5xl md:text-6xl lg:text-7xl uppercase tracking-tighter leading-none",
+        "h2": "text-4xl md:text-5xl uppercase tracking-tight leading-none",
+        "h3": "text-2xl md:text-3xl uppercase tracking-tight",
+        "body": "text-base leading-relaxed text-[#C4C4C4]",
+        "small": "text-sm uppercase tracking-widest text-[#C4C4C4]"
+      }
+    }
+  },
+  "colors": {
+    "background": "#0A0A0A",
+    "surface": "#111111",
+    "text": "#C4C4C4",
+    "accent": "#FFFFFF",
+    "border": "#1E1E1E",
+    "hover": "#C4C4C4",
+    "rules": {
+      "background_usage": "Global app background is pure #0A0A0A.",
+      "surface_usage": "Cards, dropdowns, and elevated containers use #111111.",
+      "border_usage": "Always 1px solid #1E1E1E. Used aggressively to define structure.",
+      "text_usage": "Primary text and icons use #C4C4C4. High emphasis text uses #FFFFFF.",
+      "cta_usage": "Primary buttons MUST have background #FFFFFF and text #0A0A0A. Hover state darkens slightly or inverts."
+    }
+  },
+  "spacing": {
+    "system": "Strictly limited to: 8px, 16px, 24px, 40px, 64px.",
+    "tailwind_classes": ["p-2", "p-4", "p-6", "p-10", "p-16", "gap-2", "gap-4", "gap-6", "gap-10", "gap-16"]
+  },
+  "components": {
+    "global_rules": [
+      "No border radius anywhere (rounded-none).",
+      "No shadows anywhere (shadow-none).",
+      "No gradients anywhere.",
+      "All interactive elements MUST have data-testid attributes."
+    ],
+    "buttons": {
+      "primary": "bg-[#FFFFFF] text-[#0A0A0A] font-['Impact'] uppercase px-6 py-4 hover:bg-[#C4C4C4] transition-colors",
+      "secondary": "bg-transparent border border-[#1E1E1E] text-[#FFFFFF] font-['Impact'] uppercase px-6 py-4 hover:bg-[#111111] transition-colors"
+    },
+    "cards_and_surfaces": "bg-[#111111] border border-[#1E1E1E] p-6",
+    "inputs": "bg-[#111111] border border-[#1E1E1E] text-[#C4C4C4] p-4 font-['Arial'] focus:outline-none focus:border-[#FFFFFF]",
+    "navigation": "Sticky top, bg-[#0A0A0A], border-b border-[#1E1E1E]. Layout: Centered logo, left links, right icons.",
+    "announcement_bar": "bg-[#111111] text-[#FFFFFF] font-['Impact'] uppercase text-sm py-2 border-b border-[#1E1E1E]. Fast marquee scroll. Content: 'BOLD. ELECTRIC. FEARLESS. / DROP 001 / NOT FOR EVERYONE.'",
+    "product_card": "Bordered container. Image area border-b. Minimal text area: Brand, Title, Price."
+  },
+  "layouts": {
+    "grid_system": "Visible borders on grid items (border-collapse style). Brutalist exposed structure.",
+    "homepage": {
+      "hero": "Massive typography, full width or structured grid layout. Stark imagery.",
+      "product_grid": "4 columns desktop, 2 mobile. gap-px bg-[#1E1E1E] (1px borders everywhere).",
+      "drop_stories": "Horizontal scrolling list of circular or square portraits with visible borders.",
+      "editorial": "Large asymmetric blocks of text and image."
+    },
+    "product_page": {
+      "layout": "2-column split desktop. Left: Sticky image gallery. Right: Scrolling product info.",
+      "actions": "Massive, dominant ADD TO CART button."
+    },
+    "cart_drawer": "Slide from right. bg-[#0A0A0A] border-l border-[#1E1E1E]. Clear subtotal, free shipping message (> ₹999), checkout CTA."
+  },
+  "media": {
+    "image_urls": {
+      "hero": [
+        "https://images.unsplash.com/photo-1647768617268-06697e8a91d4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxibGFjayUyMGhvb2RpZSUyMHByb2R1Y3R8ZW58MHx8fHwxNzc0ODI0OTE5fDA&ixlib=rb-4.1.0&q=85",
+        "https://images.unsplash.com/photo-1614975058769-97b080519c13?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHw0fHxzdHJlZXR3ZWFyJTIwZmFzaGlvbiUyMG1vZGVsfGVufDB8fHx8MTc3NDgyNDkxOXww&ixlib=rb-4.1.0&q=85"
+      ],
+      "products": [
+        "https://images.unsplash.com/photo-1499971442178-8c10fdf5f6ac?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwyfHxibGFjayUyMGhvb2RpZSUyMHByb2R1Y3R8ZW58MHx8fHwxNzc0ODI0OTE5fDA&ixlib=rb-4.1.0&q=85",
+        "https://images.unsplash.com/photo-1627811269913-c0d964da1eb2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHw0fHxibGFjayUyMGhvb2RpZSUyMHByb2R1Y3R8ZW58MHx8fHwxNzc0ODI0OTE5fDA&ixlib=rb-4.1.0&q=85",
+        "https://images.unsplash.com/photo-1625024573124-57a3efa69d7d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwxfHxibGFjayUyMGhvb2RpZSUyMHByb2R1Y3R8ZW58MHx8fHwxNzc0ODI0OTE5fDA&ixlib=rb-4.1.0&q=85"
+      ],
+      "editorial_and_stories": [
+        "https://images.unsplash.com/photo-1642400997435-f4b7c0f68ce9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNDR8MHwxfHNlYXJjaHwzfHxzdHJlZXR3ZWFyJTIwZmFzaGlvbiUyMG1vZGVsfGVufDB8fHx8MTc3NDgyNDkxOXww&ixlib=rb-4.1.0&q=85",
+        "https://images.pexels.com/photos/5365647/pexels-photo-5365647.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "https://images.unsplash.com/photo-1684188503395-7b4cefbd1767?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHw0fHxibGFjayUyMGhvb2RpZSUyMHByb2R1Y3R8ZW58MHx8fHwxNzc0ODI0OTE5fDA&ixlib=rb-4.1.0&q=85"
+      ]
+    },
+    "rules": "Never use placeholder images. Images should feel dark, raw, and high-end."
+  },
+  "motion": {
+    "philosophy": "Instant and structural. Avoid bouncy or soft animations.",
+    "hover_states": "Hard cuts or fast fades on background colors. No scaling (no transform scaling).",
+    "scrolling": "Use smooth scrolling for marquee and horizontal scroll sections."
+  },
+  "icons": {
+    "library": "lucide-react",
+    "style": "Sharp, minimal, 1.5px stroke width. Consistent size (e.g., 20px or 24px)."
+  },
+  "accessibility": {
+    "contrast": "Ensure pure #FFFFFF text over #0A0A0A background for high-contrast readability.",
+    "focus": "focus:outline-none focus:ring-1 focus:ring-[#FFFFFF] focus:border-[#FFFFFF]"
+  },
+  "instructions_to_main_agent": [
+    "Strictly use tailwind classes font-['Impact'] and font-['Arial'].",
+    "Apply bg-[#0A0A0A] and text-[#C4C4C4] to the root body.",
+    "Completely ban rounded classes (e.g., rounded-md, rounded-lg, rounded-full) except for explicitly requested circular elements if any, otherwise stick to sharp corners.",
+    "Implement the 'Announcement Bar' at the very top using a marquee effect.",
+    "Create a solid grid structure with 1px solid #1E1E1E borders defining all sections.",
+    "Ensure the Cart is a slide-out drawer from the right side, with clear cart functionalities.",
+    "Build the product detail page with sticky images on the left and scrollable product info on the right.",
+    "Include 'BOLD. ELECTRIC. FEARLESS. / DROP 001 / NOT FOR EVERYONE.' heavily in the typography styling.",
+    "Ensure every interactive element (buttons, links, inputs) has a data-testid attribute in kebab-case format."
+  ]
+}
