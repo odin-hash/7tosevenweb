@@ -71,9 +71,13 @@ export default function CheckoutPage() {
 
       const rzp1 = new window.Razorpay(options);
       rzp1.on('payment.failed', function (response){
-        console.error(response.error);
-        alert("Payment failed: " + response.error.description);
+        console.error("Razorpay Detailed Error:", response.error);
+        const errorReason = response.error.reason || response.error.description;
+        alert(`Payment Initialization Failed.\nReason: ${errorReason}\nStep: ${response.error.step}`);
       });
+      
+      console.log("Razorpay Key Status: ", options.key ? `Loaded (${options.key.substring(0, 8)}...)` : "MISSING");
+      
       rzp1.open();
 
     } catch (err) { 
