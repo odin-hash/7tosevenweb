@@ -63,13 +63,14 @@
         padding-right: 0 !important;
     }
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'Impact', sans-serif;
+        font-family: 'Anton', 'Impact', sans-serif !important;
         text-transform: uppercase;
         letter-spacing: 0.04em;
         @apply text-[#0A0A0A] dark:text-white transition-colors duration-500;
     }
     
     .font-\[\'Impact\'\] {
+        font-family: 'Anton', 'Impact', sans-serif !important;
         letter-spacing: 0.04em !important;
     }
 }

@@ -61,9 +61,13 @@ export default function Navbar() {
           {/* Right — Icons */}
           <div className="flex items-center gap-4 md:gap-5">
             {mounted && (
-              <button onClick={toggleTheme} className="text-[#111]/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-all duration-300">
-                {theme === 'dark' ? <Sun size={18} strokeWidth={1.5} /> : <Moon size={18} strokeWidth={1.5} />}
-              </button>
+              <div className="relative flex items-center justify-center group" title="Switch to Dark Mode">
+                {/* Subtle pulsing indicator to draw attention */}
+                <span className="absolute inline-flex h-[130%] w-[130%] rounded-full bg-black/10 dark:bg-white/10 opacity-75 group-hover:animate-ping animate-pulse"></span>
+                <button onClick={toggleTheme} className="relative z-10 text-[#111]/70 hover:text-black dark:text-white/70 dark:hover:text-white transition-all duration-300 bg-[#111]/5 dark:bg-white/10 p-1.5 rounded-full">
+                  {theme === 'dark' ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
+                </button>
+              </div>
             )}
 
             <button data-testid="nav-cart-btn" onClick={() => setIsCartOpen(true)} className="text-[#111]/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors duration-300 relative">

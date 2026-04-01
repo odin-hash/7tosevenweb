@@ -20,7 +20,7 @@ export default function DropCountdownSection() {
     <section className="py-10 md:py-20 transition-colors duration-500 relative overflow-hidden" data-testid="drop-countdown">
       {/* Background Watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.03] dark:opacity-[0.02]">
-        <h3 className="font-['Impact'] text-[10rem] md:text-[15vw] uppercase tracking-tighter whitespace-nowrap text-black dark:text-white">
+        <h3 className="font-['Impact'] text-[25vw] md:text-[15vw] uppercase tracking-tighter whitespace-nowrap text-black dark:text-white">
           THE DROP
         </h3>
       </div>

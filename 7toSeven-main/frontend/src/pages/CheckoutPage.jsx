@@ -95,7 +95,7 @@ export default function CheckoutPage() {
     );
   }
 
-  const inputClass = "w-full bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.06] text-black/80 dark:text-white/80 p-4 font-['Arial'] text-sm rounded-xl focus:outline-none focus:border-black/20 dark:border-white/20 placeholder:text-white/20 transition-colors duration-300";
+  const inputClass = "w-full bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.06] text-black/80 dark:text-white/80 p-4 font-['Arial'] text-sm rounded-xl focus:outline-none focus:border-black/20 dark:border-white/20 placeholder:text-black/40 dark:placeholder:text-white/20 transition-colors duration-300";
 
   return (
     <div data-testid="checkout-page" className="min-h-screen pt-32 md:pt-36">
