@@ -10,26 +10,19 @@ export default function HeroSection() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <section data-testid="hero-section" className="relative w-full min-h-[100dvh] flex flex-col justify-end pt-32 bg-white dark:bg-black transition-colors duration-500">
+    <section data-testid="hero-section" className="relative w-full min-h-[100dvh] flex flex-col justify-end pt-32 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
       {/* Background Image Container */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Dark Mode Background */}
+      <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
+        {/* Single master transparent PNG perfectly aligned and CSS styled for mode */}
         <img
-          src="/hero-image.jpg"
-          alt="7toSEVEN Drop 001 - Dark Mode"
+          src="/hero-image-transparent.png"
+          alt="7toSEVEN Drop 001"
           fetchPriority="high"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-0 dark:opacity-100 transition-opacity duration-1000"
-        />
-        {/* Light Mode Background */}
-        <img
-          src="/hero-image-light.jpg"
-          alt="7toSEVEN Drop 001 - Light Mode"
-          fetchPriority="high"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-100 dark:opacity-0 transition-opacity duration-1000"
+          className="w-full h-full object-cover object-center transition-all duration-700 dark:brightness-75 dark:contrast-125"
         />
         
         {/* Gradients */}
-        <div className="absolute inset-0 bg-white/20 dark:bg-black/50 transition-colors duration-500" />
+        <div className="absolute inset-0 bg-white/10 dark:bg-black/40 transition-colors duration-500 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#F9F9F9] via-[#F9F9F9]/40 to-transparent dark:from-[#0A0A0A] dark:via-[#0A0A0A]/20 transition-colors duration-500" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#F9F9F9]/90 via-[#F9F9F9]/20 to-transparent dark:from-[#0A0A0A]/80 dark:via-transparent transition-colors duration-500" />
       </div>
