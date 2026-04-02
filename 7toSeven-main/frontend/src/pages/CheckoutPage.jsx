@@ -108,7 +108,7 @@ export default function CheckoutPage() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-16">
         <div className="  border-white/10 pb-8">
           <p className="font-sans font-bold  md:text-xs uppercase tracking-[0.4em]  text-white/50 mb-4">SECURE</p>
-          <h1 className="font-['Impact']  uppercase tracking-widest  text-white leading-[0.9]">CHECKOUT</h1>
+          <h1 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight text-white leading-[1.1]">CHECKOUT</h1>
         </div>
       </div>
 
