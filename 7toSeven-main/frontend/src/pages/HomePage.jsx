@@ -165,8 +165,8 @@ export default function HomePage() {
           <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,7rem)] uppercase tracking-widest text-[#111111] dark:text-white transition-colors duration-500 leading-[1] md:ml-[25%] opacity-50 mt-4 md:mt-6">
             NO COMFORT ZONE.
           </h2>
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,7rem)] uppercase tracking-widest text-red-600 dark:text-red-500 transition-colors duration-500 leading-[1] md:ml-[15%] mt-4 md:mt-6 line-through decoration-black dark:decoration-white decoration-[6px] md:decoration-[12px] opacity-90">
-            NO APOLOGIES.
+          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,7rem)] uppercase tracking-widest text-red-600 dark:text-red-500 transition-colors duration-500 leading-[1] md:ml-[15%] mt-4 md:mt-6 opacity-90">
+            <span className="line-through decoration-black dark:decoration-white decoration-[6px] md:decoration-[12px]">NO APOLOGIES</span>.
           </h2>
         </div>
       </section>
