@@ -48,8 +48,8 @@ export default function HeroSection() {
       {/* Content Container - Asymmetrical Layout */}
       <div className="relative z-30 flex pl-6 md:pl-16 pr-6 md:pr-16 lg:px-24 pb-16 h-full max-w-[1400px] mx-auto w-full flex-grow">
         
-        {/* Top Right Secondary Paragraph */}
-        <div className="absolute top-8 right-6 md:right-16 lg:right-24 max-w-[280px] md:max-w-xs text-right animate-in fade-in slide-in-from-right-8 duration-1000 delay-300">
+        {/* Top Right Secondary Paragraph - Hidden on mobile to prevent collision */}
+        <div className="hidden md:block absolute top-8 right-16 lg:right-24 max-w-[280px] md:max-w-xs text-right animate-in fade-in slide-in-from-right-8 duration-1000 delay-300">
           <p className="font-['Impact'] uppercase tracking-[0.2em] text-[#CCFF00] mb-2 text-sm">
             // AUTHORIZED ACCESS
           </p>
@@ -64,7 +64,7 @@ export default function HeroSection() {
             DROP 001
           </p>
           
-          <h1 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase leading-[0.9] tracking-widest text-white drop-shadow-2xl">
+          <h1 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase leading-[0.8] tracking-widest text-white drop-shadow-2xl">
             BUILT<br/>
             DIFFERENT.<br/>
             WORN<br/>
