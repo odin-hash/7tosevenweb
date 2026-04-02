@@ -95,7 +95,7 @@ export default function ProductPage() {
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
-                className="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 hover:scale-[1.03] hover:grayscale-0 hover:opacity-100"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                 data-testid="product-main-image"
               />
             </div>
@@ -107,7 +107,7 @@ export default function ProductPage() {
                     data-testid={`product-thumbnail-${i}`}
                     onClick={() => setSelectedImage(i)}
                     className={`w-20 aspect-square overflow-hidden transition-all duration-300 ${
-                      selectedImage === i ? 'opacity-100 ring-1 ring-black dark:ring-white grayscale-0' : 'opacity-40 hover:opacity-100 grayscale'
+                      selectedImage === i ? 'opacity-100 ring-1 ring-black dark:ring-white' : 'opacity-50 hover:opacity-100'
                     }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />

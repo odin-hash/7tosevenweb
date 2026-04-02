@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
         <img
           src={product.images[0]}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           loading="lazy"
         />
         {product.is_new && (
