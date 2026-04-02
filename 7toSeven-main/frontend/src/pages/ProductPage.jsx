@@ -272,7 +272,9 @@ export default function ProductPage() {
               </div>
               <div className="flex flex-col items-center justify-center text-center gap-2">
                 <Shield size={20} className="text-white/60" />
-                <span className="font-sans text-[10px] uppercase tracking-widest text-white/50">SECURE CHECKOUT</span>
+                <span className="font-sans text-[10px] uppercase tracking-widest text-white/50">
+                  SECURE <span className="text-[13px] font-bold text-white tracking-[0.2em]">CHECKOUT</span>
+                </span>
               </div>
             </div>
 
