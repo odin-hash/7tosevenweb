@@ -98,7 +98,7 @@ export default function HomePage() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-12">
               {products.slice(0, 4).map((product) => (
                 <div key={product.id} className="h-full">
                   <ProductCard product={product} />
@@ -215,7 +215,7 @@ export default function HomePage() {
                 <img 
                   src={src} 
                   alt={`Lookbook Archive 00${idx + 1}`} 
-                  className="h-full w-full object-cover object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-grab active:cursor-grabbing" 
+                  className="h-full w-full object-cover object-center grayscale-[0.8] opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-200 ease-in cursor-grab active:cursor-grabbing" 
                   loading="lazy" 
                   draggable={false}
                 />

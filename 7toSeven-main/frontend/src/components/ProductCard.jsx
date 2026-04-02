@@ -35,6 +35,14 @@ export default function ProductCard({ product }) {
           </span>
         )}
 
+        {/* Scarcity Radar Indicator */}
+        <div className="absolute top-2 right-2 bg-black border border-white/10 flex items-center gap-2 px-3 py-1.5 z-30 rounded-none shadow-xl">
+          <div className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_rgba(163,230,53,0.8)]"></div>
+          <span className="text-white font-mono text-[9px] uppercase tracking-widest pt-0.5">
+            LIMITED RUN
+          </span>
+        </div>
+
         {/* Quick Add Overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-[20%] bg-white/95 backdrop-blur-md flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
           <span className="font-['Impact'] font-bold text-xs md:text-sm uppercase tracking-widest text-black">
