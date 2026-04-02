@@ -155,10 +155,11 @@ export default function CheckoutPage() {
                   ))}
                 </div>
                 <div className="mt-8 space-y-4 font-sans font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs">
-                  <div className="flex justify-between  text-white/50"><span>SUBTOTAL</span><span>{'\u20B9'}{subtotal.toLocaleString('en-IN')}</span></div>
-                  <div className="flex justify-between  text-white/50"><span>SHIPPING</span><span>{shipping === 0 ? 'FREE' : `\u20B9${shipping}`}</span></div>
-                  <div className="flex justify-between  text-white font-['Impact']  uppercase tracking-widest pt-6   border-white/10 mt-6">
-                    <span>TOTAL</span><span>{'\u20B9'}{total.toLocaleString('en-IN')}</span>
+                  <div className="flex justify-between text-white/50"><span>SUBTOTAL</span><span>{'\u20B9'}{subtotal.toLocaleString('en-IN')}</span></div>
+                  <div className="flex justify-between text-white/50"><span>SHIPPING</span><span>{shipping === 0 ? 'FREE' : `\u20B9${shipping}`}</span></div>
+                  <div className="flex justify-between items-end pt-6 border-t border-white/10 mt-6">
+                    <span className="font-['Impact'] text-xl md:text-2xl text-white tracking-widest leading-none uppercase">TOTAL</span>
+                    <span className="font-sans font-bold text-lg md:text-xl text-white tracking-widest leading-none">{'\u20B9'}{total.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
               </div>
