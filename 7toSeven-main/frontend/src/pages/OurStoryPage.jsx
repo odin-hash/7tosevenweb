@@ -69,9 +69,9 @@ export default function OurStoryPage() {
               { title: 'NO RESTOCKS', text: 'Small batches, never restocked. When it\'s gone, it\'s gone. This isn\'t scarcity marketing. It\'s integrity.' },
               { title: 'CRAFTED IN INDIA', text: 'Designed and manufactured locally. Supporting Indian craftsmanship while building a global brand.' },
             ].map((v, i) => (
-              <div key={i} className="border border-white/20 bg-[#0A0A0A] p-8 md:p-12 hover:bg-[#111] transition-colors duration-300">
-                <h3 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-widest text-white mb-6 drop-shadow-sm">{v.title}</h3>
-                <p className="text-sm text-white/50 leading-relaxed font-sans uppercase tracking-widest">{v.text}</p>
+              <div key={i} className="border-t border-white/10 bg-transparent pt-8 md:pt-12 mt-8 md:mt-0 transition-all duration-300">
+                <h3 className="font-['Impact'] text-2xl md:text-3xl uppercase tracking-widest text-white mb-4 drop-shadow-sm">{v.title}</h3>
+                <p className="text-[12px] md:text-sm text-white/50 font-sans tracking-[0.2em] uppercase leading-relaxed max-w-[90%]">{v.text}</p>
               </div>
             ))}
           </div>
@@ -84,8 +84,8 @@ export default function OurStoryPage() {
           IF YOU KNOW, <br className="md:hidden"/>YOU KNOW.
         </h2>
         <div className="mt-12 flex justify-center">
-          <Link to="/shop" data-testid="story-shop-btn" className="inline-block bg-white text-black font-['Impact'] text-xs md:text-sm uppercase tracking-[0.2em] px-12 py-5 border-2 border-white hover:bg-white/90 hover:scale-[1.02] active:scale-95 transition-all duration-300">
-            SHOP DROP
+          <Link to="/shop" data-testid="story-shop-btn" className="inline-block bg-white text-black font-sans font-bold text-[11px] md:text-xs uppercase tracking-[0.2em] px-10 py-4 hover:bg-black hover:text-white border border-white transition-colors duration-300">
+            SHOP THE DROP
           </Link>
         </div>
       </section>

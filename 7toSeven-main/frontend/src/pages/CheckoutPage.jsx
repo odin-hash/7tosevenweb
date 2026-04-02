@@ -90,22 +90,26 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-4 pt-32">
-        <p className="font-['Impact'] text-xl uppercase tracking-wider text-black/30 dark:text-white/30">Your cart is empty</p>
-        <button onClick={() => navigate('/shop')} data-testid="checkout-empty-shop-btn" className="bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-['Impact'] text-xs uppercase tracking-[0.15em] px-8 py-3.5 rounded-full hover:bg-black/80 dark:hover:bg-white/90 transition-all duration-300">
-          Continue Shopping
-        </button>
+      <div className="min-h-screen flex flex-col items-center justify-center gap-8 px-4 pt-32 pb-40 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
+        <div className="flex flex-col items-center text-center">
+          <p className="font-['Impact'] text-[clamp(2.5rem,5vw,4rem)] uppercase tracking-widest text-black dark:text-white mb-8">CART IS EMPTY</p>
+          <button onClick={() => navigate('/shop')} data-testid="checkout-empty-shop-btn" className="bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-sans font-bold text-[11px] uppercase tracking-[0.2em] px-10 py-4 border border-black dark:border-white hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white transition-all duration-300">
+            RETURN TO COLLECTION
+          </button>
+        </div>
       </div>
     );
   }
 
-  const inputClass = "w-full bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.06] text-black/80 dark:text-white/80 p-4 font-['Arial'] text-sm rounded-xl focus:outline-none focus:border-black/20 dark:border-white/20 placeholder:text-black/40 dark:placeholder:text-white/20 transition-colors duration-300";
+  const inputClass = "w-full bg-transparent border-b border-black/20 dark:border-white/20 text-black dark:text-white pb-3 pt-4 font-sans font-bold uppercase tracking-widest text-[11px] md:text-xs rounded-none focus:outline-none focus:border-black dark:focus:border-white placeholder:text-black/30 dark:placeholder:text-white/30 transition-all duration-300";
 
   return (
-    <div data-testid="checkout-page" className="min-h-screen pt-32 md:pt-36">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-10">
-        <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em] text-black/30 dark:text-white/30 mb-2">Secure</p>
-        <h1 className="font-['Impact'] text-4xl md:text-5xl uppercase tracking-tighter text-black dark:text-white leading-[1.1]">Checkout</h1>
+    <div data-testid="checkout-page" className="min-h-screen pt-32 md:pt-36 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-16">
+        <div className="border-b border-black/10 dark:border-white/10 pb-8">
+          <p className="font-sans font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] text-black/50 dark:text-white/50 mb-4">SECURE</p>
+          <h1 className="font-['Impact'] text-[clamp(3.5rem,8vw,6rem)] uppercase tracking-widest text-black dark:text-white leading-[0.9]">CHECKOUT</h1>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -113,46 +117,48 @@ export default function CheckoutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-12">
             {/* Left - Form */}
             <div className="lg:col-span-3">
-              <h2 className="font-['Impact'] text-sm uppercase tracking-wider text-black/60 dark:text-white/60 mb-6">Shipping Details</h2>
-              <div className="space-y-4">
-                <input name="customer_name" value={form.customer_name} onChange={handleChange} placeholder="Full Name" required data-testid="checkout-name" className={inputClass} />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input name="customer_email" type="email" value={form.customer_email} onChange={handleChange} placeholder="Email" required data-testid="checkout-email" className={inputClass} />
-                  <input name="customer_phone" value={form.customer_phone} onChange={handleChange} placeholder="Phone" required data-testid="checkout-phone" className={inputClass} />
+              <h2 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-widest text-black dark:text-white mb-8">SHIPPING DETAILS</h2>
+              <div className="space-y-6">
+                <input name="customer_name" value={form.customer_name} onChange={handleChange} placeholder="FULL NAME" required data-testid="checkout-name" className={inputClass} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <input name="customer_email" type="email" value={form.customer_email} onChange={handleChange} placeholder="EMAIL" required data-testid="checkout-email" className={inputClass} />
+                  <input name="customer_phone" value={form.customer_phone} onChange={handleChange} placeholder="PHONE" required data-testid="checkout-phone" className={inputClass} />
                 </div>
-                <input name="address" value={form.address} onChange={handleChange} placeholder="Street Address" required data-testid="checkout-address" className={inputClass} />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <input name="city" value={form.city} onChange={handleChange} placeholder="City" required data-testid="checkout-city" className={inputClass} />
-                  <input name="state" value={form.state} onChange={handleChange} placeholder="State" required data-testid="checkout-state" className={inputClass} />
-                  <input name="pincode" value={form.pincode} onChange={handleChange} placeholder="Pincode" required data-testid="checkout-pincode" className={inputClass} />
+                <input name="address" value={form.address} onChange={handleChange} placeholder="STREET ADDRESS" required data-testid="checkout-address" className={inputClass} />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <input name="city" value={form.city} onChange={handleChange} placeholder="CITY" required data-testid="checkout-city" className={inputClass} />
+                  <input name="state" value={form.state} onChange={handleChange} placeholder="STATE" required data-testid="checkout-state" className={inputClass} />
+                  <input name="pincode" value={form.pincode} onChange={handleChange} placeholder="PINCODE" required data-testid="checkout-pincode" className={inputClass} />
                 </div>
               </div>
-              <button type="submit" data-testid="checkout-submit-btn" disabled={submitting} className="w-full bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-['Impact'] text-sm uppercase tracking-[0.15em] py-4 mt-10 rounded-full hover:bg-black/80 dark:hover:bg-white/90 transition-all duration-300 disabled:bg-black/10 dark:disabled:bg-white/10 disabled:text-black/20 dark:disabled:text-white/20">
-                {submitting ? 'Placing Order...' : 'Place Order'}
+              <button type="submit" data-testid="checkout-submit-btn" disabled={submitting} className="w-full bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-sans font-bold text-[11px] md:text-xs uppercase tracking-[0.2em] py-5 mt-16 border border-black dark:border-white hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white transition-colors duration-300 disabled:opacity-50">
+                {submitting ? 'PROCESSING...' : 'CONFIRM & PAY'}
               </button>
             </div>
 
             {/* Right - Order Summary */}
             <div className="lg:col-span-2">
-              <div className="glass rounded-2xl p-6 md:p-8 sticky top-32">
-                <h2 className="font-['Impact'] text-sm uppercase tracking-wider text-black/60 dark:text-white/60 mb-6">Order Summary</h2>
-                <div className="space-y-4">
+              <div className="bg-[#F9F9F9] dark:bg-[#0A0A0A]/50 p-6 md:p-10 sticky top-32 transition-colors duration-500">
+                <h2 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-widest text-black dark:text-white mb-8 border-b border-black/10 dark:border-white/10 pb-4">ORDER SUMMARY</h2>
+                <div className="space-y-6">
                   {items.map((item) => (
-                    <div key={`${item.product_id}-${item.size}`} className="flex gap-3 pb-4 border-b border-black/5 dark:border-white/[0.04]">
-                      <img src={item.image} alt={item.product_name} className="w-14 h-18 object-cover rounded-lg" />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-['Impact'] text-[10px] uppercase tracking-wider text-black dark:text-white truncate">{item.product_name}</p>
-                        <p className="text-[10px] text-black/30 dark:text-white/30 mt-0.5">Size: {item.size} | Qty: {item.quantity}</p>
+                    <div key={`${item.product_id}-${item.size}`} className="flex gap-6 pb-6 border-b border-black/10 dark:border-white/10 last:border-0 hover:opacity-80 transition-opacity">
+                      <img src={item.image} alt={item.product_name} className="w-20 h-24 object-cover" />
+                      <div className="flex-1 min-w-0 flex flex-col justify-center">
+                        <div className="mb-2">
+                          <p className="font-['Impact'] text-base uppercase tracking-widest text-black dark:text-white leading-tight">{item.product_name}</p>
+                          <p className="font-sans font-bold text-[10px] text-black/40 dark:text-white/40 tracking-[0.2em] mt-1 uppercase">SIZE: {item.size} / QTY: {item.quantity}</p>
+                        </div>
+                        <p className="font-sans font-bold text-xs tracking-widest text-black/60 dark:text-white/60 whitespace-nowrap">{'\u20B9'}{(item.price * item.quantity).toLocaleString('en-IN')}</p>
                       </div>
-                      <p className="text-xs text-black dark:text-white whitespace-nowrap">{'\u20B9'}{(item.price * item.quantity).toLocaleString('en-IN')}</p>
                     </div>
                   ))}
                 </div>
-                <div className="mt-6 space-y-2.5 text-xs">
-                  <div className="flex justify-between text-black/40 dark:text-white/40"><span>Subtotal</span><span>{'\u20B9'}{subtotal.toLocaleString('en-IN')}</span></div>
-                  <div className="flex justify-between text-black/40 dark:text-white/40"><span>Shipping</span><span>{shipping === 0 ? 'FREE' : `\u20B9${shipping}`}</span></div>
-                  <div className="flex justify-between text-black dark:text-white font-['Impact'] text-base uppercase tracking-wider pt-4 border-t border-black/5 dark:border-white/[0.04]">
-                    <span>Total</span><span>{'\u20B9'}{total.toLocaleString('en-IN')}</span>
+                <div className="mt-8 space-y-4 font-sans font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs">
+                  <div className="flex justify-between text-black/50 dark:text-white/50"><span>SUBTOTAL</span><span>{'\u20B9'}{subtotal.toLocaleString('en-IN')}</span></div>
+                  <div className="flex justify-between text-black/50 dark:text-white/50"><span>SHIPPING</span><span>{shipping === 0 ? 'FREE' : `\u20B9${shipping}`}</span></div>
+                  <div className="flex justify-between text-black dark:text-white font-['Impact'] text-2xl uppercase tracking-widest pt-6 border-t border-black/10 dark:border-white/10 mt-6">
+                    <span>TOTAL</span><span>{'\u20B9'}{total.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
               </div>

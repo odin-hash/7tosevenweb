@@ -71,32 +71,27 @@ export default function ShopPage() {
   return (
     <div data-testid="shop-page" className="min-h-screen pt-32 md:pt-36 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
       {/* Header */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-10 md:mb-16">
-        <div className="border-[4px] border-black dark:border-white p-8 md:p-16 relative overflow-hidden bg-[#F9F9F9] dark:bg-[#0A0A0A] group">
-          {/* Subtle noise/grid pattern */}
-          <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none transition-opacity duration-500 group-hover:opacity-10 dark:group-hover:opacity-[0.15]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E")' }}></div>
-          
-          <div className="relative z-10 flex flex-col items-center text-center">
-            <p className="font-['Impact'] text-[12px] md:text-[14px] uppercase tracking-[0.4em] text-black dark:text-white mb-4 transition-colors duration-500">The Collection</p>
-            <h1 className="font-['Impact'] text-[clamp(4rem,10vw,8rem)] uppercase tracking-widest text-black dark:text-white leading-[0.9] transition-colors duration-500 hover:scale-[1.02] transform duration-500">
-              DROP 001
-            </h1>
-          </div>
-        </div>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-16 md:mb-24 mt-12 md:mt-24 text-center md:text-left">
+        <p className="font-['Impact'] text-[10px] md:text-xs uppercase tracking-[0.4em] text-black/50 dark:text-white/50 mb-4 transition-colors duration-500">
+          SEASON 001
+        </p>
+        <h1 className="font-['Impact'] text-[clamp(4rem,8vw,6rem)] uppercase tracking-widest text-black dark:text-white leading-[0.9] transition-colors duration-500">
+          COLLECTION
+        </h1>
       </div>
 
-      {/* Filters */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-12 flex flex-wrap items-center gap-4">
+      {/* Filters & Sorting */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-12 flex flex-wrap items-center gap-6 border-b border-black/10 dark:border-white/10 pb-6">
         <Select value={category} onValueChange={(v) => updateFilter('category', v)}>
           <SelectTrigger
             data-testid="filter-category"
-            className="w-[160px] bg-white dark:bg-[#0A0A0A] text-black dark:text-white text-[12px] uppercase tracking-widest font-['Impact'] rounded-none h-12 px-5 border-[3px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors focus:ring-0"
+            className="w-[120px] bg-transparent text-black dark:text-white text-[12px] uppercase tracking-widest font-sans font-bold rounded-none h-10 px-0 border-none shadow-none focus:ring-0"
           >
             <SelectValue placeholder="CATEGORY" />
           </SelectTrigger>
-          <SelectContent className="rounded-none border-[3px] border-black dark:border-white bg-white dark:bg-[#0A0A0A] shadow-[4px_4px_0_0_rgba(0,0,0,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)]">
+          <SelectContent className="rounded-none border border-black/10 dark:border-white/10 bg-white dark:bg-[#0A0A0A] shadow-xl">
             {CATEGORIES.map(c => (
-              <SelectItem key={c.value} value={c.value} className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">
+              <SelectItem key={c.value} value={c.value} className="text-black dark:text-white font-sans font-bold text-[11px] uppercase tracking-widest focus:bg-black/5 dark:focus:bg-white/5 cursor-pointer py-3 rounded-none">
                 {c.label}
               </SelectItem>
             ))}
@@ -104,25 +99,25 @@ export default function ShopPage() {
         </Select>
 
         <Select value={sizeFilter || 'all-sizes'} onValueChange={(v) => updateFilter('size', v === 'all-sizes' ? '' : v)}>
-          <SelectTrigger data-testid="filter-size" className="w-[140px] bg-white dark:bg-[#0A0A0A] text-black dark:text-white text-[12px] uppercase tracking-widest font-['Impact'] rounded-none h-12 px-5 border-[3px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors focus:ring-0">
+          <SelectTrigger data-testid="filter-size" className="w-[100px] bg-transparent text-black dark:text-white text-[12px] uppercase tracking-widest font-sans font-bold rounded-none h-10 px-0 border-none shadow-none focus:ring-0">
             <SelectValue placeholder="SIZE" />
           </SelectTrigger>
-          <SelectContent className="rounded-none border-[3px] border-black dark:border-white bg-white dark:bg-[#0A0A0A] shadow-[4px_4px_0_0_rgba(0,0,0,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)]">
-            <SelectItem value="all-sizes" className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">ALL SIZES</SelectItem>
+          <SelectContent className="rounded-none border border-black/10 dark:border-white/10 bg-white dark:bg-[#0A0A0A] shadow-xl">
+            <SelectItem value="all-sizes" className="text-black dark:text-white font-sans font-bold text-[11px] uppercase tracking-widest focus:bg-black/5 dark:focus:bg-white/5 cursor-pointer py-3 rounded-none">ALL SIZES</SelectItem>
             {SIZES.map(s => (
-              <SelectItem key={s} value={s} className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">SIZE: {s}</SelectItem>
+              <SelectItem key={s} value={s} className="text-black dark:text-white font-sans font-bold text-[11px] uppercase tracking-widest focus:bg-black/5 dark:focus:bg-white/5 cursor-pointer py-3 rounded-none">SIZE: {s}</SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <div className="ml-auto">
           <Select value={sort} onValueChange={(v) => updateFilter('sort', v)}>
-            <SelectTrigger data-testid="filter-sort" className="w-[190px] bg-white dark:bg-[#0A0A0A] text-black dark:text-white text-[12px] uppercase tracking-widest font-['Impact'] rounded-none h-12 px-5 border-[3px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors focus:ring-0">
+            <SelectTrigger data-testid="filter-sort" className="w-[160px] bg-transparent text-black dark:text-white text-[12px] uppercase tracking-widest font-sans font-bold rounded-none h-10 px-0 border-none shadow-none focus:ring-0 flex justify-end">
               <SelectValue placeholder="SORT BY" />
             </SelectTrigger>
-            <SelectContent className="rounded-none border-[3px] border-black dark:border-white bg-white dark:bg-[#0A0A0A] shadow-[4px_4px_0_0_rgba(0,0,0,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)]">
+            <SelectContent alignment="end" className="rounded-none border border-black/10 dark:border-white/10 bg-white dark:bg-[#0A0A0A] shadow-xl">
               {SORT_OPTIONS.map(s => (
-                <SelectItem key={s.value} value={s.value} className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">{s.label}</SelectItem>
+                <SelectItem key={s.value} value={s.value} className="text-black dark:text-white font-sans font-bold text-[11px] uppercase tracking-widest focus:bg-black/5 dark:focus:bg-white/5 cursor-pointer py-3 rounded-none text-right">{s.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -132,15 +127,12 @@ export default function ShopPage() {
       {/* Product Grid */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 pb-32">
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-32 gap-8 border-[4px] border-black dark:border-white bg-[#F9F9F9] dark:bg-[#0A0A0A]">
-            <div className="w-12 h-12 border-4 border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+          <div className="flex flex-col items-center justify-center py-32 gap-6 min-h-[400px]">
+            <div className="w-8 h-8 border border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
             {loadingSlow && (
               <div className="text-center animate-pulse">
-                <p className="font-['Impact'] text-[14px] md:text-[18px] uppercase tracking-widest text-black dark:text-white mb-2">
-                  BOOTING SYSTEM...
-                </p>
-                <p className="font-['Impact'] text-[10px] md:text-[12px] uppercase tracking-[0.2em] text-black/60 dark:text-white/60 max-w-[280px] mx-auto">
-                  SERVER SPIN UP MAY TAKE 2 MINS. HOLD FAST.
+                <p className="font-sans font-bold text-[10px] md:text-[12px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">
+                  BOOTING SYSTEM... SPUN DOWN INSTANCE MAY TAKE 2M.
                 </p>
               </div>
             )}
