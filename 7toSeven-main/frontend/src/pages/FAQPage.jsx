@@ -39,13 +39,13 @@ export default function FAQPage() {
     <div data-testid="faq-page" className="min-h-screen">
       <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 overflow-hidden">
         <div className="max-w-[1000px] mx-auto px-6 md:px-16 text-center">
-          <p className="font-sans font-bold text-[10px] uppercase tracking-[0.4em] text-black/50 dark:text-white/50 mb-6 transition-colors duration-500">
+          <p className="font-sans font-bold  uppercase tracking-[0.4em]  text-white/50 mb-6 transition-colors duration-500">
             SUPPORT
           </p>
-          <h1 className="font-['Impact'] text-[clamp(4rem,10vw,8rem)] uppercase tracking-widest text-black dark:text-white leading-[0.9] mb-8 transition-colors duration-500">
+          <h1 className="font-['Impact']  uppercase tracking-widest  text-white leading-[0.9] mb-8 transition-colors duration-500">
             F.A.Q.
           </h1>
-          <p className="font-sans font-bold uppercase tracking-widest text-sm md:text-base text-black/40 dark:text-white/40 leading-relaxed max-w-2xl mx-auto transition-colors duration-500">
+          <p className="font-sans font-bold uppercase tracking-widest  md:text-base  text-white/40 leading-relaxed max-w-2xl mx-auto transition-colors duration-500">
             Answers to your most frequent questions about shipping, drops, sizing, and our policies.
           </p>
         </div>
@@ -60,13 +60,13 @@ export default function FAQPage() {
               return (
                 <div 
                   key={index} 
-                  className={`border-b border-black/10 dark:border-white/10 overflow-hidden transition-all duration-300 ${
+                  className={`  border-white/10 overflow-hidden transition-all duration-300 ${
                     index === 0 ? 'border-t' : ''
                   }`}
                 >
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full flex items-center justify-between py-6 md:py-8 text-left outline-none text-black dark:text-white hover:opacity-70 transition-opacity"
+                    className="w-full flex items-center justify-between py-6 md:py-8  outline-none  text-white hover:opacity-70 transition-opacity"
                   >
                     <span className="font-sans font-bold text-[12px] md:text-sm uppercase tracking-widest">
                       {item.question}
@@ -85,7 +85,7 @@ export default function FAQPage() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="pb-8 pt-0 text-sm md:text-base font-sans text-black/60 dark:text-white/60 leading-relaxed">
+                      <p className="pb-8 pt-0  md:text-base font-sans  text-white/60 leading-relaxed">
                         {item.answer}
                       </p>
                     </div>
@@ -98,13 +98,13 @@ export default function FAQPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 text-center mt-12 bg-[#F9F9F9] dark:bg-[#0A0A0A]">
-        <h2 className="font-['Impact'] text-[clamp(2rem,5vw,4rem)] uppercase tracking-widest text-black dark:text-white mb-8">
+      <section className="py-24 text-center mt-12  bg-[#0A0A0A]">
+        <h2 className="font-['Impact']  uppercase tracking-widest  text-white mb-8">
           STILL HAVE QUESTIONS?
         </h2>
         <a 
           href="mailto:support@7toseven.com" 
-          className="inline-block bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-sans font-bold text-[11px] uppercase tracking-[0.2em] px-10 py-4 border border-black dark:border-white hover:bg-transparent hover:text-black dark:hover:bg-transparent dark:hover:text-white transition-all duration-300"
+          className="inline-block   bg-white text-[#0A0A0A] font-sans font-bold  uppercase tracking-[0.2em] px-10 py-4 border  border-white   hover:bg-transparent hover:text-white transition-all duration-300"
         >
           CONTACT US
         </a>

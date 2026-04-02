@@ -19,14 +19,14 @@ export default function DropCountdownSection() {
   return (
     <section className="py-10 md:py-20 transition-colors duration-500 relative overflow-hidden" data-testid="drop-countdown">
       {/* Background Watermark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.03] dark:opacity-[0.02]">
-        <h3 className="font-['Impact'] text-[25vw] md:text-[15vw] uppercase tracking-tighter whitespace-nowrap text-black dark:text-white">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-[0.03] opacity-[0.02]">
+        <h3 className="font-['Impact']  md:text-[15vw] uppercase tracking-tighter whitespace-nowrap  text-white">
           THE DROP
         </h3>
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 md:px-16 text-center relative z-10">
-        <p className="font-['Impact'] text-[11px] md:text-xs uppercase tracking-[0.4em] text-black/50 dark:text-white/40 mb-8 md:mb-12">
+        <p className="font-['Impact']  md:text-xs uppercase tracking-[0.4em]  text-white/40 mb-8 md:mb-12">
           Next Drop In
         </p>
 
@@ -35,50 +35,50 @@ export default function DropCountdownSection() {
           
           {/* Days */}
           <div className="flex flex-col items-center">
-            <span className="font-['Impact'] text-xl sm:text-4xl md:text-6xl lg:text-8xl text-black dark:text-white leading-none tracking-tighter w-[2ch] mx-auto text-center">
+            <span className="font-['Impact']  sm:text-4xl md:text-6xl lg:text-8xl  text-white leading-none tracking-tighter w-[2ch] mx-auto ">
               {mounted ? pad(days) : '00'}
             </span>
-            <span className="font-['Impact'] text-[8px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1 md:mt-2">Days</span>
+            <span className="font-['Impact']  sm:text-[10px] md:text-xs uppercase tracking-[0.2em]  text-white/40 mt-1 md:mt-2">Days</span>
           </div>
 
-          <span className="font-['Impact'] text-base sm:text-2xl md:text-4xl lg:text-6xl text-black/20 dark:text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">:</span>
+          <span className="font-['Impact']  sm:text-2xl md:text-4xl lg:text-6xl  text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">:</span>
 
           {/* Hours */}
           <div className="flex flex-col items-center">
-            <span className="font-['Impact'] text-xl sm:text-4xl md:text-6xl lg:text-8xl text-black dark:text-white leading-none tracking-tighter w-[2ch] mx-auto text-center">
+            <span className="font-['Impact']  sm:text-4xl md:text-6xl lg:text-8xl  text-white leading-none tracking-tighter w-[2ch] mx-auto ">
               {mounted ? pad(hours) : '00'}
             </span>
-            <span className="font-['Impact'] text-[8px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1 md:mt-2">Hours</span>
+            <span className="font-['Impact']  sm:text-[10px] md:text-xs uppercase tracking-[0.2em]  text-white/40 mt-1 md:mt-2">Hours</span>
           </div>
 
-          <span className="font-['Impact'] text-base sm:text-2xl md:text-4xl lg:text-6xl text-black/20 dark:text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">:</span>
+          <span className="font-['Impact']  sm:text-2xl md:text-4xl lg:text-6xl  text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">:</span>
 
           {/* Minutes */}
           <div className="flex flex-col items-center">
-            <span className="font-['Impact'] text-xl sm:text-4xl md:text-6xl lg:text-8xl text-black dark:text-white leading-none tracking-tighter w-[2ch] mx-auto text-center">
+            <span className="font-['Impact']  sm:text-4xl md:text-6xl lg:text-8xl  text-white leading-none tracking-tighter w-[2ch] mx-auto ">
               {mounted ? pad(minutes) : '00'}
             </span>
-            <span className="font-['Impact'] text-[8px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1 md:mt-2">Mins</span>
+            <span className="font-['Impact']  sm:text-[10px] md:text-xs uppercase tracking-[0.2em]  text-white/40 mt-1 md:mt-2">Mins</span>
           </div>
 
-          <span className="font-['Impact'] text-base sm:text-2xl md:text-4xl lg:text-6xl text-black/20 dark:text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">:</span>
+          <span className="font-['Impact']  sm:text-2xl md:text-4xl lg:text-6xl  text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">:</span>
 
           {/* Seconds */}
           <div className="flex flex-col items-center">
-            <span className="font-['Impact'] text-xl sm:text-4xl md:text-6xl lg:text-8xl text-black dark:text-white leading-none tracking-tighter w-[2ch] mx-auto text-center">
+            <span className="font-['Impact']  sm:text-4xl md:text-6xl lg:text-8xl  text-white leading-none tracking-tighter w-[2ch] mx-auto ">
               {mounted ? pad(seconds) : '00'}
             </span>
-            <span className="font-['Impact'] text-[8px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1 md:mt-2">Secs</span>
+            <span className="font-['Impact']  sm:text-[10px] md:text-xs uppercase tracking-[0.2em]  text-white/40 mt-1 md:mt-2">Secs</span>
           </div>
 
-          <span className="font-['Impact'] text-base sm:text-2xl md:text-4xl lg:text-6xl text-black/20 dark:text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">.</span>
+          <span className="font-['Impact']  sm:text-2xl md:text-4xl lg:text-6xl  text-white/20 pb-3 sm:pb-5 md:pb-8 lg:pb-12 shrink-0">.</span>
 
           {/* Milliseconds */}
           <div className="flex flex-col items-center">
-            <span className="font-['Impact'] text-base sm:text-3xl md:text-5xl lg:text-7xl text-black/60 dark:text-white/60 leading-none tracking-tighter w-[2ch] mx-auto text-left">
+            <span className="font-['Impact']  sm:text-3xl md:text-5xl lg:text-7xl  text-white/60 leading-none tracking-tighter w-[2ch] mx-auto ">
               {mounted ? pad(milliseconds) : '00'}
             </span>
-            <span className="font-['Impact'] text-[8px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] text-black/40 dark:text-white/40 mt-1 md:mt-2 opacity-0 select-none">MS</span>
+            <span className="font-['Impact']  sm:text-[10px] md:text-xs uppercase tracking-[0.2em]  text-white/40 mt-1 md:mt-2 opacity-0 select-none">MS</span>
           </div>
         </div>
       </div>

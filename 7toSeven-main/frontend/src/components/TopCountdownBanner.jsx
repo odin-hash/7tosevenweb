@@ -24,17 +24,17 @@ export default function TopCountdownBanner() {
   return (
     <div
       data-testid="top-countdown"
-      className="fixed top-0 left-0 right-0 z-[60] bg-white/80 dark:bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-black/10 dark:border-white/10 py-1.5 overflow-hidden whitespace-nowrap pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-[60]  bg-[#0A0A0A]/80 backdrop-blur-xl   border-white/10 py-1.5 overflow-hidden whitespace-nowrap pointer-events-none"
     >
       {/* CSS diagonal stripes transparent background for warning aesthetic */}
       <div 
-        className="absolute inset-0 opacity-5 dark:opacity-[0.03]" 
+        className="absolute inset-0 opacity-5 opacity-[0.03]" 
         style={{
           backgroundImage: 'repeating-linear-gradient(45deg, #000 0, #000 2px, transparent 2px, transparent 8px)'
         }} 
       />
       <div className="animate-marquee inline-flex relative z-10">
-        <span className="font-['Impact'] text-[10px] md:text-xs uppercase tracking-[0.25em] text-black dark:text-white">
+        <span className="font-['Impact']  md:text-xs uppercase tracking-[0.25em]  text-white">
           {repeatedText}
         </span>
       </div>
