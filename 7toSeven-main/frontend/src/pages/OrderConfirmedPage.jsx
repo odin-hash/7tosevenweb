@@ -23,7 +23,7 @@ export default function OrderConfirmedPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-32 pb-40">
-        <div className="w-8 h-8 border-2 border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+        <p className="font-sans font-bold text-[10px] uppercase tracking-[0.4em] text-black/40 dark:text-white/40 animate-pulse">LOADING...</p>
       </div>
     );
   }

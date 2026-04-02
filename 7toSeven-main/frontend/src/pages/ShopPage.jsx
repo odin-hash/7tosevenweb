@@ -128,7 +128,7 @@ export default function ShopPage() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 pb-32">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32 gap-6 min-h-[400px]">
-            <div className="w-8 h-8 border border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+            <p className="font-sans font-bold text-[10px] uppercase tracking-[0.4em] text-black/40 dark:text-white/40 animate-pulse">LOADING...</p>
             {loadingSlow && (
               <div className="text-center animate-pulse">
                 <p className="font-sans font-bold text-[10px] md:text-[12px] uppercase tracking-[0.2em] text-black/40 dark:text-white/40">

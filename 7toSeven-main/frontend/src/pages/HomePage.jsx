@@ -94,7 +94,7 @@ export default function HomePage() {
           </div>
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 gap-6">
-              <div className="w-8 h-8 border-2 border-[#111111]/10 border-t-[#111111] dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+              <p className="font-sans font-bold text-[10px] uppercase tracking-[0.4em] text-[#111111]/40 dark:text-white/40 animate-pulse">LOADING...</p>
               {loadingSlow && (
                 <div className="text-center animate-pulse">
                   <p className="font-['Impact'] text-sm uppercase tracking-widest text-[#111111]/60 dark:text-white/60 mb-1">
