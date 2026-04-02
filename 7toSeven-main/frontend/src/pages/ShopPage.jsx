@@ -69,27 +69,34 @@ export default function ShopPage() {
   };
 
   return (
-    <div data-testid="shop-page" className="min-h-screen pt-32 md:pt-36">
+    <div data-testid="shop-page" className="min-h-screen pt-32 md:pt-36 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
       {/* Header */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-10 md:mb-16">
-        <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em] text-black/30 dark:text-white/30 mb-2">The Collection</p>
-        <h1 className="font-['Impact'] text-[clamp(3rem,6vw,5rem)] uppercase tracking-widest text-black dark:text-white leading-[1.1]">
-          DROP 001
-        </h1>
+        <div className="border-[4px] border-black dark:border-white p-8 md:p-16 relative overflow-hidden bg-[#F9F9F9] dark:bg-[#0A0A0A] group">
+          {/* Subtle noise/grid pattern */}
+          <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none transition-opacity duration-500 group-hover:opacity-10 dark:group-hover:opacity-[0.15]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E")' }}></div>
+          
+          <div className="relative z-10 flex flex-col items-center text-center">
+            <p className="font-['Impact'] text-[12px] md:text-[14px] uppercase tracking-[0.4em] text-black dark:text-white mb-4 transition-colors duration-500">The Collection</p>
+            <h1 className="font-['Impact'] text-[clamp(4rem,10vw,8rem)] uppercase tracking-widest text-black dark:text-white leading-[0.9] transition-colors duration-500 hover:scale-[1.02] transform duration-500">
+              DROP 001
+            </h1>
+          </div>
+        </div>
       </div>
 
       {/* Filters */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-8 flex flex-wrap items-center gap-3">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-12 flex flex-wrap items-center gap-4">
         <Select value={category} onValueChange={(v) => updateFilter('category', v)}>
           <SelectTrigger
             data-testid="filter-category"
-            className="w-[140px] bg-transparent text-black dark:text-white text-[10px] uppercase tracking-wider font-['Impact'] rounded-none h-10 px-4 border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors"
+            className="w-[160px] bg-white dark:bg-[#0A0A0A] text-black dark:text-white text-[12px] uppercase tracking-widest font-['Impact'] rounded-none h-12 px-5 border-[3px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors focus:ring-0"
           >
-            <SelectValue placeholder="Category" />
+            <SelectValue placeholder="CATEGORY" />
           </SelectTrigger>
-          <SelectContent className="rounded-none border border-black/20 dark:border-white/20 bg-white dark:bg-[#0A0A0A]">
+          <SelectContent className="rounded-none border-[3px] border-black dark:border-white bg-white dark:bg-[#0A0A0A] shadow-[4px_4px_0_0_rgba(0,0,0,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)]">
             {CATEGORIES.map(c => (
-              <SelectItem key={c.value} value={c.value} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">
+              <SelectItem key={c.value} value={c.value} className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">
                 {c.label}
               </SelectItem>
             ))}
@@ -97,25 +104,25 @@ export default function ShopPage() {
         </Select>
 
         <Select value={sizeFilter || 'all-sizes'} onValueChange={(v) => updateFilter('size', v === 'all-sizes' ? '' : v)}>
-          <SelectTrigger data-testid="filter-size" className="w-[120px] bg-transparent text-black dark:text-white text-[10px] uppercase tracking-wider font-['Impact'] rounded-none h-10 px-4 border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors">
-            <SelectValue placeholder="Size" />
+          <SelectTrigger data-testid="filter-size" className="w-[140px] bg-white dark:bg-[#0A0A0A] text-black dark:text-white text-[12px] uppercase tracking-widest font-['Impact'] rounded-none h-12 px-5 border-[3px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors focus:ring-0">
+            <SelectValue placeholder="SIZE" />
           </SelectTrigger>
-          <SelectContent className="rounded-none border border-black/20 dark:border-white/20 bg-white dark:bg-[#0A0A0A]">
-            <SelectItem value="all-sizes" className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">All Sizes</SelectItem>
+          <SelectContent className="rounded-none border-[3px] border-black dark:border-white bg-white dark:bg-[#0A0A0A] shadow-[4px_4px_0_0_rgba(0,0,0,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)]">
+            <SelectItem value="all-sizes" className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">ALL SIZES</SelectItem>
             {SIZES.map(s => (
-              <SelectItem key={s} value={s} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">{s}</SelectItem>
+              <SelectItem key={s} value={s} className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">SIZE: {s}</SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <div className="ml-auto">
           <Select value={sort} onValueChange={(v) => updateFilter('sort', v)}>
-            <SelectTrigger data-testid="filter-sort" className="w-[170px] bg-transparent text-black dark:text-white text-[10px] uppercase tracking-wider font-['Impact'] rounded-none h-10 px-4 border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors">
-              <SelectValue placeholder="Sort by" />
+            <SelectTrigger data-testid="filter-sort" className="w-[190px] bg-white dark:bg-[#0A0A0A] text-black dark:text-white text-[12px] uppercase tracking-widest font-['Impact'] rounded-none h-12 px-5 border-[3px] border-black dark:border-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors focus:ring-0">
+              <SelectValue placeholder="SORT BY" />
             </SelectTrigger>
-            <SelectContent className="rounded-none border border-black/20 dark:border-white/20 bg-white dark:bg-[#0A0A0A]">
+            <SelectContent className="rounded-none border-[3px] border-black dark:border-white bg-white dark:bg-[#0A0A0A] shadow-[4px_4px_0_0_rgba(0,0,0,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)]">
               {SORT_OPTIONS.map(s => (
-                <SelectItem key={s.value} value={s.value} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">{s.label}</SelectItem>
+                <SelectItem key={s.value} value={s.value} className="text-black dark:text-white font-['Impact'] text-[12px] uppercase tracking-widest focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black rounded-none cursor-pointer py-3">{s.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
@@ -123,17 +130,17 @@ export default function ShopPage() {
       </div>
 
       {/* Product Grid */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-16 pb-24">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-16 pb-32">
         {loading ? (
-          <div className="flex flex-col items-center justify-center py-24 gap-6">
-            <div className="w-8 h-8 border-2 border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+          <div className="flex flex-col items-center justify-center py-32 gap-8 border-[4px] border-black dark:border-white bg-[#F9F9F9] dark:bg-[#0A0A0A]">
+            <div className="w-12 h-12 border-4 border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
             {loadingSlow && (
               <div className="text-center animate-pulse">
-                <p className="font-['Impact'] text-sm uppercase tracking-widest text-[#111111]/60 dark:text-white/60 mb-1">
-                  Waking Up Server...
+                <p className="font-['Impact'] text-[14px] md:text-[18px] uppercase tracking-widest text-black dark:text-white mb-2">
+                  BOOTING SYSTEM...
                 </p>
-                <p className="text-xs text-[#111111]/40 dark:text-white/40 max-w-[280px] mx-auto">
-                  Free hosting tiers can take up to 2 minutes to spin up. Hang tight!
+                <p className="font-['Impact'] text-[10px] md:text-[12px] uppercase tracking-[0.2em] text-black/60 dark:text-white/60 max-w-[280px] mx-auto">
+                  SERVER SPIN UP MAY TAKE 2 MINS. HOLD FAST.
                 </p>
               </div>
             )}
