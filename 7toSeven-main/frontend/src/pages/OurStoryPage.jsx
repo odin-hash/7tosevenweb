@@ -16,7 +16,7 @@ export default function OurStoryPage() {
       <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 lg:pb-32 overflow-hidden border-b border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/50 mb-6 font-sans">
-            Est. 2026
+            Est. <span className="text-[#CCFF00]">2026</span>
           </p>
           <h1 className="font-['Impact'] text-[clamp(4rem,10vw,8rem)] uppercase tracking-widest text-white leading-[1] drop-shadow-lg">
             MANIFESTO.
@@ -36,7 +36,7 @@ export default function OurStoryPage() {
                 7toSEVEN was born from frustration. Frustration with fast fashion. Frustration with brands that promise quality but deliver mediocrity. We started with a single question: what if every piece of clothing you owned felt like it was made specifically for you?
               </p>
               <p className="text-sm md:text-base text-white/60 leading-relaxed mt-6 font-sans uppercase tracking-widest max-w-lg">
-                Founded in 2026, we set out to create streetwear that respects both the craft and the culture. No shortcuts. No compromises. Every stitch intentional.
+                Founded in <span className="text-[#CCFF00]">2026</span>, we set out to create streetwear that respects both the craft and the culture. No shortcuts. No compromises. Every stitch intentional.
               </p>
             </div>
             <div className="aspect-square bg-black overflow-hidden relative">

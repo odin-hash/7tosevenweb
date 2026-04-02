@@ -233,7 +233,7 @@ export default function HomePage() {
       <section className="pt-8 pb-24 md:pt-10 md:pb-40 bg-black flex flex-col items-center justify-center text-center px-6">
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <h2 className="font-['Impact'] text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-widest text-white leading-[1] mb-6">
-            DROP 001<br/>IS LIVE.
+            DROP <span className="text-[#CCFF00]">001</span><br/>IS LIVE.
           </h2>
           <p className="font-['Impact'] text-[clamp(1rem,3vw,2rem)] uppercase tracking-[0.2em] text-white/50 mb-12 drop-shadow-sm">
             YOU’RE EITHER IN. OR INVISIBLE.

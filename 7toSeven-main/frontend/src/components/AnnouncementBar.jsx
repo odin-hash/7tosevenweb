@@ -1,7 +1,10 @@
 import React from 'react';
 
 export default function AnnouncementBar() {
-  const text = "BOLD. ELECTRIC. FEARLESS. \u00A0\u00A0\u2014\u00A0\u00A0 DROP 001 NOW LIVE \u00A0\u00A0\u2014\u00A0\u00A0 FREE SHIPPING ABOVE RS. 999 \u00A0\u00A0\u2014\u00A0\u00A0 NOT FOR EVERYONE \u00A0\u00A0\u2014\u00A0\u00A0 ";
+  const textFragment1 = "BOLD. ELECTRIC. FEARLESS. \u00A0\u00A0\u2014\u00A0\u00A0 DROP ";
+  const highlight = <span className="text-[#CCFF00]">001</span>;
+  const textFragment2 = " NOW LIVE \u00A0\u00A0\u2014\u00A0\u00A0 FREE SHIPPING ABOVE RS. 999 \u00A0\u00A0\u2014\u00A0\u00A0 NOT FOR EVERYONE \u00A0\u00A0\u2014\u00A0\u00A0 ";
+  const textBlock = <>{textFragment1}{highlight}{textFragment2}</>;
 
   return (
     <div
@@ -10,7 +13,7 @@ export default function AnnouncementBar() {
     >
       <div className="animate-marquee inline-flex">
         <span className="font-['Impact'] text-[10px] uppercase tracking-[0.25em] text-white/70">
-          {text}{text}{text}{text}
+          {textBlock}{textBlock}{textBlock}{textBlock}
         </span>
       </div>
     </div>

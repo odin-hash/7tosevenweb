@@ -9,7 +9,7 @@ export default function LookbookPage() {
             SS25 &mdash; Editorial
           </p>
           <h1 className="font-['Impact'] text-[clamp(3rem,8vw,6rem)] uppercase tracking-widest text-white leading-[1]">
-            LOOKBOOK<br/>001
+            LOOKBOOK<br/><span className="text-[#CCFF00]">001</span>
           </h1>
           <p className="mt-6 text-white/50 font-sans tracking-widest uppercase text-sm max-w-lg">
             Shot on location. Harsh light. Brutalist forms. 7TOSEVEN isn't worn, it's carried.

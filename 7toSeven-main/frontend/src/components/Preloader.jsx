@@ -70,7 +70,7 @@ export default function Preloader() {
            {count.toString().padStart(2, '0')}
          </div>
          <div className="font-mono text-xs md:text-sm text-[#CCFF00] uppercase tracking-[0.4em] font-bold animate-glitch mt-4">
-           SYSTEM READY // DROP 001
+           SYSTEM READY // DROP <span className="text-[#CCFF00]">001</span>
          </div>
       </div>
     </div>

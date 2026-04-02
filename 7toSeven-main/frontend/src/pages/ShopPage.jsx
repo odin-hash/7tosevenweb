@@ -65,7 +65,7 @@ export default function ShopPage() {
       {/* Header */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-16 md:mb-24 mt-12 md:mt-24 text-center md:text-left">
         <p className="font-['Impact']  md:text-xs uppercase tracking-[0.4em]  text-white/50 mb-4 transition-colors duration-500">
-          SEASON 001
+          SEASON <span className="text-[#CCFF00]">001</span>
         </p>
         <h1 className="font-['Impact'] text-5xl md:text-7xl lg:text-9xl uppercase tracking-widest text-white leading-[0.9] transition-colors duration-500">
           COLLECTION
