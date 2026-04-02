@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Heart, Minus, Plus, ChevronLeft } from 'lucide-react';
+import { Heart, Minus, Plus, ChevronLeft, ChevronRight, X, ZoomIn, ZoomOut } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import ProductCard from '@/components/ProductCard';
 import {
@@ -21,6 +21,8 @@ export default function ProductPage() {
   const [wishlisted, setWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingSlow, setLoadingSlow] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   useEffect(() => {
     setLoading(true);
@@ -42,6 +44,37 @@ export default function ProductPage() {
         setLoadingSlow(false);
       });
   }, [slug]);
+
+  useEffect(() => {
+    if (isLightboxOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isLightboxOpen]);
+
+  const handlePrevImage = (e) => {
+    e?.stopPropagation();
+    setSelectedImage((prev) => (prev === 0 ? product.images.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = (e) => {
+    e?.stopPropagation();
+    setSelectedImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1));
+  };
+
+  const openLightbox = () => {
+    setZoomLevel(1);
+    setIsLightboxOpen(true);
+  };
+  
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+    setZoomLevel(1);
+  };
 
   const handleAddToCart = () => {
     if (!selectedSize) return;
@@ -95,13 +128,30 @@ export default function ProductPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left - Image Gallery */}
           <div className="lg:sticky lg:top-32 lg:h-fit">
-            <div className="aspect-[3/4] overflow-hidden  bg-[#0A0A0A]">
+            <div className="group relative aspect-[3/4] overflow-hidden bg-[#0A0A0A] cursor-zoom-in" onClick={openLightbox}>
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 data-testid="product-main-image"
               />
+              {/* Image Navigation Arrows */}
+              {product.images.length > 1 && (
+                <>
+                  <button 
+                    onClick={handlePrevImage}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80"
+                  >
+                    <ChevronLeft size={20} strokeWidth={2} />
+                  </button>
+                  <button 
+                    onClick={handleNextImage}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80"
+                  >
+                    <ChevronRight size={20} strokeWidth={2} />
+                  </button>
+                </>
+              )}
             </div>
             {product.images.length > 1 && (
               <div className="flex gap-4 mt-6">
@@ -250,6 +300,62 @@ export default function ProductPage() {
             </div>
           </div>
         </section>
+      )}
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <div className="fixed inset-0 z-[100] bg-[#0A0A0A]/95 backdrop-blur-sm flex flex-col items-center justify-center">
+          {/* Top Bar */}
+          <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-50">
+            <div className="font-sans font-bold uppercase tracking-[0.2em] text-white/50 text-sm">
+              {selectedImage + 1} / {product.images.length}
+            </div>
+            <div className="flex items-center gap-4">
+              <button onClick={(e) => { e.stopPropagation(); setZoomLevel(Math.max(1, zoomLevel - 0.5)); }} className="text-white/50 hover:text-white transition-colors" disabled={zoomLevel <= 1}>
+                <ZoomOut size={28} />
+              </button>
+              <button onClick={(e) => { e.stopPropagation(); setZoomLevel(Math.min(3, zoomLevel + 0.5)); }} className="text-white/50 hover:text-white transition-colors" disabled={zoomLevel >= 3}>
+                <ZoomIn size={28} />
+              </button>
+              <button onClick={closeLightbox} className="text-white/50 hover:text-white transition-colors ml-4 sm:ml-8">
+                <X size={36} />
+              </button>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="relative w-full h-[90vh] flex items-center justify-center overflow-auto" onClick={closeLightbox}>
+            <div 
+              className={`relative transition-transform duration-300 ease-out ${zoomLevel > 1 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+              style={{ transform: `scale(${zoomLevel})` }}
+              onClick={(e) => { e.stopPropagation(); setZoomLevel(prev => prev === 1 ? 2 : 1); }}
+            >
+              <img 
+                src={product.images[selectedImage]} 
+                alt={product.name} 
+                className="max-w-full max-h-[90vh] object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          {product.images.length > 1 && (
+            <>
+              <button 
+                onClick={handlePrevImage}
+                className="absolute left-4 sm:left-10 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center bg-white/5 text-white hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-md z-50 rounded-full"
+              >
+                <ChevronLeft size={28} strokeWidth={2} />
+              </button>
+              <button 
+                onClick={handleNextImage}
+                className="absolute right-4 sm:right-10 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center bg-white/5 text-white hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-md z-50 rounded-full"
+              >
+                <ChevronRight size={28} strokeWidth={2} />
+              </button>
+            </>
+          )}
+        </div>
       )}
     </div>
   );
