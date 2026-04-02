@@ -94,10 +94,10 @@ export default function HomePage() {
           </div>
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 gap-6">
-              <div className="relative flex items-center justify-center w-10 h-10">
-                <div className="absolute inset-0 border-[1px] border-[#111111]/10 dark:border-white/10 rounded-full" />
-                <div className="absolute inset-0 border-[1px] border-[#111111] dark:border-white rounded-full animate-[spin_1.5s_linear_infinite] border-t-transparent border-l-transparent" />
-                <div className="w-1.5 h-1.5 bg-[#111111] dark:bg-white rounded-full animate-pulse" />
+              <div className="relative flex items-center justify-center w-12 h-12">
+                <div className="absolute inset-0 border-[2px] border-[#111111]/10 dark:border-white/10 rounded-full" />
+                <div className="absolute inset-0 border-[2px] border-[#111111] dark:border-white rounded-full animate-spin border-t-transparent" />
+                <div className="w-2 h-2 bg-[#111111] dark:bg-white rounded-full animate-pulse" />
               </div>
               {loadingSlow && (
                 <div className="text-center animate-pulse">
