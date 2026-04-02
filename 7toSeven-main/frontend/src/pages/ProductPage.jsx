@@ -124,14 +124,14 @@ export default function ProductPage() {
           {/* Right - Product Info */}
           <div className="py-2 lg:py-10 flex flex-col justify-start">
             <div>
-              <p className="font-sans font-bold  uppercase tracking-[0.3em]  text-white/40 mb-3">{product.collection}</p>
-              <h1 data-testid="product-name" className="font-['Impact']  md:text-[4rem] uppercase tracking-widest  text-white leading-[0.9] mb-6">
+              <p className="font-sans font-bold uppercase tracking-[0.3em] text-white/40 mb-4">{product.collection}</p>
+              <h1 data-testid="product-name" className="font-['Impact'] md:text-[4rem] text-4xl uppercase tracking-widest text-white leading-[1] mb-4">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-4 mt-2">
-                <span data-testid="product-price" className="font-sans font-bold  tracking-widest  text-white">{'\u20B9'}{product.price.toLocaleString('en-IN')}</span>
+              <div className="flex items-center gap-4">
+                <span data-testid="product-price" className="font-sans font-bold tracking-widest text-white">{'\u20B9'}{product.price.toLocaleString('en-IN')}</span>
                 {product.original_price && (
-                  <span className="font-sans font-bold   text-white/30 line-through tracking-widest">{'\u20B9'}{product.original_price.toLocaleString('en-IN')}</span>
+                  <span className="font-sans font-bold text-white/30 line-through tracking-widest">{'\u20B9'}{product.original_price.toLocaleString('en-IN')}</span>
                 )}
               </div>
               
@@ -167,12 +167,12 @@ export default function ProductPage() {
               {/* Quantity */}
               <div className="mt-10">
                 <p className="font-sans font-bold  uppercase tracking-[0.2em]  text-white/50 mb-4">QUANTITY</p>
-                <div className="flex items-center border  border-white/10 w-fit bg-transparent" data-testid="quantity-selector">
-                  <button data-testid="qty-minus" onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-14 h-14 flex items-center justify-center  text-white/50  hover:text-white transition-colors   border-white/10">
+                <div className="flex items-center border border-white/10 w-fit bg-transparent" data-testid="quantity-selector">
+                  <button data-testid="qty-minus" onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-14 h-14 flex items-center justify-center text-white/50 hover:text-white transition-colors border-r border-white/10">
                     <Minus size={16} strokeWidth={2} />
                   </button>
-                  <span className="w-14 font-sans font-bold    text-white">{quantity}</span>
-                  <button data-testid="qty-plus" onClick={() => setQuantity(q => q + 1)} className="w-14 h-14 flex items-center justify-center  text-white/50  hover:text-white transition-colors   border-white/10">
+                  <span className="w-14 h-14 flex items-center justify-center font-sans font-bold text-white">{quantity}</span>
+                  <button data-testid="qty-plus" onClick={() => setQuantity(q => q + 1)} className="w-14 h-14 flex items-center justify-center text-white/50 hover:text-white transition-colors border-l border-white/10">
                     <Plus size={16} strokeWidth={2} />
                   </button>
                 </div>
