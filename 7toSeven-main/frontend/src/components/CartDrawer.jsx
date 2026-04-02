@@ -91,7 +91,7 @@ export default function CartDrawer() {
                       <button
                         data-testid={`cart-remove-${item.product_id}`}
                         onClick={() => removeFromCart(item.product_id, item.size)}
-                        className=" text-white/20  hover:text-black hover:text-white/60 transition-colors"
+                        className="text-white/50 hover:text-red-500 transition-colors duration-300"
                       >
                         <Trash2 size={14} />
                       </button>
