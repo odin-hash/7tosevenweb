@@ -131,7 +131,7 @@ export default function CheckoutPage() {
                   <input name="pincode" value={form.pincode} onChange={handleChange} placeholder="PINCODE" required data-testid="checkout-pincode" className={inputClass} />
                 </div>
               </div>
-              <button type="submit" data-testid="checkout-submit-btn" disabled={submitting} className="w-full   bg-white text-[#0A0A0A] font-sans font-bold  md:text-xs uppercase tracking-[0.2em] py-5 mt-16 border  border-white   hover:bg-transparent hover:text-white transition-colors duration-300 disabled:opacity-50">
+              <button type="submit" data-testid="checkout-submit-btn" disabled={submitting} className="w-full bg-white text-[#0A0A0A] font-sans font-bold md:text-sm uppercase tracking-[0.2em] py-5 mt-16 border-2 border-transparent hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black active:bg-[#CCFF00] active:text-black transition-all duration-300 rounded-none shadow-[4px_4px_0px_0px_rgba(204,255,0,0.5)] hover:shadow-[0px_0px_0px_0px_rgba(204,255,0,0)] hover:translate-y-[4px] hover:translate-x-[4px] disabled:opacity-50 disabled:hover:-translate-y-[0px] disabled:hover:-translate-x-[0px] disabled:hover:shadow-[4px_4px_0px_0px_rgba(204,255,0,0.5)] disabled:hover:bg-white disabled:hover:text-[#0A0A0A]">
                 {submitting ? 'PROCESSING...' : 'CONFIRM & PAY'}
               </button>
             </div>

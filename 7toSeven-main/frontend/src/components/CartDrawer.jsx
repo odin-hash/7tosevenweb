@@ -132,7 +132,7 @@ export default function CartDrawer() {
             <button
               data-testid="cart-checkout-btn"
               onClick={handleCheckout}
-              className="w-full bg-white text-black font-['Impact'] text-xl uppercase tracking-widest py-5 border-2 border-transparent hover:bg-black hover:text-white hover:border-white transition-all duration-300 rounded-none shadow-[4px_4px_0px_0px_rgba(204,255,0,0.5)] hover:shadow-[0px_0px_0px_0px_rgba(204,255,0,0)] hover:translate-y-[4px] hover:translate-x-[4px] mt-4"
+              className="w-full bg-white text-black font-['Impact'] text-xl uppercase tracking-widest py-5 border-2 border-transparent hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black active:bg-[#CCFF00] transition-all duration-300 rounded-none shadow-[4px_4px_0px_0px_rgba(204,255,0,0.5)] hover:shadow-[0px_0px_0px_0px_rgba(204,255,0,0)] hover:translate-y-[4px] hover:translate-x-[4px] mt-4"
             >
               SECURE DROP
             </button>
