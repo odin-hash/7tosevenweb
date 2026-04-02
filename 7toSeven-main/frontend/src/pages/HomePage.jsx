@@ -52,8 +52,8 @@ export default function HomePage() {
               <p>For those who don’t fit.</p>
             </div>
             <p className="font-['Impact'] text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-widest text-[#111111] dark:text-white leading-[1] transition-colors duration-500">
-              7TOSEVEN isn’t worn.<br/>
-              <span className="text-red-600 dark:text-red-500 drop-shadow-sm block mt-2">It’s carried.</span>
+              NOT FOR EVERYONE.<br/>
+              <span className="text-red-600 dark:text-red-500 drop-shadow-sm block mt-2">NEVER WAS.</span>
             </p>
           </div>
         </div>
@@ -64,9 +64,9 @@ export default function HomePage() {
         <div className="flex gap-1 animate-marquee w-max">
           {[...Array(4)].map((_, groupIndex) => (
             <React.Fragment key={`group-${groupIndex}`}>
-              {[1, 2, 3].map((i) => (
+              {[1, 2, 3, 4].map((i) => (
                 <div key={`${groupIndex}-${i}`} className="w-[85vw] md:w-[45vw] h-[45vh] md:h-[65vh] flex-shrink-0 bg-[#0A0A0A]">
-                  <img src={`/visual_strip_${i}.png`} alt={`Vibe 0${i}`} className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" loading="lazy" />
+                  <img src={`/visual_strip_${i}.png`} alt={`Look 0${i}`} className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" loading="lazy" />
                 </div>
               ))}
             </React.Fragment>
@@ -163,20 +163,19 @@ export default function HomePage() {
       {/* Brand Statement */}
       <section className="py-24 md:py-40 relative overflow-hidden transition-colors duration-500 bg-[#E5E5E5] dark:bg-[#111111]">
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col items-center md:items-start text-center md:text-left">
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,7rem)] uppercase tracking-widest text-[#111111] dark:text-white transition-colors duration-500 leading-[1] md:ml-[10%]">
+          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight text-[#111111] dark:text-white transition-colors duration-500 leading-[0.85] md:ml-[5%] relative z-10 hover:scale-[1.02] transform transition-transform">
             NO RULES.
           </h2>
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,7rem)] uppercase tracking-widest text-[#111111] dark:text-white transition-colors duration-500 leading-[1] md:ml-[25%] opacity-50 mt-4 md:mt-6">
+          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight text-[#111111] dark:text-white transition-colors duration-500 leading-[0.85] ml-[15%] md:ml-[20%] opacity-70 -mt-6 md:-mt-12 relative z-20 hover:scale-[1.02] transform transition-transform">
             NO COMFORT ZONE.
           </h2>
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,7rem)] uppercase tracking-widest text-red-600 dark:text-red-500 transition-colors duration-500 leading-[1] md:ml-[15%] mt-4 md:mt-6 opacity-90">
-            <span className="line-through decoration-black dark:decoration-white decoration-[6px] md:decoration-[12px]">NO APOLOGIES</span>.
+          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight text-red-600 dark:text-red-500 transition-colors duration-500 leading-[0.85] ml-[5%] md:ml-[10%] -mt-6 md:-mt-12 opacity-90 relative z-30 drop-shadow-[4px_4px_0_rgba(0,0,0,1)] dark:drop-shadow-[4px_4px_0_rgba(255,255,255,0.1)] hover:scale-[1.02] transform transition-transform">
+            <span className="line-through decoration-[#111111] dark:decoration-white decoration-[8px] md:decoration-[16px]">NO APOLOGIES</span>.
           </h2>
         </div>
       </section>
 
-      {/* Drop Countdown Section */}
-      <DropCountdownSection />
+
 
       {/* Lookbook / Drop Story Grid */}
       <section className="py-16 md:py-24 transition-colors duration-500 bg-black">
@@ -211,7 +210,7 @@ export default function HomePage() {
             DROP 001<br/>IS LIVE.
           </h2>
           <p className="font-['Impact'] text-[clamp(1rem,3vw,2rem)] uppercase tracking-[0.2em] text-white/50 mb-12 drop-shadow-sm">
-            STEP IN OR STAY BASIC.
+            YOU’RE EITHER IN. OR INVISIBLE.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
             <Link to="/shop" className="bg-white text-black font-['Impact'] text-xs md:text-sm px-10 py-4 md:py-5 uppercase tracking-[0.2em] hover:bg-white/90 transition-all border-2 border-white hover:scale-105 active:scale-95 text-center">

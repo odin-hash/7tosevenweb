@@ -53,7 +53,7 @@ export default function HeroSection() {
             
             <Link
               to="/lookbook"
-              className="inline-flex items-center justify-center gap-3 bg-transparent border-2 border-white text-white font-['Impact'] text-xs md:text-sm uppercase tracking-[0.15em] px-8 py-3.5 hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 w-full sm:w-auto backdrop-blur-sm"
+              className="inline-flex items-center justify-center gap-3 bg-[#111111] border-2 border-[#111111] dark:border-white text-white font-['Impact'] text-xs md:text-sm uppercase tracking-[0.15em] px-8 py-3.5 hover:bg-black transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 w-full sm:w-auto backdrop-blur-sm"
             >
               VIEW LOOKBOOK
             </Link>

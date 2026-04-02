@@ -11,7 +11,12 @@ export default function ProductCard({ product }) {
       {/* Borderless Image Container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-[#F9F9F9] dark:bg-[#0A0A0A]">
         <img
-          src={product.images[0]}
+          src={
+            [
+              '/product_model_1.png',
+              '/product_model_2.png'
+            ][(product.name?.charCodeAt(0) || 0) % 2]
+          }
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           loading="lazy"
