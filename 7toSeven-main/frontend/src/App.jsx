@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '@/App.css';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import { CartProvider } from '@/context/CartContext';
+import Preloader from '@/components/Preloader';
+import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import CartDrawer from '@/components/CartDrawer';
 import Footer from '@/components/Footer';
@@ -41,6 +42,8 @@ function App() {
     <div className="App bg-[#0A0A0A] text-white min-h-screen">
       <BrowserRouter>
         <ScrollToTop />
+        <CustomCursor />
+        <Preloader />
         <CartProvider>
           <Navbar />
           <CartDrawer />

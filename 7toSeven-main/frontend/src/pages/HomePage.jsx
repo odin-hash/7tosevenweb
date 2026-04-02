@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowRight } from 'lucide-react';
 import HeroSection from '@/components/HeroSection';
+import MarqueeBanner from '@/components/MarqueeBanner';
 import DropCountdownSection from '@/components/DropCountdownSection';
 import ProductCard from '@/components/ProductCard';
 
@@ -34,6 +35,9 @@ export default function HomePage() {
       {/* Hero */}
       <HeroSection />
 
+      {/* Harsh Loop Marquee */}
+      <MarqueeBanner />
+
       {/* Identity Block */}
       <section className="py-16 md:py-24 transition-colors duration-500  bg-[#111111]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
@@ -43,7 +47,7 @@ export default function HomePage() {
               <p>For those who don’t follow.</p>
               <p>For those who don’t fit.</p>
             </div>
-            <p className="font-['Impact']  uppercase tracking-widest  text-white leading-[1] transition-colors duration-500">
+            <p className="font-['Impact'] text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-widest  text-white leading-[1] transition-colors duration-500">
               NOT FOR EVERYONE.<br/>
               <span className=" text-red-500 drop-shadow-sm block mt-2">NEVER WAS.</span>
             </p>
@@ -71,8 +75,8 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="flex items-end justify-between mb-10 md:mb-12">
             <div>
-              <p className="font-['Impact']  uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Curated</p>
-              <h2 className="font-['Impact']  md:text-4xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
+              <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Curated</p>
+              <h2 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
                 Featured
               </h2>
             </div>
@@ -102,7 +106,7 @@ export default function HomePage() {
                     <div key={product.id} className="sm:col-span-2 lg:col-span-2 sm:row-span-2 relative group overflow-hidden border border-zinc-800 hover:border-white transition-colors duration-500 bg-[#0A0A0A] flex flex-col justify-end aspect-square lg:aspect-auto min-h-[450px]">
                       <Link to={`/products/${product.slug}`} className="block absolute inset-0 w-full h-full">
                         <img 
-                          src="/lookbook_1_1775132994912.png" 
+                          src="/lookbook_1.png" 
                           className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05]" 
                           alt={product.name} 
                         />
@@ -130,7 +134,7 @@ export default function HomePage() {
                     <div key={product.id} className="sm:col-span-2 lg:col-span-2 relative group overflow-hidden border border-zinc-800 hover:border-white transition-colors duration-500 bg-[#0A0A0A] flex flex-col sm:flex-row min-h-[300px]">
                         <Link to={`/products/${product.slug}`} className="flex w-full h-full flex-col sm:flex-row">
                           <div className="w-full sm:w-1/2 relative overflow-hidden border-b sm:border-b-0 sm:border-r border-zinc-800 group-hover:border-white transition-colors duration-500 min-h-[200px]">
-                            <img src="/lookbook_2_1775133011541.png" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05] grayscale contrast-125" alt={product.name} />
+                            <img src="/lookbook_2.png" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05] grayscale contrast-125" alt={product.name} />
                           </div>
                           <div className="w-full sm:w-1/2 p-6 md:p-8 flex flex-col justify-center bg-[#0A0A0A]">
                               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 mb-2">// LATEST ADDITION</p>
@@ -161,8 +165,8 @@ export default function HomePage() {
         <section className="py-16 md:py-24 transition-colors duration-500">
           <div className="max-w-[1400px] mx-auto px-6 md:px-16">
             <div className="mb-10 md:mb-12">
-              <p className="font-['Impact']  uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Explore</p>
-              <h2 className="font-['Impact']  md:text-4xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
+              <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Explore</p>
+              <h2 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
                 Collections
               </h2>
             </div>
@@ -199,13 +203,13 @@ export default function HomePage() {
       {/* Brand Statement */}
       <section className="py-24 md:py-40 relative overflow-hidden transition-colors duration-500  bg-[#111111]">
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col items-center md:items-start text-center md:text-left">
-          <h2 className="font-['Impact']  uppercase tracking-tight  text-white transition-colors duration-500 leading-[0.85] md:ml-[5%] relative z-10 hover:scale-[1.02] transform transition-transform">
+          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight  text-white transition-colors duration-500 leading-[0.85] md:ml-[5%] relative z-10 hover:scale-[1.02] transform transition-transform">
             NO RULES.
           </h2>
-          <h2 className="font-['Impact']  uppercase tracking-tight  text-white transition-colors duration-500 leading-[0.85] ml-[15%] md:ml-[20%] opacity-70 -mt-6 md:-mt-12 relative z-20 hover:scale-[1.02] transform transition-transform">
+          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight  text-white transition-colors duration-500 leading-[0.85] ml-[15%] md:ml-[20%] opacity-70 -mt-6 md:-mt-12 relative z-20 hover:scale-[1.02] transform transition-transform">
             NO COMFORT ZONE.
           </h2>
-          <h2 className="font-['Impact']  uppercase tracking-tight  text-red-500 transition-colors duration-500 leading-[0.85] ml-[5%] md:ml-[10%] -mt-6 md:-mt-12 opacity-90 relative z-30  drop-shadow-[4px_4px_0_rgba(255,255,255,0.1)] hover:scale-[1.02] transform transition-transform">
+          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight  text-red-500 transition-colors duration-500 leading-[0.85] ml-[5%] md:ml-[10%] -mt-6 md:-mt-12 opacity-90 relative z-30  drop-shadow-[4px_4px_0_rgba(255,255,255,0.1)] hover:scale-[1.02] transform transition-transform">
             <span className="line-through  decoration-white  md:decoration-[16px]">NO APOLOGIES</span>.
           </h2>
         </div>

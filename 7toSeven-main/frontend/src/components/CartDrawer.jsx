@@ -24,14 +24,14 @@ export default function CartDrawer() {
       <SheetContent
         side="right"
         data-testid="cart-drawer"
-        className="w-full sm:max-w-md  bg-[#0A0A0A] p-0 flex flex-col [&>button]:hidden   border-white !z-50"
+        className="w-full sm:max-w-md bg-zinc-950 p-0 flex flex-col [&>button]:hidden border-0 border-l border-zinc-800 !z-50 rounded-none"
         style={{ borderRadius: 0 }}
       >
         {/* Header */}
         <SheetHeader className="p-6 pb-4   border-white/[0.04]">
           <div className="flex items-center justify-between">
-            <SheetTitle className="font-['Impact']  uppercase tracking-wider  text-white">
-              Cart ({items.length})
+            <SheetTitle className="font-['Impact'] text-2xl uppercase tracking-widest text-[#CCFF00]">
+              INVENTORY MANIFEST <span className="text-white/50 text-sm">({items.length})</span>
             </SheetTitle>
             <button
               data-testid="cart-close-btn"
@@ -48,8 +48,8 @@ export default function CartDrawer() {
         <div className="flex-1 overflow-y-auto">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full p-10">
-              <p className="font-['Impact']  uppercase tracking-wider  text-white/30">Cart is empty</p>
-              <p className="  text-white/20 mt-2">Add something to get started.</p>
+              <p className="font-['Impact']  uppercase tracking-widest text-2xl text-white/30">MANIFEST EMPTY</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-white/20 mt-4 border border-white/10 px-6 py-2">SCAN NEW ITEMS</p>
             </div>
           ) : (
             <div className="p-4 space-y-3">
@@ -65,12 +65,12 @@ export default function CartDrawer() {
                     className="w-16 h-20 object-cover"
                   />
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-['Impact']  uppercase tracking-wider  text-white truncate">
+                    <h4 className="font-mono text-sm uppercase tracking-widest font-bold text-white truncate break-words whitespace-normal">
                       {item.product_name}
                     </h4>
-                    <p className="  text-white/30 mt-0.5">Size: {item.size}</p>
-                    <p className="  text-white mt-1">{'\u20B9'}{item.price.toLocaleString('en-IN')}</p>
-                    <div className="flex items-center justify-between mt-2">
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-[#CCFF00] mt-1">SIZE: // {item.size}</p>
+                    <p className="font-mono text-xs font-bold text-white mt-3 pb-2 border-b border-white/10">RS. {item.price.toLocaleString('en-IN')}</p>
+                    <div className="flex items-center justify-between mt-3">
                       <div className="flex items-center border  border-white/20">
                         <button
                           data-testid={`cart-qty-minus-${item.product_id}`}
@@ -79,7 +79,7 @@ export default function CartDrawer() {
                         >
                           <Minus size={12} />
                         </button>
-                        <span className="w-6    text-white">{item.quantity}</span>
+                        <span className="w-6 font-mono text-xs text-center text-white">{item.quantity}</span>
                         <button
                           data-testid={`cart-qty-plus-${item.product_id}`}
                           onClick={() => updateQuantity(item.product_id, item.size, item.quantity + 1)}
@@ -105,34 +105,34 @@ export default function CartDrawer() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="p-6 pt-4 space-y-4   border-white/[0.04]">
+          <div className="p-6 pt-4 space-y-4 border-t border-zinc-800 bg-[#050505]">
             {subtotal < 899 ? (
-              <p data-testid="cart-shipping-msg" className="   text-white/30 uppercase tracking-wider">
-                Add {'\u20B9'}{(899 - subtotal).toLocaleString('en-IN')} more for free shipping
+              <p data-testid="cart-shipping-msg" className="font-mono text-[9px] text-[#CCFF00] uppercase tracking-widest">
+                // ADD RS. {(899 - subtotal).toLocaleString('en-IN')} FOR SECURE SHIPPING //
               </p>
             ) : (
-              <p data-testid="cart-free-shipping" className="   text-white/50 uppercase tracking-wider">
-                Free shipping unlocked
+              <p data-testid="cart-free-shipping" className="font-mono text-[9px] text-[#CCFF00] uppercase tracking-widest">
+                // FREIGHT CLEARED // FREE SHIPPING //
               </p>
             )}
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between  text-white/40">
-                <span>Subtotal</span>
-                <span>{'\u20B9'}{subtotal.toLocaleString('en-IN')}</span>
+            <div className="space-y-3 font-mono text-[10px] uppercase tracking-widest">
+              <div className="flex justify-between text-white/50">
+                <span>SUBTOTAL</span>
+                <span>RS. {subtotal.toLocaleString('en-IN')}</span>
               </div>
-              <div className="flex justify-between  text-white/40">
-                <span>Shipping</span>
-                <span>{shipping === 0 ? 'FREE' : `\u20B9${shipping}`}</span>
+              <div className="flex justify-between text-white/50">
+                <span>SHIPPING</span>
+                <span>{shipping === 0 ? 'CLEARED' : `RS. ${shipping}`}</span>
               </div>
-              <div className="flex justify-between  text-white font-['Impact']  uppercase tracking-wider pt-3   border-white/[0.04]">
-                <span>Total</span>
-                <span>{'\u20B9'}{total.toLocaleString('en-IN')}</span>
+              <div className="flex justify-between text-white font-bold text-sm tracking-widest pt-4 border-t border-white/10">
+                <span>TOTAL</span>
+                <span>RS. {total.toLocaleString('en-IN')}</span>
               </div>
             </div>
             <button
               data-testid="cart-checkout-btn"
               onClick={handleCheckout}
-              className="w-full   bg-white text-[#0A0A0A] font-['Impact']  uppercase tracking-[0.2em] py-5   border-white hover:bg-transparent  hover:text-white transition-all duration-300"
+              className="w-full bg-white text-black font-['Impact'] text-xl uppercase tracking-widest py-5 border-2 border-transparent hover:bg-black hover:text-white hover:border-white transition-all duration-300 rounded-none shadow-[4px_4px_0px_0px_rgba(204,255,0,0.5)] hover:shadow-[0px_0px_0px_0px_rgba(204,255,0,0)] hover:translate-y-[4px] hover:translate-x-[4px] mt-4"
             >
               SECURE DROP
             </button>

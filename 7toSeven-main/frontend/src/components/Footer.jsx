@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 pt-6   border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4 transition-colors duration-500">
+        <div className="mt-20 pt-6 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4 transition-colors duration-500">
           <p className=" uppercase tracking-[0.2em]  text-white/20 transition-colors">&copy; 2026 7toSEVEN. All rights reserved.</p>
           <p className=" uppercase tracking-[0.2em]  text-white/20 transition-colors">Relentless Evolution</p>
         </div>

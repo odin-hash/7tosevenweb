@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => setMounted(true), []);
-
   return (
     <section data-testid="hero-section" className="relative w-full min-h-[100dvh] flex flex-col pt-32 bg-[#0A0A0A] overflow-hidden">
       

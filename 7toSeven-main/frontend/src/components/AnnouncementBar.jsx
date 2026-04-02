@@ -9,7 +9,7 @@ export default function AnnouncementBar() {
       className="fixed top-0 left-0 right-0 z-[60] bg-black py-2 overflow-hidden whitespace-nowrap"
     >
       <div className="animate-marquee inline-flex">
-        <span className="font-['Impact'] uppercase tracking-[0.25em] text-white/70">
+        <span className="font-['Impact'] text-[10px] uppercase tracking-[0.25em] text-white/70">
           {text}{text}{text}{text}
         </span>
       </div>
