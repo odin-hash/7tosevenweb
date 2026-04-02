@@ -55,24 +55,24 @@ export default function ProductCard({ product }) {
       <div className="flex flex-col sm:flex-row p-0 divide-y sm:divide-y-0 sm:divide-x divide-zinc-800 group-hover:divide-white transition-colors duration-500">
         
         {/* Left Side: Category & Name */}
-        <div className="flex-1 p-3 flex flex-col justify-center">
-          <p className="font-['Impact'] text-[9px] uppercase tracking-[0.2em] text-white/50 mb-1">
+        <div className="flex-1 p-4 md:p-5 flex flex-col justify-center">
+          <p className="font-['Impact'] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/60 mb-2">
             // {product.collection || product.category || "CORE"}
           </p>
-          <h3 className="font-['Impact'] text-xs font-bold uppercase tracking-widest text-white truncate max-w-[150px] md:max-w-[200px]">
+          <h3 className="font-['Impact'] text-lg md:text-2xl font-bold uppercase tracking-widest text-white truncate max-w-full">
             {product.name}
           </h3>
         </div>
         
         {/* Right Side: Pricing */}
-        <div className="p-3 flex items-center justify-end min-w-[80px] bg-zinc-950/20">
+        <div className="p-4 md:p-5 flex items-center justify-end min-w-[120px] bg-zinc-950/20">
           <div className="flex flex-col items-end">
             {product.original_price && (
-              <span className="font-['Impact'] text-[9px] text-zinc-600 line-through tracking-widest mb-0.5">
+              <span className="font-['Impact'] text-xs md:text-sm text-zinc-500 line-through tracking-[0.2em] mb-1">
                 RS. {product.original_price.toLocaleString('en-IN')}
               </span>
             )}
-            <span className={`font-['Impact'] text-xs font-bold tracking-widest ${product.original_price ? 'text-[#CCFF00]' : 'text-white'}`}>
+            <span className={`font-['Impact'] text-lg md:text-2xl font-bold tracking-widest ${product.original_price ? 'text-[#CCFF00]' : 'text-white'}`}>
               RS. {product.price.toLocaleString('en-IN')}
             </span>
           </div>

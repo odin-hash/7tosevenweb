@@ -22,7 +22,7 @@ export default function HeroSection() {
         
         {/* Foreground Typography */}
         <div className="flex flex-col flex-1 items-center justify-center mt-[-10dvh] px-4 w-full overflow-hidden">
-          <h1 className="font-['Impact'] text-[25vw] sm:text-[20vw] md:text-8xl lg:text-[10rem] uppercase leading-[0.85] md:leading-[0.9] tracking-tighter text-white/30 text-center break-words w-full animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <h1 className="font-['Impact'] text-[25vw] sm:text-[20vw] md:text-8xl lg:text-[10rem] uppercase leading-[1] md:leading-[0.9] tracking-tighter text-white/30 text-center break-words w-full animate-in fade-in slide-in-from-bottom-8 duration-1000">
             7TO<br className="md:hidden" />SEVEN
           </h1>
         </div>
