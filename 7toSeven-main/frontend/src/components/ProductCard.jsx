@@ -9,16 +9,26 @@ export default function ProductCard({ product }) {
       className="group block overflow-hidden border border-zinc-800 hover:border-white transition-colors duration-500 rounded-none bg-[#0A0A0A]"
     >
       {/* Flush Image Container */}
-      <div className="relative aspect-[3/4] overflow-hidden w-full border-b border-zinc-800 group-hover:border-white transition-colors duration-500">
+      <div className="relative aspect-[4/5] overflow-hidden w-full border-b border-zinc-800 group-hover:border-white transition-colors duration-500 bg-zinc-950">
+        
+        {/* Default Product Image (T-Shirt) */}
+        <img
+          src={product.image}
+          alt={product.name}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[400ms] ease-in-out z-10 group-hover:opacity-0"
+          loading="lazy"
+        />
+
+        {/* Hover Lifestyle Image (Hidden by default, revealed under main image) */}
         <img
           src={
             [
               '/product_model_1.png',
-              '/product_model_2.png'
+              '/product_model_2.png',
             ][(product.name?.charCodeAt(0) || 0) % 2]
           }
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05]"
+          alt={`Model wearing ${product.name}`}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] scale-[1.05] group-hover:scale-100 z-0"
           loading="lazy"
         />
         

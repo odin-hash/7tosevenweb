@@ -1,100 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section data-testid="hero-section" className="relative w-full min-h-[100dvh] flex flex-col pt-32 bg-[#0A0A0A] overflow-hidden">
+    <section data-testid="hero-section" className="relative w-full min-h-[100dvh] bg-zinc-950 flex items-center pt-24 pb-16 px-6 md:px-16 lg:px-24 overflow-hidden border-b border-zinc-800">
       
-      {/* Inline Styles for Animated Grain */}
+      {/* Background Subtle Grain */}
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes film-grain {
+        @keyframes bg-noise {
           0%, 100% { transform: translate(0, 0); }
-          10% { transform: translate(-1%, -1%); }
-          20% { transform: translate(1%, 1%); }
-          30% { transform: translate(-2%, -2%); }
-          40% { transform: translate(2%, 2%); }
-          50% { transform: translate(-1%, 2%); }
-          60% { transform: translate(1%, -1%); }
-          70% { transform: translate(2%, 1%); }
-          80% { transform: translate(-2%, 1%); }
-          90% { transform: translate(1%, -2%); }
+          50% { transform: translate(1%, -1%); }
         }
-        .animate-grain {
-          animation: film-grain 0.6s steps(2) infinite;
+        .bg-grain {
+          animation: bg-noise 0.4s steps(2) infinite;
         }
       `}} />
-
-      {/* Background Image Container */}
-      <div className="absolute inset-0 bg-black">
-        <img
-          src="/hero_indian_real.png"
-          alt="7toSEVEN Drop 001"
-          fetchPriority="high"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-70 grayscale contrast-125"
-        />
-        
-        {/* Gradients for text readability */}
-        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t to-transparent from-[#0A0A0A] via-[#0A0A0A]/60" />
-      </div>
-
-      {/* Animated Static Grain Overlay */}
       <div 
-        className="absolute w-[200%] h-[200%] -top-[50%] -left-[50%] opacity-[0.15] mix-blend-overlay pointer-events-none animate-grain z-20"
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}
+        className="absolute w-[200%] h-[200%] -top-[50%] -left-[50%] opacity-[0.05] pointer-events-none bg-grain z-0"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22nf%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23nf)%22/%3E%3C/svg%3E")' }}
       />
 
-      {/* Content Container - Asymmetrical Layout */}
-      <div className="relative z-30 flex pl-6 md:pl-16 pr-6 md:pr-16 lg:px-24 pb-16 h-full max-w-[1400px] mx-auto w-full flex-grow">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
         
-        {/* Top Right Secondary Paragraph - Hidden on mobile to prevent collision */}
-        <div className="hidden md:block absolute top-8 right-16 lg:right-24 max-w-[280px] md:max-w-xs text-right animate-in fade-in slide-in-from-right-8 duration-1000 delay-300">
-          <p className="font-['Impact'] uppercase tracking-[0.2em] text-[#CCFF00] mb-2 text-sm">
+        {/* LEFT COLUMN: Typography & Identity */}
+        <div className="flex flex-col justify-center animate-in fade-in slide-in-from-left-8 duration-1000 order-2 md:order-1 pt-8 md:pt-0">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.4em] text-[#CCFF00] mb-6">
             // AUTHORIZED ACCESS
           </p>
-          <p className="font-sans text-xs md:text-sm text-white/70 leading-relaxed uppercase tracking-wider border-r-2 border-[#CCFF00] pr-4">
-            Embrace the chaos. Unapologetic Indian streetwear designed for the alleys, the rooftops, and the noise of the city. 
-          </p>
-        </div>
-
-        {/* Bottom Left Main Heading & Brutalist Call to Actions */}
-        <div className="mt-auto animate-in fade-in slide-in-from-left-8 duration-1000 w-full">
-          <p className="font-['Impact'] md:text-sm uppercase tracking-[0.4em] text-white/50 mb-4 inline-block bg-white/10 px-2 py-1 backdrop-blur-sm">
-            DROP 001
-          </p>
           
-          <h1 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase leading-[0.8] tracking-widest text-white drop-shadow-2xl">
-            BUILT<br/>
-            DIFFERENT.<br/>
-            WORN<br/>
-            FEARLESS.
+          <h1 className="font-['Impact'] text-[clamp(4.5rem,14vw,10.5rem)] uppercase leading-[0.95] tracking-widest text-white drop-shadow-2xl mb-12">
+            7TO<br/>SEVEN
           </h1>
           
-          <div className="flex flex-col sm:flex-row items-start gap-6 mt-12 w-full max-w-lg">
+          <p className="font-mono text-xs md:text-sm text-white/50 uppercase tracking-widest max-w-sm mb-12 border-l-2 border-[#CCFF00] pl-5 leading-relaxed">
+            Embrace the chaos. Unapologetic Indian streetwear designed for the alleys, the rooftops, and the noise of the city. 
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-6 w-full">
             {/* Harsh Brutalist Neon Button */}
             <Link
               to="/shop"
               data-testid="hero-shop-btn"
-              className="group relative inline-flex items-center justify-center gap-3 bg-transparent text-white font-['Impact'] text-sm md:text-base uppercase tracking-[0.2em] px-10 py-5 w-full sm:w-auto border-[3px] border-white hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black hover:translate-x-1 hover:-translate-y-1 transition-all duration-200 shadow-none hover:shadow-[-6px_6px_0px_#ffffff]"
+              className="group relative inline-flex items-center justify-center gap-4 bg-white text-black font-['Impact'] text-lg md:text-xl uppercase tracking-[0.2em] px-12 py-6 w-full sm:w-auto border-[3px] border-white hover:border-[#CCFF00] hover:bg-[#CCFF00] hover:text-black hover:translate-x-1 hover:-translate-y-1 transition-all duration-200 rounded-none shadow-[6px_6px_0px_0px_#ffffff] hover:shadow-[-4px_4px_0px_0px_transparent]"
             >
               SHOP THE DROP
-              <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-2 transition-transform" />
-            </Link>
-            
-            <Link
-              to="/lookbook"
-              className="inline-flex items-center justify-center gap-3 bg-black/60 border border-white/20 text-white font-['Impact'] text-xs md:text-sm uppercase tracking-[0.2em] px-8 py-5 hover:bg-white hover:text-black transition-all duration-300 w-full sm:w-auto backdrop-blur-md"
-            >
-              LOOKBOOK
+              <ArrowRight size={22} strokeWidth={2.5} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </div>
 
-      </div>
+        {/* RIGHT COLUMN: 4:5 Aspect Image */}
+        <div className="w-full relative aspect-[4/5] border border-zinc-800 animate-in fade-in slide-in-from-right-8 duration-1000 delay-300 order-1 md:order-2 group overflow-hidden bg-black object-cover">
+          <img
+            src="/hero_indian_real.png"
+            alt="7toSEVEN Hero"
+            fetchPriority="high"
+            className="absolute inset-0 w-full h-full object-cover object-center grayscale contrast-[1.1] transition-transform duration-[1200ms] group-hover:scale-[1.04]"
+          />
+          {/* Subtle vignette over the image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+        </div>
 
-      {/* Bottom fade into next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t to-transparent from-[#0A0A0A] pointer-events-none z-20" />
+      </div>
     </section>
   );
 }

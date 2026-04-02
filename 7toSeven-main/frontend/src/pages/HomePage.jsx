@@ -97,64 +97,12 @@ export default function HomePage() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {products.slice(0, 4).map((product, index) => {
-                
-                // Top-Left Massive Editorial Piece
-                if (index === 0) {
-                  return (
-                    <div key={product.id} className="sm:col-span-2 lg:col-span-2 sm:row-span-2 relative group overflow-hidden border border-zinc-800 hover:border-white transition-colors duration-500 bg-[#0A0A0A] flex flex-col justify-end aspect-square lg:aspect-auto min-h-[450px]">
-                      <Link to={`/products/${product.slug}`} className="block absolute inset-0 w-full h-full">
-                        <img 
-                          src="/lookbook_1.png" 
-                          className="absolute inset-0 w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05]" 
-                          alt={product.name} 
-                        />
-                        
-                        <div className="absolute top-4 left-4 bg-white text-black font-mono font-bold text-xs uppercase tracking-widest px-3 py-1.5 z-20">
-                          FEATURED / 01
-                        </div>
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8 border-t border-transparent group-hover:border-white z-10 transition-colors">
-                            <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-[#CCFF00] mb-2">// HEAVYWEIGHT // {product.collection || "CORE"}</p>
-                            <h3 className="font-['Impact'] text-3xl md:text-5xl uppercase tracking-widest text-white leading-[1.1] mb-6 max-w-sm">{product.name}</h3>
-                            <div className="flex flex-col sm:flex-row justify-between sm:items-end border-t border-zinc-800 pt-5 gap-4">
-                               <span className="font-mono text-xl md:text-2xl font-bold tracking-widest text-white">RS. {product.price.toLocaleString('en-IN')}</span>
-                               <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest bg-white text-black font-bold px-6 py-3 hover:bg-[#CCFF00] transition-colors border border-transparent inline-block text-center">QUICK ADD +</span>
-                            </div>
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                }
-                
-                // Bottom-Right Panoramic Piece
-                if (index === 3) {
-                  return (
-                    <div key={product.id} className="sm:col-span-2 lg:col-span-2 relative group overflow-hidden border border-zinc-800 hover:border-white transition-colors duration-500 bg-[#0A0A0A] flex flex-col sm:flex-row min-h-[300px]">
-                        <Link to={`/products/${product.slug}`} className="flex w-full h-full flex-col sm:flex-row">
-                          <div className="w-full sm:w-1/2 relative overflow-hidden border-b sm:border-b-0 sm:border-r border-zinc-800 group-hover:border-white transition-colors duration-500 min-h-[200px]">
-                            <img src="/lookbook_2.png" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05] grayscale contrast-125" alt={product.name} />
-                          </div>
-                          <div className="w-full sm:w-1/2 p-6 md:p-8 flex flex-col justify-center bg-[#0A0A0A]">
-                              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 mb-2">// LATEST ADDITION</p>
-                              <h3 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-widest text-white leading-[1.1] mb-6">{product.name}</h3>
-                              <span className="font-mono text-sm md:text-base font-bold tracking-widest text-[#CCFF00] mb-8">RS. {product.price.toLocaleString('en-IN')}</span>
-                              
-                              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-widest border border-white text-white font-bold px-6 py-3 hover:bg-white hover:text-black transition-colors w-max">EXPLORE ITEM</span>
-                          </div>
-                        </Link>
-                    </div>
-                  );
-                }
-
-                // Standard Cards (Index 1 & 2)
-                return (
-                  <div key={product.id} className="sm:col-span-1 lg:col-span-1 h-full">
-                    <ProductCard product={product} />
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+              {products.slice(0, 4).map((product) => (
+                <div key={product.id} className="h-full">
+                  <ProductCard product={product} />
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -201,16 +149,16 @@ export default function HomePage() {
       )}
 
       {/* Brand Statement */}
-      <section className="py-24 md:py-40 relative overflow-hidden transition-colors duration-500  bg-[#111111]">
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col items-center md:items-start text-center md:text-left">
-          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight  text-white transition-colors duration-500 leading-[0.85] md:ml-[5%] relative z-10 hover:scale-[1.02] transform transition-transform">
-            NO RULES.
+      <section className="pt-20 pb-28 md:pt-32 md:pb-40 relative overflow-hidden bg-zinc-950">
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col w-full gap-4 md:gap-8">
+          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,6.5rem)] uppercase tracking-tight text-white leading-none text-left w-full">
+            NO RULES IN
           </h2>
-          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight  text-white transition-colors duration-500 leading-[0.85] ml-[15%] md:ml-[20%] opacity-70 -mt-6 md:-mt-12 relative z-20 hover:scale-[1.02] transform transition-transform">
-            NO COMFORT ZONE.
+          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,6.5rem)] uppercase tracking-tight text-white leading-none text-center w-full">
+            THE ZONE
           </h2>
-          <h2 className="font-['Impact'] text-[clamp(3.5rem,10vw,9rem)] uppercase tracking-tight  text-red-500 transition-colors duration-500 leading-[0.85] ml-[5%] md:ml-[10%] -mt-6 md:-mt-12 opacity-90 relative z-30  drop-shadow-[4px_4px_0_rgba(255,255,255,0.1)] hover:scale-[1.02] transform transition-transform">
-            <span className="line-through  decoration-white  md:decoration-[16px]">NO APOLOGIES</span>.
+          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,6.5rem)] uppercase tracking-tight text-[#CCFF00] leading-none text-right w-full">
+            NO APOLOGIES
           </h2>
         </div>
       </section>
