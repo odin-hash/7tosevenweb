@@ -98,7 +98,7 @@ export default function HomePage() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-12 max-w-5xl mx-auto">
               {products.slice(0, 4).map((product) => (
                 <div key={product.id} className="h-full">
                   <ProductCard product={product} />
