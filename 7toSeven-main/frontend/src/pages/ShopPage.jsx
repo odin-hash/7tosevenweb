@@ -72,11 +72,10 @@ export default function ShopPage() {
     <div data-testid="shop-page" className="min-h-screen pt-32 md:pt-36">
       {/* Header */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-10 md:mb-16">
-        <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em] text-black/30 dark:text-white/30 mb-2">Browse</p>
-        <h1 className="font-['Impact'] text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter text-black dark:text-white leading-[1.1]">
-          Shop
+        <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em] text-black/30 dark:text-white/30 mb-2">The Collection</p>
+        <h1 className="font-['Impact'] text-[clamp(3rem,6vw,5rem)] uppercase tracking-widest text-black dark:text-white leading-[1.1]">
+          DROP 001
         </h1>
-        <p className="text-xs text-black/30 dark:text-white/30 mt-2">{products.length} Products</p>
       </div>
 
       {/* Filters */}
@@ -84,13 +83,13 @@ export default function ShopPage() {
         <Select value={category} onValueChange={(v) => updateFilter('category', v)}>
           <SelectTrigger
             data-testid="filter-category"
-            className="w-[140px] glass text-black/60 dark:text-white/60 text-[10px] uppercase tracking-wider font-['Impact'] rounded-full h-9 px-4 border-black/10 dark:border-white/[0.06]"
+            className="w-[140px] bg-transparent text-black dark:text-white text-[10px] uppercase tracking-wider font-['Impact'] rounded-none h-10 px-4 border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors"
           >
             <SelectValue placeholder="Category" />
           </SelectTrigger>
-          <SelectContent className="glass rounded-xl border-black/10 dark:border-white/[0.06]">
+          <SelectContent className="rounded-none border border-black/20 dark:border-white/20 bg-white dark:bg-[#0A0A0A]">
             {CATEGORIES.map(c => (
-              <SelectItem key={c.value} value={c.value} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-lg cursor-pointer">
+              <SelectItem key={c.value} value={c.value} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">
                 {c.label}
               </SelectItem>
             ))}
@@ -98,25 +97,25 @@ export default function ShopPage() {
         </Select>
 
         <Select value={sizeFilter || 'all-sizes'} onValueChange={(v) => updateFilter('size', v === 'all-sizes' ? '' : v)}>
-          <SelectTrigger data-testid="filter-size" className="w-[120px] glass text-black/60 dark:text-white/60 text-[10px] uppercase tracking-wider font-['Impact'] rounded-full h-9 px-4 border-black/10 dark:border-white/[0.06]">
+          <SelectTrigger data-testid="filter-size" className="w-[120px] bg-transparent text-black dark:text-white text-[10px] uppercase tracking-wider font-['Impact'] rounded-none h-10 px-4 border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors">
             <SelectValue placeholder="Size" />
           </SelectTrigger>
-          <SelectContent className="glass rounded-xl border-black/10 dark:border-white/[0.06]">
-            <SelectItem value="all-sizes" className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-lg cursor-pointer">All Sizes</SelectItem>
+          <SelectContent className="rounded-none border border-black/20 dark:border-white/20 bg-white dark:bg-[#0A0A0A]">
+            <SelectItem value="all-sizes" className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">All Sizes</SelectItem>
             {SIZES.map(s => (
-              <SelectItem key={s} value={s} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-lg cursor-pointer">{s}</SelectItem>
+              <SelectItem key={s} value={s} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">{s}</SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <div className="ml-auto">
           <Select value={sort} onValueChange={(v) => updateFilter('sort', v)}>
-            <SelectTrigger data-testid="filter-sort" className="w-[170px] glass text-black/60 dark:text-white/60 text-[10px] uppercase tracking-wider font-['Impact'] rounded-full h-9 px-4 border-black/10 dark:border-white/[0.06]">
+            <SelectTrigger data-testid="filter-sort" className="w-[170px] bg-transparent text-black dark:text-white text-[10px] uppercase tracking-wider font-['Impact'] rounded-none h-10 px-4 border border-black/20 dark:border-white/20 hover:border-black dark:hover:border-white transition-colors">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
-            <SelectContent className="glass rounded-xl border-black/10 dark:border-white/[0.06]">
+            <SelectContent className="rounded-none border border-black/20 dark:border-white/20 bg-white dark:bg-[#0A0A0A]">
               {SORT_OPTIONS.map(s => (
-                <SelectItem key={s.value} value={s.value} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-lg cursor-pointer">{s.label}</SelectItem>
+                <SelectItem key={s.value} value={s.value} className="text-black/60 dark:text-white/60 text-xs uppercase tracking-wider focus:bg-black/5 dark:focus:bg-white/[0.04] focus:text-black dark:focus:text-white rounded-none cursor-pointer">{s.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>

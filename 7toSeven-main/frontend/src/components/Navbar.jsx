@@ -37,7 +37,7 @@ export default function Navbar() {
             ? 'bg-white/70 dark:bg-[#0A0A0A]/70 border-black/10 dark:border-white/10 backdrop-blur-2xl backdrop-saturate-[180%] shadow-sm' 
             : 'bg-transparent border-transparent backdrop-blur-none backdrop-saturate-100'
         }`}
-        style={{ borderRadius: '20px' }}
+        style={{ borderRadius: '0px' }}
       >
         <div className="flex items-center justify-between px-5 md:px-8 h-14 md:h-16">
           {/* Left — Icon logo (lightning bolt) */}
@@ -47,14 +47,11 @@ export default function Navbar() {
 
           {/* Center — Links (desktop) */}
           <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            <Link to="/shop?sort=newest" data-testid="nav-newin-link" className="font-['Impact'] text-[11px] uppercase tracking-[0.2em] text-[#111111]/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors duration-300">
-              New In
-            </Link>
             <Link to="/shop" data-testid="nav-shop-link" className="font-['Impact'] text-[11px] uppercase tracking-[0.2em] text-[#111111]/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors duration-300">
-              Shop All
+              SHOP
             </Link>
             <Link to="/our-story" data-testid="nav-story-link" className="font-['Impact'] text-[11px] uppercase tracking-[0.2em] text-[#111111]/60 hover:text-black dark:text-white/60 dark:hover:text-white transition-colors duration-300">
-              Our Story
+              MANIFESTO
             </Link>
           </div>
 
@@ -87,9 +84,9 @@ export default function Navbar() {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-[45] bg-[#F9F9F9]/95 dark:bg-[#0A0A0A]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10" data-testid="mobile-menu">
-          <Link to="/shop?sort=newest" data-testid="mobile-newin" className="font-['Impact'] text-3xl uppercase tracking-wider text-black/80 hover:text-black dark:text-white/80 dark:hover:text-white transition-colors">New In</Link>
-          <Link to="/shop" data-testid="mobile-shop" className="font-['Impact'] text-3xl uppercase tracking-wider text-black/80 hover:text-black dark:text-white/80 dark:hover:text-white transition-colors">Shop All</Link>
-          <Link to="/our-story" data-testid="mobile-story" className="font-['Impact'] text-3xl uppercase tracking-wider text-black/80 hover:text-black dark:text-white/80 dark:hover:text-white transition-colors">Our Story</Link>
+          <Link to="/shop" data-testid="mobile-shop" className="font-['Impact'] text-4xl uppercase tracking-wider text-black/80 hover:text-black dark:text-white/80 dark:hover:text-white transition-colors">SHOP</Link>
+          <Link to="/our-story" data-testid="mobile-story" className="font-['Impact'] text-4xl uppercase tracking-wider text-black/80 hover:text-black dark:text-white/80 dark:hover:text-white transition-colors">MANIFESTO</Link>
+          <Link to="/lookbook" data-testid="mobile-lookbook" className="font-['Impact'] text-4xl uppercase tracking-wider text-black/80 hover:text-black dark:text-white/80 dark:hover:text-white transition-colors">LOOKBOOK</Link>
         </div>
       )}
     </>

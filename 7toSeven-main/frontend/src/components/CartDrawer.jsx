@@ -24,7 +24,7 @@ export default function CartDrawer() {
       <SheetContent
         side="right"
         data-testid="cart-drawer"
-        className="w-full sm:max-w-md glass-strong p-0 flex flex-col [&>button]:hidden border-l-0 !z-50"
+        className="w-full sm:max-w-md bg-white dark:bg-[#0A0A0A] p-0 flex flex-col [&>button]:hidden border-l-2 border-black dark:border-white !z-50"
         style={{ borderRadius: 0 }}
       >
         {/* Header */}
@@ -57,12 +57,12 @@ export default function CartDrawer() {
                 <div
                   key={`${item.product_id}-${item.size}`}
                   data-testid={`cart-item-${item.product_id}`}
-                  className="flex gap-4 p-3 rounded-xl bg-black/5 dark:bg-white/[0.02]"
+                  className="flex gap-4 p-3 border-b border-black/10 dark:border-white/10"
                 >
                   <img
                     src={item.image}
                     alt={item.product_name}
-                    className="w-16 h-20 object-cover rounded-lg"
+                    className="w-16 h-20 object-cover"
                   />
                   <div className="flex-1 min-w-0">
                     <h4 className="font-['Impact'] text-[11px] uppercase tracking-wider text-black dark:text-white truncate">
@@ -71,11 +71,11 @@ export default function CartDrawer() {
                     <p className="text-[10px] text-black/30 dark:text-white/30 mt-0.5">Size: {item.size}</p>
                     <p className="text-xs text-black dark:text-white mt-1">{'\u20B9'}{item.price.toLocaleString('en-IN')}</p>
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center rounded-full bg-black/5 dark:bg-white/[0.04] overflow-hidden">
+                      <div className="flex items-center border border-black/20 dark:border-white/20">
                         <button
                           data-testid={`cart-qty-minus-${item.product_id}`}
                           onClick={() => updateQuantity(item.product_id, item.size, item.quantity - 1)}
-                          className="w-7 h-7 flex items-center justify-center text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/[0.06] transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-black/50 dark:text-white/50 hover:bg-black/10 dark:hover:bg-white/[0.06] transition-colors"
                         >
                           <Minus size={12} />
                         </button>
@@ -83,7 +83,7 @@ export default function CartDrawer() {
                         <button
                           data-testid={`cart-qty-plus-${item.product_id}`}
                           onClick={() => updateQuantity(item.product_id, item.size, item.quantity + 1)}
-                          className="w-7 h-7 flex items-center justify-center text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/[0.06] transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-black/50 dark:text-white/50 hover:bg-black/10 dark:hover:bg-white/[0.06] transition-colors"
                         >
                           <Plus size={12} />
                         </button>
@@ -132,9 +132,9 @@ export default function CartDrawer() {
             <button
               data-testid="cart-checkout-btn"
               onClick={handleCheckout}
-              className="w-full bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-['Impact'] text-xs uppercase tracking-[0.15em] py-3.5 rounded-full hover:bg-black/80 dark:hover:bg-white/90 transition-all duration-300"
+              className="w-full bg-black text-white dark:bg-white dark:text-[#0A0A0A] font-['Impact'] text-xs uppercase tracking-[0.2em] py-5 border-2 border-black dark:border-white hover:bg-transparent hover:text-black dark:hover:text-white transition-all duration-300"
             >
-              Checkout
+              SECURE DROP
             </button>
           </div>
         )}

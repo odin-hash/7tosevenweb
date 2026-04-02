@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <h4 className="font-['Impact'] text-[12px] uppercase tracking-[0.25em] text-[#111111]/50 dark:text-white/50 mb-8 transition-colors duration-500">Info</h4>
             <div className="space-y-5">
-              <Link to="/our-story" data-testid="footer-story" className="block text-[15px] text-[#555] hover:text-black dark:text-[#777] dark:hover:text-white transition-colors duration-300">Our Story</Link>
+              <Link to="/our-story" data-testid="footer-story" className="block text-[15px] text-[#555] hover:text-black dark:text-[#777] dark:hover:text-white transition-colors duration-300">Manifesto</Link>
               <Link to="/faq" className="block text-[15px] text-[#555] hover:text-black dark:text-[#777] dark:hover:text-white transition-colors duration-300">FAQ</Link>
               <Link to="/shipping" className="block text-[15px] text-[#555] hover:text-black dark:text-[#777] dark:hover:text-white transition-colors duration-300">Shipping Policy</Link>
               <Link to="/returns" className="block text-[15px] text-[#555] hover:text-black dark:text-[#777] dark:hover:text-white transition-colors duration-300">Make a Return / Exchange</Link>

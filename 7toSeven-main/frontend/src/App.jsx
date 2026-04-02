@@ -17,6 +17,7 @@ import TermsPage from '@/pages/TermsPage';
 import ShippingPolicyPage from '@/pages/ShippingPolicyPage';
 import OrderConfirmedPage from '@/pages/OrderConfirmedPage';
 import ReturnsExchangesPage from '@/pages/ReturnsExchangesPage';
+import LookbookPage from '@/pages/LookbookPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/shipping" element={<ShippingPolicyPage />} />
                 <Route path="/returns" element={<ReturnsExchangesPage />} />
                 <Route path="/order-confirmed" element={<OrderConfirmedPage />} />
+                <Route path="/lookbook" element={<LookbookPage />} />
               </Routes>
             </main>
             <Footer />
