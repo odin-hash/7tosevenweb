@@ -11,22 +11,32 @@ export default function ProductCard({ product }) {
       {/* Flush Image Container */}
       <div className="relative aspect-[4/5] overflow-hidden w-full border-b border-zinc-800 group-hover:border-white transition-colors duration-500 bg-zinc-950">
         
-        {/* Default Product Image */}
+        {/* Default Product Image (Resting state, flat lay / ghost) */}
         <img
           src={product.images?.[0] || product.image}
           alt={product.name}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] group-hover:scale-[1.05] z-10"
+          className={`absolute inset-0 w-full h-full object-cover object-center z-10 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] ${!product.images?.[1] ? 'group-hover:scale-[1.05]' : ''}`}
           loading="lazy"
         />
+
+        {/* Hover Lifestyle/Mood Image (Triggered strictly on hover) */}
+        {product.images?.length > 1 && (
+          <img
+            src={product.images[1]}
+            alt={`${product.name} lifestyle`}
+            className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] opacity-0 group-hover:opacity-100 group-hover:scale-[1.05] z-20"
+            loading="lazy"
+          />
+        )}
         
         {product.is_new && (
-          <span className="absolute top-0 left-0 bg-white text-black font-['Impact'] font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 border-r border-b border-white z-20">
+          <span className="absolute top-0 left-0 bg-white text-black font-['Impact'] font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 border-r border-b border-white z-30 shadow-sm">
             NEW
           </span>
         )}
 
-        {/* Quick Add Overlay (bottom 20%) */}
-        <div className="absolute bottom-0 left-0 right-0 h-[20%] bg-white/95 backdrop-blur-md flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] z-10 border-t border-white">
+        {/* Quick Add Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-[20%] bg-white/95 backdrop-blur-md flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
           <span className="font-['Impact'] font-bold text-xs md:text-sm uppercase tracking-widest text-black">
             QUICK ADD +
           </span>

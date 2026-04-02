@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowRight } from 'lucide-react';
@@ -15,7 +15,13 @@ export default function HomePage() {
   const [stories, setStories] = useState([]);
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
+  const lookbookRef = useRef(null);
 
+  const scrollLookbook = (direction) => {
+    if (lookbookRef.current) {
+      lookbookRef.current.scrollBy({ left: direction === 'left' ? -600 : 600, behavior: 'smooth' });
+    }
+  };
   useEffect(() => {
     setLoading(true);
 
@@ -42,14 +48,9 @@ export default function HomePage() {
       <section className="py-16 md:py-24 transition-colors duration-500  bg-[#111111]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
           <div className="mx-auto max-w-3xl flex flex-col items-center">
-            <div className="flex flex-col items-center gap-2 mb-12 font-sans font-black  md:text-xl tracking-[0.2em] uppercase  text-white/70 transition-colors duration-500">
-              <p>For those who don’t wait.</p>
-              <p>For those who don’t follow.</p>
-              <p>For those who don’t fit.</p>
-            </div>
-            <p className="font-['Impact'] text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-widest  text-white leading-[1] transition-colors duration-500">
+            <p className="font-['Impact'] text-3xl md:text-5xl lg:text-6xl uppercase tracking-widest text-white leading-tight transition-colors duration-500">
               NOT FOR EVERYONE.<br/>
-              <span className=" text-red-500 drop-shadow-sm block mt-2">NEVER WAS.</span>
+              <span className="text-red-500 drop-shadow-sm block mt-2">NEVER WAS.</span>
             </p>
           </div>
         </div>
@@ -130,7 +131,7 @@ export default function HomePage() {
                     <img
                       src={col.image}
                       alt={col.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
                       loading="lazy"
                     />
                   </div>
@@ -149,16 +150,16 @@ export default function HomePage() {
       )}
 
       {/* Brand Statement */}
-      <section className="pt-20 pb-28 md:pt-32 md:pb-40 relative overflow-hidden bg-zinc-950">
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 flex flex-col w-full gap-4 md:gap-8">
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,6.5rem)] uppercase tracking-tight text-white leading-none text-left w-full">
-            NO RULES IN
-          </h2>
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,6.5rem)] uppercase tracking-tight text-white leading-none text-center w-full">
-            THE ZONE
-          </h2>
-          <h2 className="font-['Impact'] text-[clamp(2.5rem,8vw,6.5rem)] uppercase tracking-tight text-[#CCFF00] leading-none text-right w-full">
-            NO APOLOGIES
+      <section className="py-12 md:py-24 relative overflow-hidden bg-zinc-950 flex justify-center w-full">
+        <div className="relative z-10 w-max max-w-full px-4 flex flex-col pointer-events-none select-none">
+          <h2 className="font-['Impact'] text-[clamp(1.5rem,4vw,6rem)] uppercase tracking-[0.1em] md:tracking-[0.2em] text-white leading-[1.1] md:leading-[1] flex flex-col w-max">
+            <span>NO RULES IN</span>
+            <span>
+              <span className="opacity-0 select-none">NO RULES IN </span>THE ZONE
+            </span>
+            <span>
+              <span className="opacity-0 select-none">NO RULES IN THE ZONE </span><span className="text-[#CCFF00]">NO APOLOGIES</span>
+            </span>
           </h2>
         </div>
       </section>
@@ -179,9 +180,26 @@ export default function HomePage() {
         </div>
 
         <div className="relative w-full group">
+          {/* Desktop Navigation Arrows */}
+          <button 
+            onClick={() => scrollLookbook('left')} 
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white text-black font-mono font-bold w-14 h-14 items-center justify-center rounded-none shadow-xl border-2 border-black hover:bg-black hover:text-[#CCFF00] hover:border-[#CCFF00] transition-colors"
+            aria-label="Scroll left"
+          >
+            {'<-'}
+          </button>
+          <button 
+            onClick={() => scrollLookbook('right')} 
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white text-black font-mono font-bold w-14 h-14 items-center justify-center rounded-none shadow-xl border-2 border-black hover:bg-black hover:text-[#CCFF00] hover:border-[#CCFF00] transition-colors"
+            aria-label="Scroll right"
+          >
+            {'->'}
+          </button>
+
           {/* Edge-to-edge horizontal scroll container */}
           <div 
-            className="flex w-full overflow-x-auto snap-x snap-mandatory"
+            ref={lookbookRef}
+            className="flex w-full overflow-x-auto snap-x snap-mandatory scroll-smooth"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             {/* 
@@ -193,11 +211,11 @@ export default function HomePage() {
             `}} />
 
             {['/lookbook_1.png', '/lookbook_2.png', '/lookbook_3.png'].map((src, idx) => (
-              <div key={idx} className="flex-none h-[80vh] snap-center bg-[#111]">
+              <div key={idx} className="flex-none h-[80vh] aspect-[4/5] snap-center bg-[#111] overflow-hidden">
                 <img 
                   src={src} 
                   alt={`Lookbook Archive 00${idx + 1}`} 
-                  className="h-full w-auto max-w-none object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-grab active:cursor-grabbing" 
+                  className="h-full w-full object-cover object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-grab active:cursor-grabbing" 
                   loading="lazy" 
                   draggable={false}
                 />
@@ -206,12 +224,22 @@ export default function HomePage() {
           </div>
 
           {/* Persistent overlay text */}
-          <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 z-20 pointer-events-none mix-blend-difference">
-            <p className="font-mono text-[10px] md:text-xs text-white uppercase tracking-[0.3em] border border-white/20 p-3 bg-black/10 backdrop-blur-md">
-              DRAG TO EXPLORE [→]
+          <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-20 pointer-events-none">
+            <p className="bg-white text-black font-mono text-xs md:text-sm tracking-widest uppercase rounded-none px-4 py-2 shadow-lg">
+              <span className="md:hidden">SWIPE</span><span className="hidden md:inline">SCROLL</span> TO EXPLORE [→]
             </p>
           </div>
         </div>
+      </section>
+
+      {/* Trust & Origin Anchor */}
+      <section className="py-16 md:py-20 bg-black flex flex-col items-center justify-center text-center px-4 md:px-6 border-t border-white/5 overflow-hidden w-full">
+        <h2 
+          className="text-[clamp(1rem,4vw,3.5rem)] font-black uppercase tracking-[0.15em] md:tracking-[0.3em] text-white/90 leading-tight whitespace-nowrap w-full"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          MADE FOR INDIAN STREETS.
+        </h2>
       </section>
 
       {/* CTA Close */}

@@ -18,30 +18,30 @@ export default function LookbookPage() {
 
         <div className="flex flex-col gap-12 md:gap-24">
           {/* Image 1 - Full Width */}
-          <div className="w-full aspect-[4/5] md:aspect-[16/9] bg-[#111] overflow-hidden">
+          <div className="w-full aspect-[4/5] bg-[#111] overflow-hidden">
             <img 
               src="/lookbook_1.png" 
               alt="Lookbook Shot 1" 
-              className="w-full h-full object-cover object-top md:object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
+              className="w-full h-full object-cover object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
               loading="lazy"
             />
           </div>
 
           {/* Images 2 and 3 - Side by side */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
-            <div className="w-full aspect-[3/4] bg-[#111] overflow-hidden">
+            <div className="w-full aspect-[4/5] bg-[#111] overflow-hidden">
               <img 
                 src="/lookbook_2.png" 
                 alt="Lookbook Shot 2" 
-                className="w-full h-full object-cover object-top grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
+                className="w-full h-full object-cover object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
                 loading="lazy"
               />
             </div>
-            <div className="w-full aspect-[3/4] bg-[#111] overflow-hidden md:mt-24">
+            <div className="w-full aspect-[4/5] bg-[#111] overflow-hidden md:mt-24">
               <img 
                 src="/lookbook_3.png" 
                 alt="Lookbook Shot 3" 
-                className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
+                className="w-full h-full object-cover object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
                 loading="lazy"
               />
             </div>
