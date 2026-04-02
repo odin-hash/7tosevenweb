@@ -69,7 +69,7 @@ export default function Footer() {
 
       {/* Massive Brutalist Watermark */}
       <div className="w-full flex items-center justify-center overflow-hidden pb-4 md:pb-8 pointer-events-none select-none">
-        <h1 className="font-['Syne'] text-[15vw] leading-none text-white/5 font-black whitespace-nowrap">
+        <h1 className="font-['Syne'] text-[10vw] leading-none text-white/5 font-black whitespace-nowrap">
           7TOSEVEN
         </h1>
       </div>

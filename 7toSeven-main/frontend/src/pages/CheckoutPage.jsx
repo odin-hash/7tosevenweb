@@ -101,7 +101,7 @@ export default function CheckoutPage() {
     );
   }
 
-  const inputClass = "w-full bg-transparent border-b border-black/20 dark:border-white/20 text-black dark:text-white pb-3 pt-4 font-sans font-bold uppercase tracking-widest text-[11px] md:text-xs rounded-none focus:outline-none focus:border-black dark:focus:border-white placeholder:text-black/30 dark:placeholder:text-white/30 transition-all duration-300";
+  const inputClass = "w-full bg-zinc-900 border border-zinc-500 text-white px-4 py-4 font-sans font-bold uppercase tracking-widest text-[11px] md:text-xs rounded-none focus:outline-none focus:border-white focus:ring-1 focus:ring-white placeholder:text-zinc-400 transition-all duration-300";
 
   return (
     <div data-testid="checkout-page" className="min-h-screen pt-32 md:pt-36  bg-[#0A0A0A] transition-colors duration-500">
