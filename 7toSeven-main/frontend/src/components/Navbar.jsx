@@ -72,9 +72,16 @@ export default function Navbar() {
 
       {mobileOpen && (
         <div className="fixed inset-0 z-[45]  bg-[#0A0A0A]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10" data-testid="mobile-menu">
-          <Link to="/shop" data-testid="mobile-shop" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-white transition-colors">SHOP</Link>
-          <Link to="/our-story" data-testid="mobile-story" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-white transition-colors">MANIFESTO</Link>
-          <Link to="/lookbook" data-testid="mobile-lookbook" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-white transition-colors">LOOKBOOK</Link>
+          <button 
+            onClick={() => setMobileOpen(false)} 
+            className="absolute top-5 right-5 md:top-6 md:right-8 text-white/60 hover:text-[#CCFF00] transition-colors p-2 flex items-center justify-center"
+            aria-label="Close Mobile Menu"
+          >
+            <X size={24} strokeWidth={1.5} />
+          </button>
+          <Link to="/shop" data-testid="mobile-shop" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl">SHOP</Link>
+          <Link to="/our-story" data-testid="mobile-story" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl">MANIFESTO</Link>
+          <Link to="/lookbook" data-testid="mobile-lookbook" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl">LOOKBOOK</Link>
         </div>
       )}
     </>
