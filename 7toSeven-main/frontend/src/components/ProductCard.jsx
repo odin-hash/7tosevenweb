@@ -39,7 +39,7 @@ export default function ProductCard({ product }) {
         <div className="absolute top-2 right-2 bg-black border border-white/10 flex items-center gap-2 px-3 py-1.5 z-30 rounded-none shadow-xl">
           <div className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_rgba(163,230,53,0.8)]"></div>
           <span className="text-white font-mono text-[9px] uppercase tracking-widest pt-0.5">
-            LIMITED RUN
+            LIVE
           </span>
         </div>
 

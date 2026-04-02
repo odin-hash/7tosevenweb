@@ -222,7 +222,7 @@ export default function HomePage() {
       {/* Trust & Origin Anchor */}
       <section className="pt-16 pb-8 md:pt-20 md:pb-10 bg-black flex flex-col items-center justify-center text-center px-4 md:px-6 border-t border-white/5 overflow-hidden w-full">
         <h2 
-          className="text-[clamp(1rem,4vw,3.5rem)] font-black uppercase tracking-[0.15em] md:tracking-[0.3em] text-white/90 leading-tight whitespace-nowrap w-full"
+          className="text-5xl md:text-7xl lg:text-9xl font-black uppercase text-white/90 leading-tight whitespace-nowrap w-full"
           style={{ fontFamily: "'Syne', sans-serif" }}
         >
           MADE FOR INDIAN STREETS.
