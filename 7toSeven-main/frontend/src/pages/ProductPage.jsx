@@ -58,12 +58,12 @@ export default function ProductPage() {
             <div className="w-2 h-2 bg-black dark:bg-white rounded-full animate-pulse" />
           </div>
           {loadingSlow && (
-            <div className="text-center animate-pulse">
-              <p className="font-sans font-bold text-[10px] md:text-[12px] uppercase tracking-[0.2em] text-black/50 dark:text-white/50 mb-2">
-                WAKING UP SERVER...
+            <div className="text-center animate-pulse mt-4">
+              <p className="font-sans font-bold text-[10px] md:text-[12px] uppercase tracking-[0.3em] text-black/60 dark:text-white/60 mb-2">
+                ESTABLISHING SECURE CONNECTION...
               </p>
-              <p className="font-sans font-bold text-[10px] md:text-[12px] tracking-[0.2em] uppercase text-black/40 dark:text-white/40 max-w-[280px] mx-auto">
-                FREE HOSTING TIERS CAN TAKE UP TO 2 MINUTES TO SPIN UP.
+              <p className="font-sans text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-black/40 dark:text-white/40 max-w-[280px] mx-auto">
+                ACCESSING 7TOSEVEN ARCHIVES
               </p>
             </div>
           )}

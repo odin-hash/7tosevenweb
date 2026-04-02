@@ -100,12 +100,12 @@ export default function HomePage() {
                 <div className="w-2 h-2 bg-[#111111] dark:bg-white rounded-full animate-pulse" />
               </div>
               {loadingSlow && (
-                <div className="text-center animate-pulse">
-                  <p className="font-['Impact'] text-sm uppercase tracking-widest text-[#111111]/60 dark:text-white/60 mb-1">
-                    Waking Up Server...
+                <div className="text-center animate-pulse mt-4">
+                  <p className="font-sans font-bold text-[10px] md:text-[12px] uppercase tracking-[0.3em] text-[#111111]/60 dark:text-white/60 mb-2">
+                    ESTABLISHING SECURE CONNECTION...
                   </p>
-                  <p className="text-xs text-[#111111]/40 dark:text-white/40 max-w-[280px] mx-auto">
-                    Free hosting tiers can take up to 2 minutes to spin up. Hang tight!
+                  <p className="font-sans text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-[#111111]/40 dark:text-white/40 max-w-[280px] mx-auto">
+                    ACCESSING 7TOSEVEN ARCHIVES
                   </p>
                 </div>
               )}
