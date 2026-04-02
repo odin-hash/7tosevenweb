@@ -39,10 +39,10 @@ export default function OurStoryPage() {
                 Founded in 2026, we set out to create streetwear that respects both the craft and the culture. No shortcuts. No compromises. Every stitch intentional.
               </p>
             </div>
-            <div className="aspect-square bg-zinc-900 border-white p-2 overflow-hidden relative">
+            <div className="aspect-square bg-black overflow-hidden relative">
               <div 
-                className="absolute w-full h-[120%] -top-[10%] left-0 will-change-transform"
-                style={{ transform: `translateY(${offsetY * -0.08}px)` }}
+                className="absolute w-full h-[140%] -top-[20%] left-0 will-change-transform"
+                style={{ transform: `translateY(${offsetY * -0.05}px)` }}
               >
                 <img src="/story_origin_gritty.png" alt="Raw Denim Frustration" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
               </div>
@@ -55,10 +55,10 @@ export default function OurStoryPage() {
       <section className="py-16 md:py-32">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div className="aspect-square bg-zinc-900 border-white p-2 overflow-hidden relative">
+            <div className="aspect-square bg-black overflow-hidden relative">
               <div 
-                className="absolute w-full h-[120%] -top-[10%] left-0 will-change-transform"
-                style={{ transform: `translateY(${offsetY * -0.08}px)` }}
+                className="absolute w-full h-[140%] -top-[20%] left-0 will-change-transform"
+                style={{ transform: `translateY(${offsetY * -0.05}px)` }}
               >
                 <img src="/story_process_gritty.png" alt="Heavyweight process" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
               </div>
@@ -98,7 +98,7 @@ export default function OurStoryPage() {
 
       {/* CTA */}
       <section className="py-24 md:py-40 text-center border-t border-white/10">
-        <h2 className="font-['Impact'] text-[clamp(2.5rem,6vw,5rem)] uppercase tracking-widest text-white leading-[1]">
+        <h2 className="font-['Impact'] text-[clamp(2.5rem,6vw,5rem)] uppercase tracking-widest text-[#CCFF00] leading-[1]">
           IF YOU KNOW, <br className="md:hidden"/>YOU KNOW.
         </h2>
         <div className="mt-12 flex justify-center">

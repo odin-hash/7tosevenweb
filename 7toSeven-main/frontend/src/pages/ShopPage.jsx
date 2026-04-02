@@ -37,14 +37,14 @@ export default function ShopPage() {
 
   useEffect(() => {
     setLoading(true);
-    
+
     const params = new URLSearchParams();
     if (category !== 'all') params.set('category', category);
     if (sort) params.set('sort', sort);
     if (sizeFilter) params.set('size', sizeFilter);
     axios.get(`${API}/products?${params.toString()}`)
       .then(r => setProducts(r.data.products))
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => {
         setLoading(false);
       });
@@ -67,7 +67,7 @@ export default function ShopPage() {
         <p className="font-['Impact']  md:text-xs uppercase tracking-[0.4em]  text-white/50 mb-4 transition-colors duration-500">
           SEASON 001
         </p>
-        <h1 className="font-['Impact']  uppercase tracking-widest  text-white leading-[0.9] transition-colors duration-500">
+        <h1 className="font-['Impact'] text-5xl md:text-7xl lg:text-9xl uppercase tracking-widest text-white leading-[0.9] transition-colors duration-500">
           COLLECTION
         </h1>
       </div>
