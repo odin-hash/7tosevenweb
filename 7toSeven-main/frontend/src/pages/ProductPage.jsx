@@ -52,7 +52,11 @@ export default function ProductPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center pt-32 pb-40 gap-8 bg-white dark:bg-[#0A0A0A] transition-colors duration-500">
         <div className="flex flex-col items-center justify-center p-16 border-[4px] border-black dark:border-white bg-[#F9F9F9] dark:bg-[#0A0A0A] gap-8">
-          <p className="font-sans font-bold text-[10px] uppercase tracking-[0.4em] text-black/40 dark:text-white/40 animate-pulse">LOADING...</p>
+          <div className="relative flex items-center justify-center w-10 h-10">
+            <div className="absolute inset-0 border-[1px] border-black/10 dark:border-white/10 rounded-full" />
+            <div className="absolute inset-0 border-[1px] border-black dark:border-white rounded-full animate-[spin_1.5s_linear_infinite] border-t-transparent border-l-transparent" />
+            <div className="w-1.5 h-1.5 bg-black dark:bg-white rounded-full animate-pulse" />
+          </div>
           {loadingSlow && (
             <div className="text-center animate-pulse">
               <p className="font-['Impact'] text-[14px] md:text-[18px] uppercase tracking-widest text-black dark:text-white mb-2">
