@@ -18,10 +18,10 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center h-full pt-32 pb-12">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center h-full pt-[20dvh] md:pt-32 pb-12">
         
         {/* Foreground Typography */}
-        <div className="flex flex-col flex-1 items-center justify-center mt-[-2dvh] md:mt-[-10dvh] px-4 w-full overflow-hidden">
+        <div className="flex flex-col flex-1 items-center justify-center mt-[5dvh] md:mt-[-10dvh] px-4 w-full overflow-hidden">
           <h1 className="font-['Impact'] text-[25vw] sm:text-[20vw] md:text-8xl lg:text-[10rem] uppercase leading-[1] md:leading-[0.9] tracking-tighter text-white/30 text-center break-words w-full animate-in fade-in slide-in-from-bottom-8 duration-1000">
             7TO<br className="md:hidden" />SEVEN
           </h1>
