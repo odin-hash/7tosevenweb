@@ -30,6 +30,7 @@ export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingSlow, setLoadingSlow] = useState(false);
 
   const category = searchParams.get('category') || 'all';
   const sort = searchParams.get('sort') || 'newest';
@@ -37,6 +38,12 @@ export default function ShopPage() {
 
   useEffect(() => {
     setLoading(true);
+    setLoadingSlow(false);
+    
+    const slowTimeout = setTimeout(() => {
+      setLoadingSlow(true);
+    }, 4000); // 4 seconds before showing warning message
+    
     const params = new URLSearchParams();
     if (category !== 'all') params.set('category', category);
     if (sort) params.set('sort', sort);
@@ -44,7 +51,11 @@ export default function ShopPage() {
     axios.get(`${API}/products?${params.toString()}`)
       .then(r => setProducts(r.data.products))
       .catch(() => {})
-      .finally(() => setLoading(false));
+      .finally(() => {
+        clearTimeout(slowTimeout);
+        setLoading(false);
+        setLoadingSlow(false);
+      });
   }, [category, sort, sizeFilter]);
 
   const updateFilter = (key, value) => {
@@ -115,8 +126,18 @@ export default function ShopPage() {
       {/* Product Grid */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 pb-24">
         {loading ? (
-          <div className="flex justify-center py-24">
+          <div className="flex flex-col items-center justify-center py-24 gap-6">
             <div className="w-8 h-8 border-2 border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+            {loadingSlow && (
+              <div className="text-center animate-pulse">
+                <p className="font-['Impact'] text-sm uppercase tracking-widest text-[#111111]/60 dark:text-white/60 mb-1">
+                  Waking Up Server...
+                </p>
+                <p className="text-xs text-[#111111]/40 dark:text-white/40 max-w-[280px] mx-auto">
+                  Free hosting tiers can take up to 2 minutes to spin up. Hang tight!
+                </p>
+              </div>
+            )}
           </div>
         ) : products.length === 0 ? (
           <div className="flex items-center justify-center py-24">

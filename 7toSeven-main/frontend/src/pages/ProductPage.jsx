@@ -20,16 +20,27 @@ export default function ProductPage() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [wishlisted, setWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingSlow, setLoadingSlow] = useState(false);
 
   useEffect(() => {
     setLoading(true);
+    setLoadingSlow(false);
     setSelectedSize('');
     setQuantity(1);
     setSelectedImage(0);
+    
+    const slowTimeout = setTimeout(() => {
+      setLoadingSlow(true);
+    }, 4000);
+
     axios.get(`${API}/products/${slug}`)
       .then(r => { setProduct(r.data.product); setRelated(r.data.related); })
       .catch(() => {})
-      .finally(() => setLoading(false));
+      .finally(() => {
+        clearTimeout(slowTimeout);
+        setLoading(false);
+        setLoadingSlow(false);
+      });
   }, [slug]);
 
   const handleAddToCart = () => {
@@ -39,8 +50,18 @@ export default function ProductPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center pt-32 pb-40">
+      <div className="min-h-screen flex flex-col items-center justify-center pt-32 pb-40 gap-6">
         <div className="w-8 h-8 border-2 border-black/10 border-t-black dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+        {loadingSlow && (
+          <div className="text-center animate-pulse">
+            <p className="font-['Impact'] text-sm uppercase tracking-widest text-[#111111]/60 dark:text-white/60 mb-1">
+              Waking Up Server...
+            </p>
+            <p className="text-xs text-[#111111]/40 dark:text-white/40 max-w-[280px] mx-auto">
+              Free hosting tiers can take up to 2 minutes to spin up. Hang tight!
+            </p>
+          </div>
+        )}
       </div>
     );
   }

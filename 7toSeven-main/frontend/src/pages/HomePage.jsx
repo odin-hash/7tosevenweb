@@ -13,11 +13,26 @@ export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [stories, setStories] = useState([]);
   const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingSlow, setLoadingSlow] = useState(false);
 
   useEffect(() => {
-    axios.get(`${API}/products`).then(r => setProducts(r.data.products)).catch(() => {});
-    axios.get(`${API}/drop-stories`).then(r => setStories(r.data.stories)).catch(() => {});
-    axios.get(`${API}/collections`).then(r => setCollections(r.data.collections)).catch(() => {});
+    setLoading(true);
+    setLoadingSlow(false);
+    
+    const slowTimeout = setTimeout(() => {
+      setLoadingSlow(true);
+    }, 4000);
+
+    Promise.all([
+      axios.get(`${API}/products`).then(r => setProducts(r.data.products)).catch(() => {}),
+      axios.get(`${API}/drop-stories`).then(r => setStories(r.data.stories)).catch(() => {}),
+      axios.get(`${API}/collections`).then(r => setCollections(r.data.collections)).catch(() => {})
+    ]).finally(() => {
+      clearTimeout(slowTimeout);
+      setLoading(false);
+      setLoadingSlow(false);
+    });
   }, []);
 
   const filteredStories = stories.filter(s => s.title.toUpperCase() !== 'NOCTURNAL LOOKBOOK' && s.title.toUpperCase() !== 'ENGINEERED UTILITY');
@@ -45,11 +60,27 @@ export default function HomePage() {
               View All <ArrowRight size={12} />
             </Link>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {products.slice(0, 8).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-16 gap-6">
+              <div className="w-8 h-8 border-2 border-[#111111]/10 border-t-[#111111] dark:border-white/10 dark:border-t-white rounded-full animate-spin" />
+              {loadingSlow && (
+                <div className="text-center animate-pulse">
+                  <p className="font-['Impact'] text-sm uppercase tracking-widest text-[#111111]/60 dark:text-white/60 mb-1">
+                    Waking Up Server...
+                  </p>
+                  <p className="text-xs text-[#111111]/40 dark:text-white/40 max-w-[280px] mx-auto">
+                    Free hosting tiers can take up to 2 minutes to spin up. Hang tight!
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {products.slice(0, 8).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
