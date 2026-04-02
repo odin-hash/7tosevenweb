@@ -66,7 +66,7 @@ export default function HomePage() {
             <React.Fragment key={`group-${groupIndex}`}>
               {[1, 2, 3].map((i) => (
                 <div key={`${groupIndex}-${i}`} className="w-[85vw] md:w-[45vw] h-[45vh] md:h-[65vh] flex-shrink-0 bg-[#0A0A0A]">
-                  <img src={`/visual_strip_${i}.png`} alt={`Vibe 0${i}`} className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700 cursor-pointer" loading="lazy" />
+                  <img src={`/visual_strip_${i}.png`} alt={`Vibe 0${i}`} className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" loading="lazy" />
                 </div>
               ))}
             </React.Fragment>
@@ -188,13 +188,13 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 lg:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
              {/* 3 images cohesive grid */}
              <div className="md:col-span-8 row-span-2 relative overflow-hidden bg-[#111]">
-               <img src="/lookbook_1.png" alt="Lookbook" className="w-full h-full object-cover opacity-90 hover:opacity-100 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
+               <img src="/lookbook_1.png" alt="Lookbook" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
              </div>
              <div className="md:col-span-4 row-span-1 relative overflow-hidden bg-[#111]">
-               <img src="/lookbook_2.png" alt="Lookbook" className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
+               <img src="/lookbook_2.png" alt="Lookbook" className="w-full h-full object-cover object-top grayscale opacity-90 hover:grayscale-0 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
              </div>
              <div className="md:col-span-4 row-span-1 relative overflow-hidden bg-[#111]">
-               <img src="/lookbook_3.png" alt="Lookbook" className="w-full h-full object-cover opacity-90 hover:opacity-100 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
+               <img src="/lookbook_3.png" alt="Lookbook" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
              </div>
           </div>
         </div>

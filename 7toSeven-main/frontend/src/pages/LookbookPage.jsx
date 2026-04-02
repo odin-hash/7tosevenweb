@@ -22,7 +22,7 @@ export default function LookbookPage() {
             <img 
               src="/lookbook_1.png" 
               alt="Lookbook Shot 1" 
-              className="w-full h-full object-cover object-top md:object-center opacity-90 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
+              className="w-full h-full object-cover object-top md:object-center grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
               loading="lazy"
             />
           </div>
@@ -33,7 +33,7 @@ export default function LookbookPage() {
               <img 
                 src="/lookbook_2.png" 
                 alt="Lookbook Shot 2" 
-                className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
+                className="w-full h-full object-cover object-top grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
                 loading="lazy"
               />
             </div>
@@ -41,7 +41,7 @@ export default function LookbookPage() {
               <img 
                 src="/lookbook_3.png" 
                 alt="Lookbook Shot 3" 
-                className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
+                className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 hover:scale-[1.02]"
                 loading="lazy"
               />
             </div>

@@ -32,7 +32,7 @@ export default function OurStoryPage() {
               </p>
             </div>
             <div className="aspect-square bg-[#0A0A0A] dark:bg-zinc-900 border-[3px] border-black dark:border-white p-2">
-              <img src="/story_origin_gritty.png" alt="Raw Denim Frustration" fetchPriority="high" className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700" />
+              <img src="/story_origin_gritty.png" alt="Raw Denim Frustration" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function OurStoryPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="aspect-square bg-[#0A0A0A] dark:bg-zinc-900 border-[3px] border-black dark:border-white p-2">
-              <img src="/story_process_gritty.png" alt="Heavyweight process" fetchPriority="high" className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700" />
+              <img src="/story_process_gritty.png" alt="Heavyweight process" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
             </div>
             <div className="lg:pl-8">
               <h2 className="font-['Impact'] text-[clamp(2.5rem,5vw,4rem)] uppercase tracking-tight text-white leading-[1] mb-6">
