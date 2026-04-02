@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function OurStoryPage() {
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setOffsetY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div data-testid="our-story-page" className="min-h-screen bg-black transition-colors duration-500">
       {/* Hero */}
@@ -31,8 +39,13 @@ export default function OurStoryPage() {
                 Founded in 2026, we set out to create streetwear that respects both the craft and the culture. No shortcuts. No compromises. Every stitch intentional.
               </p>
             </div>
-            <div className="aspect-square  bg-zinc-900   border-white p-2">
-              <img src="/story_origin_gritty.png" alt="Raw Denim Frustration" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
+            <div className="aspect-square bg-zinc-900 border-white p-2 overflow-hidden relative">
+              <div 
+                className="absolute w-full h-[120%] -top-[10%] left-0 will-change-transform"
+                style={{ transform: `translateY(${offsetY * -0.08}px)` }}
+              >
+                <img src="/story_origin_gritty.png" alt="Raw Denim Frustration" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
+              </div>
             </div>
           </div>
         </div>
@@ -42,8 +55,13 @@ export default function OurStoryPage() {
       <section className="py-16 md:py-32">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
-            <div className="aspect-square  bg-zinc-900   border-white p-2">
-              <img src="/story_process_gritty.png" alt="Heavyweight process" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
+            <div className="aspect-square bg-zinc-900 border-white p-2 overflow-hidden relative">
+              <div 
+                className="absolute w-full h-[120%] -top-[10%] left-0 will-change-transform"
+                style={{ transform: `translateY(${offsetY * -0.08}px)` }}
+              >
+                <img src="/story_process_gritty.png" alt="Heavyweight process" fetchPriority="high" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700" />
+              </div>
             </div>
             <div className="lg:pl-8">
               <h2 className="font-['Impact'] text-[clamp(2.5rem,5vw,4rem)] uppercase tracking-tight text-white leading-[1] mb-6">

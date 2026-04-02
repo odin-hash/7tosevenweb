@@ -165,28 +165,51 @@ export default function HomePage() {
 
 
 
-      {/* Lookbook / Drop Story Grid */}
-      <section className="py-16 md:py-24 transition-colors duration-500 bg-black">
+      {/* Lookbook / Drop Story Film Strip */}
+      <section className="py-16 md:py-24 transition-colors duration-500 bg-black relative">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-          <div className="flex items-end justify-between mb-10 md:mb-12">
+          <div className="flex items-end justify-between mb-8 md:mb-12">
             <div>
               <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em] text-white/30 transition-colors duration-500 mb-2">Editorial</p>
               <h2 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight text-white transition-colors duration-500 leading-[1.1]">
-                LOOKBOOK 001
+                LOOKBOOK PREVIEW
               </h2>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 lg:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
-             {/* 3 images cohesive grid */}
-             <div className="md:col-span-8 row-span-2 relative overflow-hidden bg-[#111]">
-               <img src="/lookbook_1.png" alt="Lookbook" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
-             </div>
-             <div className="md:col-span-4 row-span-1 relative overflow-hidden bg-[#111]">
-               <img src="/lookbook_2.png" alt="Lookbook" className="w-full h-full object-cover object-top grayscale opacity-90 hover:grayscale-0 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
-             </div>
-             <div className="md:col-span-4 row-span-1 relative overflow-hidden bg-[#111]">
-               <img src="/lookbook_3.png" alt="Lookbook" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:scale-[1.02] transition-all duration-700" loading="lazy" />
-             </div>
+        </div>
+
+        <div className="relative w-full group">
+          {/* Edge-to-edge horizontal scroll container */}
+          <div 
+            className="flex w-full overflow-x-auto snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+          >
+            {/* 
+              Hide Webkit scrollbar directly inline to ensure film strip look 
+              without needing tailwind config overrides 
+            */}
+            <style dangerouslySetInnerHTML={{__html: `
+              div::-webkit-scrollbar { display: none; }
+            `}} />
+
+            {['/lookbook_1.png', '/lookbook_2.png', '/lookbook_3.png'].map((src, idx) => (
+              <div key={idx} className="flex-none h-[80vh] snap-center bg-[#111]">
+                <img 
+                  src={src} 
+                  alt={`Lookbook Archive 00${idx + 1}`} 
+                  className="h-full w-auto max-w-none object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-grab active:cursor-grabbing" 
+                  loading="lazy" 
+                  draggable={false}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Persistent overlay text */}
+          <div className="absolute bottom-6 left-6 md:bottom-12 md:left-12 z-20 pointer-events-none mix-blend-difference">
+            <p className="font-mono text-[10px] md:text-xs text-white uppercase tracking-[0.3em] border border-white/20 p-3 bg-black/10 backdrop-blur-md">
+              DRAG TO EXPLORE [→]
+            </p>
           </div>
         </div>
       </section>
