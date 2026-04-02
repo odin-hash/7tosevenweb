@@ -66,6 +66,13 @@ export default function Footer() {
           <p className=" uppercase tracking-[0.2em]  text-white/20 transition-colors">Relentless Evolution</p>
         </div>
       </div>
+
+      {/* Massive Brutalist Watermark */}
+      <div className="w-full flex items-center justify-center overflow-hidden pb-4 md:pb-8 pointer-events-none select-none">
+        <h1 className="font-['Syne'] text-[15vw] leading-none text-white/5 font-black whitespace-nowrap">
+          7TOSEVEN
+        </h1>
+      </div>
     </footer>
   );
 }

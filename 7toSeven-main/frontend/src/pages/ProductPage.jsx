@@ -179,24 +179,24 @@ export default function ProductPage() {
               </div>
 
               {/* Actions */}
-              <div className="flex gap-4 mt-12 w-full max-w-lg">
+              <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-zinc-950/80 backdrop-blur-md border-t border-zinc-800 flex gap-4 w-full md:relative md:bottom-auto md:left-auto md:right-auto md:z-auto md:p-0 md:bg-transparent md:backdrop-blur-none md:border-none md:mt-12 md:max-w-lg">
                 <button
                   data-testid="add-to-cart-btn"
                   onClick={handleAddToCart}
                   disabled={!selectedSize}
-                  className={`flex-1 font-sans font-bold  uppercase tracking-[0.2em] h-14 border transition-all duration-300 ${
+                  className={`flex-1 font-sans font-bold rounded-none uppercase tracking-[0.2em] h-14 border transition-all duration-300 ${
                     selectedSize
-                      ? 'border-black   border-white bg-white text-black   hover:bg-transparent hover:text-white'
-                      : 'border-black/10 border-white/10  bg-white/5  text-white/30 cursor-not-allowed'
+                      ? 'border-white bg-white text-black hover:bg-black hover:text-white'
+                      : 'border-white/10 bg-white/5 text-white/30 cursor-not-allowed'
                   }`}
                 >
-                  {selectedSize ? 'ADD TO CART' : 'SELECT A SIZE FIRST'}
+                  {selectedSize ? 'ADD TO CART' : 'SELECT SIZE'}
                 </button>
                 <button
                   data-testid="wishlist-btn"
                   onClick={() => setWishlisted(!wishlisted)}
-                  className={`w-14 h-14 flex items-center justify-center border transition-all duration-300   hover:bg-white hover:text-black  hover:border-white ${
-                    wishlisted ? 'border-black   border-white bg-white text-black' : 'border-black/10 border-white/10   text-white'
+                  className={`w-14 h-14 flex items-center justify-center rounded-none border transition-all duration-300 hover:bg-white hover:text-black hover:border-white ${
+                    wishlisted ? 'border-white bg-white text-black' : 'border-white/10 text-white'
                   }`}
                 >
                   <Heart size={20} strokeWidth={wishlisted ? 2 : 1.5} fill={wishlisted ? 'currentColor' : 'none'} />
