@@ -149,20 +149,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* Brand Statement */}
-      <section className="py-12 md:py-24 relative overflow-hidden bg-zinc-950 flex justify-center w-full">
-        <div className="relative z-10 w-max max-w-full px-4 flex flex-col pointer-events-none select-none">
-          <h2 className="font-['Impact'] text-[clamp(1.5rem,4vw,6rem)] uppercase tracking-[0.1em] md:tracking-[0.2em] text-white leading-[1.1] md:leading-[1] flex flex-col w-max">
-            <span>NO RULES IN</span>
-            <span>
-              <span className="opacity-0 select-none">NO RULES IN </span>THE ZONE
-            </span>
-            <span>
-              <span className="opacity-0 select-none">NO RULES IN THE ZONE </span><span className="text-[#CCFF00]">NO APOLOGIES</span>
-            </span>
-          </h2>
-        </div>
-      </section>
+
 
 
 
@@ -233,7 +220,7 @@ export default function HomePage() {
       </section>
 
       {/* Trust & Origin Anchor */}
-      <section className="py-16 md:py-20 bg-black flex flex-col items-center justify-center text-center px-4 md:px-6 border-t border-white/5 overflow-hidden w-full">
+      <section className="pt-16 pb-8 md:pt-20 md:pb-10 bg-black flex flex-col items-center justify-center text-center px-4 md:px-6 border-t border-white/5 overflow-hidden w-full">
         <h2 
           className="text-[clamp(1rem,4vw,3.5rem)] font-black uppercase tracking-[0.15em] md:tracking-[0.3em] text-white/90 leading-tight whitespace-nowrap w-full"
           style={{ fontFamily: "'Syne', sans-serif" }}
@@ -243,7 +230,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Close */}
-      <section className="py-24 md:py-40 bg-black flex flex-col items-center justify-center text-center px-6 border-t border-white/5">
+      <section className="pt-8 pb-24 md:pt-10 md:pb-40 bg-black flex flex-col items-center justify-center text-center px-6">
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <h2 className="font-['Impact'] text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-widest text-white leading-[1] mb-6">
             DROP 001<br/>IS LIVE.
