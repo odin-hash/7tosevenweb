@@ -7,7 +7,7 @@ const TYPO_LOGO = "/logo-typo.png";
 
 export default function Footer() {
   return (
-    <footer data-testid="footer" className="relative  bg-[#0A0A0A] overflow-hidden transition-colors duration-500">
+    <footer data-testid="footer" className="relative w-full bg-[#0A0A0A] overflow-hidden transition-colors duration-500">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-16 py-20 md:py-24">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16">
           {/* Brand — icon + typography logo */}
@@ -25,10 +25,10 @@ export default function Footer() {
           <div>
             <h4 className="font-['Impact']  uppercase tracking-[0.25em]  text-white/50 mb-8 transition-colors duration-500">Shop</h4>
             <div className="space-y-5">
-              <Link to="/shop?category=tees" data-testid="footer-shop-tees" className="block text-white/50 hover:text-white transition-colors duration-300">Tees</Link>
-              <Link to="/shop?category=hoodies" data-testid="footer-shop-hoodies" className="block text-white/50 hover:text-white transition-colors duration-300">Hoodies</Link>
-              <Link to="/shop?category=bottoms" data-testid="footer-shop-bottoms" className="block text-white/50 hover:text-white transition-colors duration-300">Bottoms</Link>
-              <Link to="/shop?category=accessories" data-testid="footer-shop-accessories" className="block text-white/50 hover:text-white transition-colors duration-300">Accessories</Link>
+              <Link to="/shop?category=tees" data-testid="footer-shop-tees" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">TEES</Link>
+              <Link to="/shop?category=hoodies" data-testid="footer-shop-hoodies" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">HOODIES</Link>
+              <Link to="/shop?category=bottoms" data-testid="footer-shop-bottoms" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">BOTTOMS</Link>
+              <Link to="/shop?category=accessories" data-testid="footer-shop-accessories" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">ACCESSORIES</Link>
             </div>
           </div>
 
@@ -36,11 +36,11 @@ export default function Footer() {
           <div>
             <h4 className="font-['Impact']  uppercase tracking-[0.25em]  text-white/50 mb-8 transition-colors duration-500">Info</h4>
             <div className="space-y-5">
-              <Link to="/our-story" data-testid="footer-story" className="block text-white/50 hover:text-white transition-colors duration-300">Manifesto</Link>
-              <Link to="/faq" className="block text-white/50 hover:text-white transition-colors duration-300">FAQ</Link>
-              <Link to="/shipping" className="block text-white/50 hover:text-white transition-colors duration-300">Shipping Policy</Link>
-              <Link to="/returns" className="block text-white/50 hover:text-white transition-colors duration-300">Make a Return / Exchange</Link>
-              <Link to="/terms" className="block text-white/50 hover:text-white transition-colors duration-300">Terms & Privacy</Link>
+              <Link to="/our-story" data-testid="footer-story" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">MANIFESTO</Link>
+              <Link to="/faq" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">FAQ</Link>
+              <Link to="/shipping" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">ORDER PROCESSING</Link>
+              <Link to="/returns" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">RETURNS</Link>
+              <Link to="/terms" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">TERMS & PRIVACY</Link>
             </div>
           </div>
 
@@ -48,14 +48,20 @@ export default function Footer() {
           <div>
             <h4 className="font-['Impact']  uppercase tracking-[0.25em]  text-white/50 mb-8 transition-colors duration-500">Connect</h4>
             <div className="space-y-5">
-              <a href="https://www.instagram.com/7tosevenofficial" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/50 hover:text-white transition-colors duration-300">
-                <Instagram size={18} strokeWidth={1.5} /> Instagram
+              <a href="https://www.instagram.com/7tosevenofficial" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">
+                <Instagram size={18} strokeWidth={1.5} /> IG
               </a>
-              <a href="https://x.com/7tosevenoffic" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/50 hover:text-white transition-colors duration-300">
-                <Twitter size={18} strokeWidth={1.5} /> Twitter / X
+              <a href="https://x.com/7tosevenoffic" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">
+                <Twitter size={18} strokeWidth={1.5} /> X / TWITTER
               </a>
-              <a href="mailto:support@7toseven.com" className="flex items-center gap-3 text-white/50 hover:text-white transition-colors duration-300">
-                support@7toseven.com
+              <a href="mailto:support@7toseven.com" className="block font-mono text-sm text-zinc-400 hover:text-white break-all md:break-normal uppercase transition-colors duration-300">
+                SUPPORT@7TOSEVEN.COM
+              </a>
+              <a href="mailto:shipping@7toseven.com" className="block font-mono text-sm text-zinc-400 hover:text-white break-all md:break-normal uppercase transition-colors duration-300">
+                SHIPPING@7TOSEVEN.COM
+              </a>
+              <a href="mailto:legal@7toseven.com" className="block font-mono text-sm text-zinc-400 hover:text-white break-all md:break-normal uppercase transition-colors duration-300">
+                LEGAL@7TOSEVEN.COM
               </a>
             </div>
           </div>

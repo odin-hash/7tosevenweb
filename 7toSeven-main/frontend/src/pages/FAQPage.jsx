@@ -36,7 +36,7 @@ export default function FAQPage() {
   };
 
   return (
-    <div data-testid="faq-page" className="min-h-screen">
+    <div data-testid="faq-page" className="min-h-screen w-full max-w-[100vw] overflow-hidden px-4 md:px-8">
       <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 overflow-hidden">
         <div className="max-w-[1000px] mx-auto px-6 md:px-16 text-center">
           <p className="font-sans font-bold  uppercase tracking-[0.4em]  text-white/50 mb-6 transition-colors duration-500">
@@ -68,7 +68,7 @@ export default function FAQPage() {
                     onClick={() => toggleAccordion(index)}
                     className="w-full flex items-center justify-between py-6 md:py-8  outline-none  text-white hover:opacity-70 transition-opacity"
                   >
-                    <span className="font-sans font-bold text-[12px] md:text-sm uppercase tracking-widest">
+                    <span className="font-sans font-bold text-[12px] md:text-sm uppercase tracking-widest break-words whitespace-normal text-left leading-snug">
                       {item.question}
                     </span>
                     <ChevronDown 
@@ -85,7 +85,7 @@ export default function FAQPage() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="pb-8 pt-0  md:text-base font-sans  text-white/60 leading-relaxed">
+                      <p className="pb-8 pt-0  md:text-base font-sans  text-white/60 break-words whitespace-normal text-left leading-snug">
                         {item.answer}
                       </p>
                     </div>

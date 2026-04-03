@@ -44,7 +44,7 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Quick Add Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 h-[12%] min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
+        <div className="absolute bottom-0 left-0 w-full m-0 h-[12%] min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
           <span className="font-['Impact'] font-bold text-[10px] md:text-xs uppercase tracking-widest text-black">
             QUICK ADD +
           </span>
