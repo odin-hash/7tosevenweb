@@ -5,10 +5,15 @@ const DropContext = createContext();
 export function DropProvider({ children }) {
   // Hardcoded for now. In production, this would be tied to a backend drop state.
   const [isDropLocked, setIsDropLocked] = useState(true);
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  
+  // Initialize from sessionStorage to prevent relocking on refresh
+  const [isUnlocked, setIsUnlocked] = useState(() => {
+    return sessionStorage.getItem('7toSeven_unlocked') === 'true';
+  });
 
   const unlockDrop = (password) => {
     if (password.toUpperCase() === '7TOSEVEN') {
+      sessionStorage.setItem('7toSeven_unlocked', 'true');
       setIsUnlocked(true);
       return true;
     }

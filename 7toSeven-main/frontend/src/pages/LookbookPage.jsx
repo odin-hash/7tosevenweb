@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react';
 import { LOOKBOOK_DATA } from '@/data/mockLookbook';
 import { useCart } from '@/context/CartContext';
 import { Link } from 'react-router-dom';
+import ScrambleText from '@/components/ScrambleText';
 
 const Hotspot = ({ spot, active, setActive, addToCart }) => {
   const isActive = active === spot.id;
@@ -30,14 +31,18 @@ const Hotspot = ({ spot, active, setActive, addToCart }) => {
             animate={{ opacity: 1, y: 0, x: "-50%" }}
             exit={{ opacity: 0, y: 10, x: "-50%" }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="absolute bottom-full left-1/2 mb-4 w-56 bg-[#0A0A0A] border border-white/20 p-4 shadow-2xl flex flex-col items-center pointer-events-auto z-50 backdrop-blur-md"
+            className="absolute bottom-full left-1/2 mb-4 w-56 bg-[#0A0A0A] border border-white/20 p-4 shadow-2xl flex flex-col items-center pointer-events-auto z-50 backdrop-blur-md group"
           >
             {/* Pointer notch */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#0A0A0A]" />
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[9px] border-r-[9px] border-t-[9px] border-l-transparent border-r-transparent border-t-white/20 -z-10 translate-y-[1px]" />
 
             <Link to={`/products/${spot.product.slug}`} className="hover:opacity-75 transition-opacity duration-300 pointer-events-auto">
-              <p className="font-['Impact'] text-white uppercase tracking-widest text-lg text-center mb-1 leading-[1.1]">{spot.product.name}</p>
+              {/* Added Blueprint theme styling */}
+              <p className="font-['Impact'] text-white uppercase tracking-widest text-lg text-center mb-1 leading-[1.1]">
+                {spot.product.name}
+              </p>
+              <p className="font-mono text-center text-white/40 text-[9px] tracking-widest mb-2">[v1.0] // SYST_ARCHIVE</p>
             </Link>
             <p className="font-mono text-[#CCFF00] text-[10px] tracking-widest mb-4">RS. {spot.product.price.toLocaleString('en-IN')}</p>
             
@@ -49,7 +54,7 @@ const Hotspot = ({ spot, active, setActive, addToCart }) => {
               }}
               className="w-full bg-white hover:bg-[#CCFF00] text-black font-['Impact'] text-xs uppercase py-2.5 tracking-widest transition-colors duration-300"
             >
-              ADD TO CART [{spot.product.sizes[0]}]
+              <ScrambleText text={`ADD TO CART [${spot.product.sizes[0]}]`} />
             </button>
           </motion.div>
         )}
