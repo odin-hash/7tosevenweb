@@ -21,87 +21,99 @@ export default function TermsPage() {
 
       {/* Main Content */}
       <section className="py-12 md:py-24">
-        <div className="max-w-[800px] mx-auto px-6 md:px-16 space-y-12  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+        <div className="max-w-[800px] mx-auto px-6 md:px-16 space-y-12">
           
-          <div className="space-y-4 pt-8   border-white/10">
-            <h2 className="font-['Impact']  uppercase tracking-widest  text-white">
+          <div className="pt-8   border-white/10 transition-all duration-300">
+            <h2 className="font-['Impact']  md:text-3xl uppercase tracking-widest  text-white mb-6">
               1. PREAMBLE & PURPOSE
             </h2>
-            <p>
-              7toSEVEN (“Company”) is committed to fostering a legally compliant, transparent, and customer-first environment. 
-              These Terms and Conditions govern access to and use of our digital platforms, which offer curated lifestyle 
-              products under the 7toSEVEN brand. All Customers, Users, and Visitors are bound by these Terms upon accessing the Website.
-            </p>
-            <p>
-              This document ensures contractual clarity, defines user obligations, and secures the Company’s intellectual property, 
-              digital infrastructure, and transaction processes. 7toSEVEN adopts a zero-tolerance approach towards policy violations or abusive conduct.
-            </p>
+            <div className="space-y-4  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+              <p>
+                7toSEVEN (“Company”) is committed to fostering a legally compliant, transparent, and customer-first environment. 
+                These Terms and Conditions govern access to and use of our digital platforms, which offer curated lifestyle 
+                products under the 7toSEVEN brand. All Customers, Users, and Visitors are bound by these Terms upon accessing the Website.
+              </p>
+              <p>
+                This document ensures contractual clarity, defines user obligations, and secures the Company’s intellectual property, 
+                digital infrastructure, and transaction processes. 7toSEVEN adopts a zero-tolerance approach towards policy violations or abusive conduct.
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-4 pt-8   border-white/10">
-            <h2 className="font-['Impact']  uppercase tracking-widest  text-white">
+          <div className="pt-8   border-white/10 transition-all duration-300">
+            <h2 className="font-['Impact']  md:text-3xl uppercase tracking-widest  text-white mb-6">
               2. ELIGIBILITY TO CONTRACT
             </h2>
-            <p>
-              By accessing the Website, placing an order, or registering for an account, the User represents and warrants that they 
-              are legally competent to contract under the Indian Contract Act, 1872. Specifically, the User affirms that they have 
-              attained the age of 18 years, are of sound mind, and are not disqualified from contracting by any law.
-            </p>
+            <div className="space-y-4  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+              <p>
+                By accessing the Website, placing an order, or registering for an account, the User represents and warrants that they 
+                are legally competent to contract under the Indian Contract Act, 1872. Specifically, the User affirms that they have 
+                attained the age of 18 years, are of sound mind, and are not disqualified from contracting by any law.
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-4 pt-8   border-white/10">
-            <h2 className="font-['Impact']  uppercase tracking-widest  text-white">
+          <div className="pt-8   border-white/10 transition-all duration-300">
+            <h2 className="font-['Impact']  md:text-3xl uppercase tracking-widest  text-white mb-6">
               3. USER ACCOUNTS & SECURITY
             </h2>
-            <p>
-              To access certain features, Users may be required to register for a personal account (“Account”). 
-              The User is solely responsible for maintaining the confidentiality and security of their Account credentials. 
-              Each Account is personal and non-transferable. The Company reserves the right to suspend, deactivate, or terminate 
-              any Account that is found to be in violation of these Terms.
-            </p>
+            <div className="space-y-4  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+              <p>
+                To access certain features, Users may be required to register for a personal account (“Account”). 
+                The User is solely responsible for maintaining the confidentiality and security of their Account credentials. 
+                Each Account is personal and non-transferable. The Company reserves the right to suspend, deactivate, or terminate 
+                any Account that is found to be in violation of these Terms.
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-4 pt-8   border-white/10">
-            <h2 className="font-['Impact']  uppercase tracking-widest  text-white">
+          <div className="pt-8   border-white/10 transition-all duration-300">
+            <h2 className="font-['Impact']  md:text-3xl uppercase tracking-widest  text-white mb-6">
               4. ACCEPTABLE USE POLICY
             </h2>
-            <p>
-              By accessing or using the Website, the User agrees to comply with all applicable laws and regulations. Users shall not:
-            </p>
-            <ul className="list-disc pl-5 space-y-2 mt-2  text-white">
-              <li><span className=" text-white/50">Upload, post, transmit, or make available content that is defamatory, abusive, or otherwise illegal.</span></li>
-              <li><span className=" text-white/50">Infringe upon or misappropriate any third-party intellectual property rights.</span></li>
-              <li><span className=" text-white/50">Attempt to gain unauthorized access to the Website, servers, networks, or data.</span></li>
-              <li><span className=" text-white/50">Engage in data scraping, crawling, or use of automated systems without prior written consent.</span></li>
-              <li><span className=" text-white/50">Create multiple accounts for fraudulent purposes or abuse discount offers.</span></li>
-            </ul>
+            <div className="space-y-4  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+              <p>
+                By accessing or using the Website, the User agrees to comply with all applicable laws and regulations. Users shall not:
+              </p>
+              <ul className="list-disc pl-5 space-y-2 mt-2  text-white">
+                <li><span className=" text-white/50">Upload, post, transmit, or make available content that is defamatory, abusive, or otherwise illegal.</span></li>
+                <li><span className=" text-white/50">Infringe upon or misappropriate any third-party intellectual property rights.</span></li>
+                <li><span className=" text-white/50">Attempt to gain unauthorized access to the Website, servers, networks, or data.</span></li>
+                <li><span className=" text-white/50">Engage in data scraping, crawling, or use of automated systems without prior written consent.</span></li>
+                <li><span className=" text-white/50">Create multiple accounts for fraudulent purposes or abuse discount offers.</span></li>
+              </ul>
+            </div>
           </div>
 
-          <div className="space-y-4 pt-8   border-white/10">
-            <h2 className="font-['Impact']  uppercase tracking-widest  text-white">
+          <div className="pt-8   border-white/10 transition-all duration-300">
+            <h2 className="font-['Impact']  md:text-3xl uppercase tracking-widest  text-white mb-6">
               5. PRODUCT INFORMATION & PRICING
             </h2>
-            <p>
-              While the Company endeavors to provide accurate, up-to-date, and error-free information, the User acknowledges 
-              that minor variations may occur in the appearance of products due to lighting or display settings. 
-              All product images are for illustrative purposes.
-            </p>
-            <p>
-              All prices displayed are listed in Indian Rupees (INR) and are inclusive of applicable taxes unless stated otherwise. 
-              The Company reserves the right to modify product pricing, discount structures, or promotional offers at its sole discretion.
-            </p>
+            <div className="space-y-4  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+              <p>
+                While the Company endeavors to provide accurate, up-to-date, and error-free information, the User acknowledges 
+                that minor variations may occur in the appearance of products due to lighting or display settings. 
+                All product images are for illustrative purposes.
+              </p>
+              <p>
+                All prices displayed are listed in Indian Rupees (INR) and are inclusive of applicable taxes unless stated otherwise. 
+                The Company reserves the right to modify product pricing, discount structures, or promotional offers at its sole discretion.
+              </p>
+            </div>
           </div>
 
-          <div className="space-y-4 pt-8   border-white/10">
-            <h2 className="font-['Impact']  uppercase tracking-widest  text-white">
+          <div className="pt-8   border-white/10 transition-all duration-300">
+            <h2 className="font-['Impact']  md:text-3xl uppercase tracking-widest  text-white mb-6">
               6. PRIVACY POLICY
             </h2>
-            <p>
-              Your submission of personal information through the store is governed by our Privacy Policy. 
-              We strictly adhere to data protection laws to ensure your information is encrypted and securely handled. 
-              We do not sell your personal data to third-party data brokers. By using our platform, you consent to our collection 
-              and processing of information as described in our Privacy guidelines.
-            </p>
+            <div className="space-y-4  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
+              <p>
+                Your submission of personal information through the store is governed by our Privacy Policy. 
+                We strictly adhere to data protection laws to ensure your information is encrypted and securely handled. 
+                We do not sell your personal data to third-party data brokers. By using our platform, you consent to our collection 
+                and processing of information as described in our Privacy guidelines.
+              </p>
+            </div>
           </div>
 
           <div className="pt-16 mt-16   border-white/10">
@@ -112,7 +124,7 @@ export default function TermsPage() {
               <p className=" font-sans font-bold uppercase tracking-[0.2em]  text-white/40 mb-8 max-w-lg mx-auto">
                 For any legal inquiries, official notices, or privacy-related concerns, please reach out to our legal department directly.
               </p>
-              <a href="mailto:legal@7toseven.com" className="inline-block border break-all md:break-normal border-white px-8 py-4 font-sans font-bold  uppercase tracking-[0.2em]  text-white   hover:bg-white hover:text-black transition-all duration-300">
+              <a href="mailto:legal@7toseven.com" className="inline-block border whitespace-nowrap border-white px-4 md:px-8 py-3 md:py-4 font-sans font-bold text-[10px] md:text-sm uppercase tracking-[0.2em] text-white hover:bg-white hover:text-black transition-all duration-300">
                 LEGAL@7TOSEVEN.COM
               </a>
             </div>

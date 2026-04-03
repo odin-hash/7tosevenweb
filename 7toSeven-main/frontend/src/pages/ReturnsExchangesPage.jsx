@@ -50,7 +50,7 @@ export default function ReturnsExchangesPage() {
                 Ready to make a return or exchange? Follow these instructions:
               </p>
               <ol className="list-decimal pl-5 space-y-3 mt-4  text-white">
-                <li><span className=" text-white/50">Email us at <strong className="text-white break-all md:break-normal">returns@7toseven.com</strong> with your Order Number in the subject line.</span></li>
+                <li><span className=" text-white/50">Email us at <strong className="text-white whitespace-nowrap text-[11px] md:text-base">returns@7toseven.com</strong> with your Order Number in the subject line.</span></li>
                 <li><span className=" text-white/50">State clearly whether you are requesting a <em className=" text-white opacity-80 not-italic">Return</em> or an <em className=" text-white opacity-80 not-italic">Exchange</em> (and specify the new size if exchanging).</span></li>
                 <li><span className=" text-white/50">Attach a clear photo of the garment establishing its unworn condition with tags on.</span></li>
               </ol>
@@ -97,27 +97,27 @@ export default function ReturnsExchangesPage() {
               
               <div className="space-y-10  md:text-sm font-sans font-bold uppercase tracking-[0.2em]  text-white/50 leading-relaxed">
                 <div>
-                  <h3 className="font-['Impact']  uppercase tracking-widest  text-white mb-3">1. REFUND FORMAT & CREDIT NOTES</h3>
-                  <p>7toSEVEN DOES NOT PROVIDE REFUNDS IN THE FORM OF CASH, BANK TRANSFERS, OR REVERSE CREDITS TO THE ORIGINAL MODE OF PAYMENT. INSTEAD, FOR ALL APPROVED EXCHANGE REQUESTS, WE ISSUE A NON-CASH REFUND IN THE FORM OF A CREDIT NOTE (PROMO CODE). THIS CODE WILL REPRESENT THE EQUIVALENT MONETARY VALUE OF THE EXCHANGED PRODUCT, EXCLUDING ANY SHIPPING CHARGES, AND WILL BE COMMUNICATED TO YOU VIA EMAIL.</p>
+                  <p className="text-white mb-2 tracking-[0.3em] font-sans font-bold uppercase">1. REFUND FORMAT & CREDIT NOTES</p>
+                  <p>7toSEVEN does not provide refunds in the form of cash, bank transfers, or reverse credits to the original mode of payment. Instead, for all approved exchange requests, we issue a non-cash refund in the form of a credit note (promo code). This code will represent the equivalent monetary value of the exchanged product, excluding any shipping charges, and will be communicated to you via email.</p>
                 </div>
                 
                 <div>
-                  <h3 className="font-['Impact']  uppercase tracking-widest  text-white mb-3">2. CONDITIONS OF CREDIT NOTES</h3>
+                  <p className="text-white mb-2 tracking-[0.3em] font-sans font-bold uppercase">2. CONDITIONS OF CREDIT NOTES</p>
                   <ul className="list-disc pl-5 mt-3 space-y-2  text-white">
-                    <li><span className=" text-white/50">WILL BE ISSUED ONLY AFTER THE RETURNED ITEM PASSES A STRICT QUALITY INSPECTION BY OUR FACILITY.</span></li>
-                    <li><span className=" text-white/50">WILL HAVE A VALIDITY OF 3 MONTHS FROM THE DATE OF ISSUANCE.</span></li>
-                    <li><span className=" text-white/50">IS NOT CONVERTIBLE INTO CASH OR TRANSFERABLE TO ANOTHER USER OR ACCOUNT.</span></li>
+                    <li><span className=" text-white/50">Will be issued only after the returned item passes a strict quality inspection by our facility.</span></li>
+                    <li><span className=" text-white/50">Will have a validity of 3 months from the date of issuance.</span></li>
+                    <li><span className=" text-white/50">Is not convertible into cash or transferable to another user or account.</span></li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="font-['Impact']  uppercase tracking-widest  text-white mb-3">3. DEFECTIVE OR INCORRECT ITEMS</h3>
-                  <p>IN THE HIGHLY UNLIKELY EVENT THAT AN INCORRECT ITEM IS DELIVERED, CUSTOMERS MUST INITIATE AN EXCHANGE WITHIN 48 HOURS OF DELIVERY ALONG WITH PHOTOGRAPHIC EVIDENCE. AFTER VERIFICATION, 7TOSEVEN WILL ARRANGE RETURN SHIPPING AND SEND THE CORRECT ITEM OR ISSUE A CREDIT NOTE AT NO EXTRA COST TO YOU.</p>
+                  <p className="text-white mb-2 tracking-[0.3em] font-sans font-bold uppercase">3. DEFECTIVE OR INCORRECT ITEMS</p>
+                  <p>In the highly unlikely event that an incorrect item is delivered, customers must initiate an exchange within 48 hours of delivery along with photographic evidence. After verification, 7toSEVEN will arrange return shipping and send the correct item or issue a credit note at no extra cost to you.</p>
                 </div>
 
                 <div>
-                  <h3 className="font-['Impact']  uppercase tracking-widest  text-white mb-3">4. QUALITY CHECK FAILURES</h3>
-                  <p>WE RESERVE THE RIGHT TO REJECT A RETURN OR REFUSE ISSUANCE OF A PROMO CODE IF THE PRODUCT FAILS THE QUALITY CHECK, WAS RETURNED WITHOUT PRIOR APPROVAL, OR IS MISSING THE ORIGINAL INVOICE, TAGS, OR PACKAGING. IN SUCH CASES, THE ITEM WILL BE SHIPPED BACK TO THE CUSTOMER AND NO CREDIT NOTE WILL BE ISSUED.</p>
+                  <p className="text-white mb-2 tracking-[0.3em] font-sans font-bold uppercase">4. QUALITY CHECK FAILURES</p>
+                  <p>We reserve the right to reject a return or refuse issuance of a promo code if the product fails the quality check, was returned without prior approval, or is missing the original invoice, tags, or packaging. In such cases, the item will be shipped back to the customer and no credit note will be issued.</p>
                 </div>
               </div>
             </div>
