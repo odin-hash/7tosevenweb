@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useDrop } from '@/context/DropContext';
+import ScrambleText from '@/components/ScrambleText';
 
 export default function ProductCard({ product }) {
   const [isHovered, setIsHovered] = useState(false);
+  const { isDropLocked, isUnlocked } = useDrop();
+  const isLocked = isDropLocked && !isUnlocked;
 
   return (
     <Link
@@ -70,7 +74,7 @@ export default function ProductCard({ product }) {
         )}
 
         {/* Quick Add Overlay */}
-        {product.stock !== 0 && (
+        {product.stock !== 0 && !isLocked && (
           <motion.div 
             initial={false}
             animate={{ y: isHovered ? "0%" : "100%" }}
@@ -78,7 +82,7 @@ export default function ProductCard({ product }) {
             className="absolute bottom-0 left-0 w-full m-0 h-[12%] min-h-[35px] md:min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)] md:translate-y-0"
           >
             <span className="font-['Impact'] font-bold text-[10px] md:text-xs uppercase tracking-widest text-black">
-              QUICK ADD +
+              {isHovered ? <ScrambleText text="QUICK ADD +" /> : "QUICK ADD +"}
             </span>
           </motion.div>
         )}
@@ -90,10 +94,11 @@ export default function ProductCard({ product }) {
         {/* Left Side: Category & Name */}
         <div className="flex-1 p-4 md:p-5 flex flex-col justify-center">
           <p className="font-['Impact'] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/60 mb-2">
-            // {product.collection || product.category || "CORE"}
+            // SYST_{product.collection?.replace(/ /g, '_') || product.category?.replace(/ /g, '_') || "CORE"}
           </p>
-          <h3 className="font-['Impact'] text-lg md:text-2xl font-bold uppercase tracking-widest text-white truncate max-w-full">
+          <h3 className="font-['Impact'] text-lg md:text-2xl font-bold uppercase tracking-widest text-white truncate max-w-full flex items-baseline">
             {product.name}
+            <span className="font-mono text-[10px] md:text-xs text-white/40 tracking-widest ml-3">[v1.0]</span>
           </h3>
         </div>
         

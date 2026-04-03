@@ -3,6 +3,7 @@ import '@/App.css';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { CartProvider } from '@/context/CartContext';
+import { DropProvider } from '@/context/DropContext';
 import Preloader from '@/components/Preloader';
 import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
@@ -67,19 +68,21 @@ function App() {
 
   return (
     <div className="App bg-[#0A0A0A] text-white min-h-screen">
-      <BrowserRouter>
-        <ScrollToTop />
-        <CustomCursor />
-        <Preloader />
-        <CartProvider>
-          <Navbar />
-          <CartDrawer />
-          <main className="min-h-screen">
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-        </CartProvider>
-      </BrowserRouter>
+      <DropProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <CustomCursor />
+          <Preloader />
+          <CartProvider>
+            <Navbar />
+            <CartDrawer />
+            <main className="min-h-screen">
+              <AnimatedRoutes />
+            </main>
+            <Footer />
+          </CartProvider>
+        </BrowserRouter>
+      </DropProvider>
     </div>
   );
 }

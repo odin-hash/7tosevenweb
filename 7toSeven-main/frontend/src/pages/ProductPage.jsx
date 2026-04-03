@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { Heart, Minus, Plus, ChevronLeft, ChevronRight, X, ZoomIn, ZoomOut, Zap, RefreshCw, Shield } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useDrop } from '@/context/DropContext';
 import ProductCard from '@/components/ProductCard';
+import ScrambleText from '@/components/ScrambleText';
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '@/components/ui/accordion';
@@ -13,6 +15,7 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 export default function ProductPage() {
   const { slug } = useParams();
   const { addToCart } = useCart();
+  const { isDropLocked, isUnlocked } = useDrop();
   const [product, setProduct] = useState(null);
   const [related, setRelated] = useState([]);
   const [selectedSize, setSelectedSize] = useState('');
@@ -81,6 +84,10 @@ export default function ProductPage() {
     if (!selectedSize) return;
     addToCart(product, selectedSize, quantity);
   };
+
+  if (isDropLocked && !isUnlocked) {
+    return <Navigate to="/shop" replace />;
+  }
 
   if (loading) {
     return (
@@ -266,7 +273,7 @@ export default function ProductPage() {
                         : 'border-white/10 bg-white/5 text-white/30 cursor-not-allowed'
                     }`}
                 >
-                  {product.stock === 0 ? 'SOLD OUT' : selectedSize ? 'ADD TO CART' : 'SELECT SIZE'}
+                  {product.stock === 0 ? 'SOLD OUT' : selectedSize ? <ScrambleText text="ADD TO CART" /> : 'SELECT SIZE'}
                 </button>
                 <button
                   data-testid="wishlist-btn"

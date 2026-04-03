@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '@/components/ProductCard';
 import DropPasswordScreen from '@/components/DropPasswordScreen';
+import { useDrop } from '@/context/DropContext';
 import {
   Select,
   SelectContent,
@@ -32,9 +33,8 @@ export default function ShopPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // Mock DROP State
-  const IS_DROP_LOCKED = true;
-  const [unlocked, setUnlocked] = useState(false);
+  // Use global Drop context
+  const { isDropLocked, isUnlocked, unlockDrop } = useDrop();
 
   const category = searchParams.get('category') || 'all';
   const sort = searchParams.get('sort') || 'newest';
@@ -65,8 +65,12 @@ export default function ShopPage() {
     setSearchParams(newParams);
   };
 
-  if (IS_DROP_LOCKED && !unlocked) {
-    return <DropPasswordScreen onUnlock={() => setUnlocked(true)} />;
+  if (isDropLocked && !isUnlocked) {
+    return (
+      <div className="min-h-screen bg-black">
+        <DropPasswordScreen onUnlock={unlockDrop} />
+      </div>
+    );
   }
 
   return (
