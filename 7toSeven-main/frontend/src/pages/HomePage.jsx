@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import HeroSection from '@/components/HeroSection';
 import MarqueeBanner from '@/components/MarqueeBanner';
 import DropCountdownSection from '@/components/DropCountdownSection';
@@ -47,12 +48,18 @@ export default function HomePage() {
       {/* Identity Block */}
       <section className="py-16 md:py-24 transition-colors duration-500  bg-[#111111]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 text-center">
-          <div className="mx-auto max-w-3xl flex flex-col items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mx-auto max-w-3xl flex flex-col items-center"
+          >
             <p className="font-['Impact'] text-3xl md:text-5xl lg:text-6xl uppercase tracking-widest text-white leading-tight transition-colors duration-500">
               NOT FOR EVERYONE.<br/>
               <span className="text-red-500 drop-shadow-sm block mt-2">NEVER WAS.</span>
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -98,13 +105,33 @@ export default function HomePage() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-12 max-w-5xl mx-auto">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-12 max-w-5xl mx-auto"
+            >
               {products.slice(0, 4).map((product) => (
-                <div key={product.id} className="h-full">
+                <motion.div 
+                  key={product.id} 
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                  }}
+                  className="h-full"
+                >
                   <ProductCard product={product} />
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
         </div>
       </section>
@@ -119,32 +146,49 @@ export default function HomePage() {
                 Collections
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.15 } }
+              }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+            >
               {collections.map((col) => (
-                <Link
-                  to={`/shop?collection=${col.slug}`}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                  }}
                   key={col.id}
-                  data-testid={`collection-${col.slug}`}
-                  className="relative group overflow-hidden rounded-none bg-[#111111] transition-colors duration-500"
+                  className="h-full block"
                 >
-                  <div className="aspect-[4/5] overflow-hidden">
-                    <img
-                      src={col.image}
-                      alt={col.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8">
-                    <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-1.5">Collection</p>
-                    <h3 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-tight text-white leading-[1.15]">
-                      {col.name}
-                    </h3>
-                    <p className="text-xs text-white/40 mt-2 max-w-[240px] leading-relaxed">{col.description}</p>
-                  </div>
-                </Link>
+                  <Link
+                    to={`/shop?collection=${col.slug}`}
+                    data-testid={`collection-${col.slug}`}
+                    className="relative group overflow-hidden rounded-none bg-[#111111] transition-colors duration-500 block h-full"
+                  >
+                    <div className="aspect-[4/5] overflow-hidden">
+                      <img
+                        src={col.image}
+                        alt={col.name}
+                        className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8">
+                      <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-1.5">Collection</p>
+                      <h3 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-tight text-white leading-[1.15]">
+                        {col.name}
+                      </h3>
+                      <p className="text-xs text-white/40 mt-2 max-w-[240px] leading-relaxed">{col.description}</p>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}

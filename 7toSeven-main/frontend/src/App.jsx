@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import '@/App.css';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { CartProvider } from '@/context/CartContext';
 import Preloader from '@/components/Preloader';
 import CustomCursor from '@/components/CustomCursor';
@@ -19,6 +20,29 @@ import OrderConfirmedPage from '@/pages/OrderConfirmedPage';
 import ReturnsExchangesPage from '@/pages/ReturnsExchangesPage';
 import LookbookPage from '@/pages/LookbookPage';
 import ComingSoonCategoryPage from '@/pages/ComingSoonCategoryPage';
+import PageTransition from '@/components/PageTransition';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
+        <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
+        <Route path="/products/:slug" element={<PageTransition><ProductPage /></PageTransition>} />
+        <Route path="/checkout" element={<PageTransition><CheckoutPage /></PageTransition>} />
+        <Route path="/our-story" element={<PageTransition><OurStoryPage /></PageTransition>} />
+        <Route path="/faq" element={<PageTransition><FAQPage /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><TermsPage /></PageTransition>} />
+        <Route path="/shipping" element={<PageTransition><ShippingPolicyPage /></PageTransition>} />
+        <Route path="/returns" element={<PageTransition><ReturnsExchangesPage /></PageTransition>} />
+        <Route path="/order-confirmed" element={<PageTransition><OrderConfirmedPage /></PageTransition>} />
+        <Route path="/lookbook" element={<PageTransition><LookbookPage /></PageTransition>} />
+        <Route path="/category/:name" element={<PageTransition><ComingSoonCategoryPage /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -49,20 +73,7 @@ function App() {
           <Navbar />
           <CartDrawer />
           <main className="min-h-screen">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/shop" element={<ShopPage />} />
-              <Route path="/products/:slug" element={<ProductPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/our-story" element={<OurStoryPage />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/terms" element={<TermsPage />} />
-              <Route path="/shipping" element={<ShippingPolicyPage />} />
-              <Route path="/returns" element={<ReturnsExchangesPage />} />
-              <Route path="/order-confirmed" element={<OrderConfirmedPage />} />
-              <Route path="/lookbook" element={<LookbookPage />} />
-              <Route path="/category/:name" element={<ComingSoonCategoryPage />} />
-            </Routes>
+            <AnimatedRoutes />
           </main>
           <Footer />
         </CartProvider>

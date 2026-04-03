@@ -1,33 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ProductCard({ product }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <Link
       to={`/products/${product.slug}`}
       data-testid={`product-card-${product.slug}`}
       className="group block overflow-hidden border border-zinc-800 hover:border-white transition-colors duration-500 rounded-none bg-[#0A0A0A]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
     >
       {/* Flush Image Container */}
-      <div className="relative aspect-[4/5] overflow-hidden w-full border-b border-zinc-800 group-hover:border-white transition-colors duration-500 bg-zinc-950">
+      <motion.div className="relative aspect-[4/5] overflow-hidden w-full border-b border-zinc-800 group-hover:border-white transition-colors duration-500 bg-zinc-950">
         
         {/* Default Product Image (Resting state, flat lay / ghost) */}
-        <img
+        <motion.img
           src={product.images?.[0] || product.image}
           alt={product.name}
-          className={`absolute inset-0 w-full h-full object-cover object-center z-10 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] ${!product.images?.[1] ? 'group-hover:scale-[1.05]' : ''}`}
+          animate={{ scale: isHovered && !product.images?.[1] ? 1.05 : 1 }}
+          transition={{ duration: 0.7, ease: [0.2, 1, 0.2, 1] }}
+          className="absolute inset-0 w-full h-full object-cover object-center z-10"
           loading="lazy"
         />
 
         {/* Hover Lifestyle/Mood Image (Triggered strictly on hover) */}
-        {product.images?.length > 1 && (
-          <img
-            src={product.images[1]}
-            alt={`${product.name} lifestyle`}
-            className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] opacity-0 group-hover:opacity-100 group-hover:scale-[1.05] z-20"
-            loading="lazy"
-          />
-        )}
+        <AnimatePresence>
+          {product.images?.length > 1 && isHovered && (
+            <motion.img
+              initial={{ opacity: 0, scale: 1 }}
+              animate={{ opacity: 1, scale: 1.05 }}
+              exit={{ opacity: 0, scale: 1 }}
+              transition={{ duration: 0.7, ease: [0.2, 1, 0.2, 1] }}
+              src={product.images[1]}
+              alt={`${product.name} lifestyle`}
+              className="absolute inset-0 w-full h-full object-cover object-center z-20"
+              loading="lazy"
+            />
+          )}
+        </AnimatePresence>
         
         {product.is_new && (
           <span className="absolute top-0 left-0 bg-white text-black font-['Impact'] font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 border-r border-b border-white z-30 shadow-sm">
@@ -44,12 +59,17 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Quick Add Overlay */}
-        <div className="absolute bottom-0 left-0 w-full m-0 h-[12%] min-h-[35px] md:min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center translate-y-0 md:translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)]">
+        <motion.div 
+          initial={false}
+          animate={{ y: isHovered ? "0%" : "100%" }}
+          transition={{ duration: 0.4, ease: [0.2, 1, 0.2, 1] }}
+          className="absolute bottom-0 left-0 w-full m-0 h-[12%] min-h-[35px] md:min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)] md:translate-y-0"
+        >
           <span className="font-['Impact'] font-bold text-[10px] md:text-xs uppercase tracking-widest text-black">
             QUICK ADD +
           </span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Industrial Spec-Sheet Info Block */}
       <div className="flex flex-col sm:flex-row p-0 divide-y sm:divide-y-0 sm:divide-x divide-zinc-800 group-hover:divide-white transition-colors duration-500">
