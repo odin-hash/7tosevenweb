@@ -200,9 +200,9 @@ export default function ProductPage() {
 
             {/* Model & Fit Info */}
             <div className="flex flex-col gap-5 mb-8 border border-white/10 p-5 bg-black/40">
-              <div className="font-mono text-[10px] text-white/50 bg-white/5 p-3 uppercase tracking-widest flex items-center justify-between">
-                <span>[ SPEC ] MODEL: 6'1" | 165LBS | WEARING: L</span>
-                <span className="text-[#CCFF00]">FIT: BOXY / OVERSIZED</span>
+              <div className="font-mono text-[10px] text-white/50 bg-white/5 p-3 uppercase tracking-widest flex flex-col md:flex-row gap-2 items-start md:items-center justify-between">
+                <span>[ SPEC ] {product.modelSpecs}</span>
+                <span className="text-[#CCFF00]">FIT: {product.fitProfile}</span>
               </div>
 
               <div className="flex flex-col gap-2 mt-2">
@@ -212,7 +212,10 @@ export default function ProductPage() {
                   <span>Boxy</span>
                 </div>
                 <div className="relative w-full h-1 bg-white/10">
-                  <div className="absolute top-1/2 left-[80%] w-2 h-4 bg-white -translate-x-1/2 -translate-y-1/2 border border-black shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
+                  <div 
+                    className="absolute top-1/2 w-2 h-4 bg-white -translate-x-1/2 -translate-y-1/2 border border-black shadow-[0_0_8px_rgba(255,255,255,0.4)] transition-all duration-500 ease-out"
+                    style={{ left: product.fitProfile?.includes("Cropped") ? "20%" : product.fitProfile?.includes("Boxy") ? "80%" : "50%" }}
+                  ></div>
                 </div>
               </div>
             </div>
@@ -330,8 +333,9 @@ export default function ProductPage() {
       {related.length > 0 && (
         <section className="py-16 md:py-24 border-t border-white/10 mt-12 bg-[#0A0A0A]">
           <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-            <h2 className="font-['Impact'] md:text-5xl text-4xl uppercase tracking-widest text-white mb-12 md:text-left leading-[0.9]">
+            <h2 className="font-['Impact'] md:text-5xl text-4xl uppercase tracking-widest text-white mb-12 md:text-left leading-[0.9] flex items-baseline gap-4">
               COMPLETE THE LOOK
+              <span className="font-mono text-white/30 text-xs md:text-sm tracking-[0.4em]">// SYST_RELATED</span>
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
               {related.slice(0, 4).map((p) => <ProductCard key={p.id} product={p} />)}
@@ -414,34 +418,15 @@ export default function ProductPage() {
                     </tr>
                   </thead>
                   <tbody className="font-sans text-sm text-white/70">
-                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                      <td className="py-4 font-bold text-white">S</td>
-                      <td className="py-4">22.5</td>
-                      <td className="py-4">27.0</td>
-                      <td className="py-4">20.5</td>
-                      <td className="py-4">9.0</td>
-                    </tr>
-                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors bg-white/5">
-                      <td className="py-4 font-bold text-white">M</td>
-                      <td className="py-4">23.5</td>
-                      <td className="py-4">28.0</td>
-                      <td className="py-4">21.5</td>
-                      <td className="py-4">9.5</td>
-                    </tr>
-                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                      <td className="py-4 font-bold text-white">L</td>
-                      <td className="py-4">24.5</td>
-                      <td className="py-4">29.0</td>
-                      <td className="py-4">22.5</td>
-                      <td className="py-4">10.0</td>
-                    </tr>
-                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors bg-white/5">
-                      <td className="py-4 font-bold text-white">XL</td>
-                      <td className="py-4">25.5</td>
-                      <td className="py-4">30.0</td>
-                      <td className="py-4">23.5</td>
-                      <td className="py-4">10.5</td>
-                    </tr>
+                    {product.measurements?.map((m, i) => (
+                      <tr key={m.size} className={`border-b border-white/10 hover:bg-white/5 transition-colors ${i % 2 !== 0 ? 'bg-white/5' : ''}`}>
+                        <td className="py-4 font-bold text-white">{m.size}</td>
+                        <td className="py-4">{m.chest}</td>
+                        <td className="py-4">{m.length}</td>
+                        <td className="py-4">{m.shoulder}</td>
+                        <td className="py-4">{m.sleeve}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

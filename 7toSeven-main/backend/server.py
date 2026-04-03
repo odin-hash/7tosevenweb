@@ -64,6 +64,7 @@ def normalize_product(p: dict) -> dict:
     
     # Generate a deterministic mock stock based on integer ID if it exists
     stock = 50
+    fitProfile = "True To Size"
     if p.get("id"):
         id_val = int(p["id"])
         if id_val % 4 == 0:
@@ -72,14 +73,31 @@ def normalize_product(p: dict) -> dict:
             stock = 3 # Almost gone
         else:
             stock = 50
+            
+        fit_val = id_val % 3
+        if fit_val == 0:
+            fitProfile = "Cropped"
+        elif fit_val == 1:
+            fitProfile = "True To Size"
+        else:
+            fitProfile = "Boxy / Oversized"
     else:
         stock = 25
+        fitProfile = "True To Size"
         
     return {
         **p,
         "original_price": p.get("compare_price"),
         "is_new": p.get("is_featured", False),
-        "stock": stock
+        "stock": stock,
+        "modelSpecs": "MODEL: 6'1\" (185cm) | 165LBS | WEARING: L",
+        "fitProfile": fitProfile,
+        "measurements": [
+            {"size": "S", "chest": 22.5, "length": 27.0, "shoulder": 20.5, "sleeve": 9.0},
+            {"size": "M", "chest": 23.5, "length": 28.0, "shoulder": 21.5, "sleeve": 9.5},
+            {"size": "L", "chest": 24.5, "length": 29.0, "shoulder": 22.5, "sleeve": 10.0},
+            {"size": "XL", "chest": 25.5, "length": 30.0, "shoulder": 23.5, "sleeve": 10.5}
+        ]
     }
 
 

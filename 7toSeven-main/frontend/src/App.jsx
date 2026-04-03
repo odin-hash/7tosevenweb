@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import '@/App.css';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -9,40 +9,42 @@ import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import CartDrawer from '@/components/CartDrawer';
 import Footer from '@/components/Footer';
-import HomePage from '@/pages/HomePage';
-import ShopPage from '@/pages/ShopPage';
-import ProductPage from '@/pages/ProductPage';
-import CheckoutPage from '@/pages/CheckoutPage';
-import OurStoryPage from '@/pages/OurStoryPage';
-import FAQPage from '@/pages/FAQPage';
-import TermsPage from '@/pages/TermsPage';
-import ShippingPolicyPage from '@/pages/ShippingPolicyPage';
-import OrderConfirmedPage from '@/pages/OrderConfirmedPage';
-import ReturnsExchangesPage from '@/pages/ReturnsExchangesPage';
-import LookbookPage from '@/pages/LookbookPage';
-import ArchivePage from '@/pages/ArchivePage';
-import ComingSoonCategoryPage from '@/pages/ComingSoonCategoryPage';
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const ShopPage = lazy(() => import('@/pages/ShopPage'));
+const ProductPage = lazy(() => import('@/pages/ProductPage'));
+const CheckoutPage = lazy(() => import('@/pages/CheckoutPage'));
+const OurStoryPage = lazy(() => import('@/pages/OurStoryPage'));
+const FAQPage = lazy(() => import('@/pages/FAQPage'));
+const TermsPage = lazy(() => import('@/pages/TermsPage'));
+const ShippingPolicyPage = lazy(() => import('@/pages/ShippingPolicyPage'));
+const OrderConfirmedPage = lazy(() => import('@/pages/OrderConfirmedPage'));
+const ReturnsExchangesPage = lazy(() => import('@/pages/ReturnsExchangesPage'));
+const LookbookPage = lazy(() => import('@/pages/LookbookPage'));
+const ArchivePage = lazy(() => import('@/pages/ArchivePage'));
+const ComingSoonCategoryPage = lazy(() => import('@/pages/ComingSoonCategoryPage'));
 import PageTransition from '@/components/PageTransition';
 
 function AnimatedRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
-        <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
-        <Route path="/products/:slug" element={<PageTransition><ProductPage /></PageTransition>} />
-        <Route path="/checkout" element={<PageTransition><CheckoutPage /></PageTransition>} />
-        <Route path="/our-story" element={<PageTransition><OurStoryPage /></PageTransition>} />
-        <Route path="/faq" element={<PageTransition><FAQPage /></PageTransition>} />
-        <Route path="/terms" element={<PageTransition><TermsPage /></PageTransition>} />
-        <Route path="/shipping" element={<PageTransition><ShippingPolicyPage /></PageTransition>} />
-        <Route path="/returns" element={<PageTransition><ReturnsExchangesPage /></PageTransition>} />
-        <Route path="/order-confirmed" element={<PageTransition><OrderConfirmedPage /></PageTransition>} />
-        <Route path="/lookbook" element={<PageTransition><LookbookPage /></PageTransition>} />
-        <Route path="/archive" element={<PageTransition><ArchivePage /></PageTransition>} />
-        <Route path="/category/:name" element={<PageTransition><ComingSoonCategoryPage /></PageTransition>} />
-      </Routes>
+      <Suspense fallback={<Preloader />}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
+          <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
+          <Route path="/products/:slug" element={<PageTransition><ProductPage /></PageTransition>} />
+          <Route path="/checkout" element={<PageTransition><CheckoutPage /></PageTransition>} />
+          <Route path="/our-story" element={<PageTransition><OurStoryPage /></PageTransition>} />
+          <Route path="/faq" element={<PageTransition><FAQPage /></PageTransition>} />
+          <Route path="/terms" element={<PageTransition><TermsPage /></PageTransition>} />
+          <Route path="/shipping" element={<PageTransition><ShippingPolicyPage /></PageTransition>} />
+          <Route path="/returns" element={<PageTransition><ReturnsExchangesPage /></PageTransition>} />
+          <Route path="/order-confirmed" element={<PageTransition><OrderConfirmedPage /></PageTransition>} />
+          <Route path="/lookbook" element={<PageTransition><LookbookPage /></PageTransition>} />
+          <Route path="/archive" element={<PageTransition><ArchivePage /></PageTransition>} />
+          <Route path="/category/:name" element={<PageTransition><ComingSoonCategoryPage /></PageTransition>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }

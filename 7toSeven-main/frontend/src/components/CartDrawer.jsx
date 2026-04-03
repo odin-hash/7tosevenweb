@@ -13,10 +13,29 @@ import {
 export default function CartDrawer() {
   const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, subtotal, shipping, total } = useCart();
   const navigate = useNavigate();
+  const [touchStartX, setTouchStartX] = React.useState(null);
+  const [touchEndX, setTouchEndX] = React.useState(null);
 
   const handleCheckout = () => {
     setIsCartOpen(false);
     navigate('/checkout');
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchEndX(null);
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+    const distance = touchStartX - touchEndX;
+    if (distance < -50) { // Right swipe
+      setIsCartOpen(false);
+    }
   };
 
   return (
@@ -24,8 +43,11 @@ export default function CartDrawer() {
       <SheetContent
         side="right"
         data-testid="cart-drawer"
-        className="w-full sm:max-w-md bg-zinc-950 p-0 flex flex-col [&>button]:hidden border-0 border-l border-zinc-800 !z-50 rounded-none"
+        className="w-full sm:max-w-md bg-zinc-950 p-0 flex flex-col [&>button]:hidden border-0 border-l border-zinc-800 !z-50 rounded-none transform transition-transform"
         style={{ borderRadius: 0 }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Header */}
         <SheetHeader className="p-6 pb-4   border-white/[0.04]">

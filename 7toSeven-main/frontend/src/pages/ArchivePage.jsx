@@ -49,7 +49,7 @@ export default function ArchivePage() {
               
               <div className="absolute bottom-6 left-6 pointer-events-none">
                 <p className="font-mono text-[#CCFF00] text-[10px] tracking-widest uppercase mb-1">
-                  [{item.year}] // SOLD OUT
+                  [ ARCHIVED ] // LEGACY_DATA_v0.9
                 </p>
                 <h3 className="font-['Impact'] text-xl text-white tracking-widest uppercase opacity-30 group-hover:opacity-100 transition-opacity duration-300">
                   {item.name}

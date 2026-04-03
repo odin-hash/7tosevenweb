@@ -7,12 +7,13 @@ export default function CustomCursor() {
 
   useEffect(() => {
     if (window.matchMedia('(pointer: coarse)').matches) {
-      return; 
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
     }
-    
-    setIsVisible(true);
 
     const updatePosition = (e) => {
+      setIsVisible(true);
       setPosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -29,12 +30,18 @@ export default function CustomCursor() {
       setIsHovering(!!isInteractive);
     };
 
+    const handleTouch = () => {
+      setIsVisible(false);
+    };
+
     window.addEventListener('mousemove', updatePosition);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('touchstart', handleTouch, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', updatePosition);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('touchstart', handleTouch);
     };
   }, []);
 

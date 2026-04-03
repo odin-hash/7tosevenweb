@@ -279,10 +279,10 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-end gap-6">
             <div>
               <p className="font-['Impact'] text-xs md:text-sm uppercase tracking-[0.4em] text-[#CCFF00] mb-4">
-                COMMUNITY
+                // FIELD_TESTING
               </p>
               <h2 className="font-['Impact'] text-5xl md:text-7xl uppercase tracking-widest text-white leading-[0.9]">
-                CULT
+                COMMUNITY
               </h2>
             </div>
             <Link to="/archive" className="font-sans font-bold text-sm md:text-base uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors underline pb-2">
@@ -301,18 +301,36 @@ export default function HomePage() {
               '/visual_strip_1.png',
               '/lookbook_2.png'
             ].map((src, i) => (
-              <div key={i} className={`relative aspect-[4/5] overflow-hidden bg-zinc-950 group ${i % 2 !== 0 ? 'lg:-translate-y-8' : ''}`}>
-                <img 
+              <motion.div 
+                key={i} 
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
+                className={`relative aspect-[4/5] overflow-hidden bg-zinc-950 cursor-pointer ${i % 2 !== 0 ? 'lg:-translate-y-8' : ''}`}
+              >
+                <motion.img 
                   src={src} 
-                  alt={`Cult UGC 00${i + 1}`} 
-                  className="w-full h-full object-cover grayscale opacity-60 mix-blend-luminosity group-hover:grayscale-0 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700 ease-out scale-[1.02] group-hover:scale-110"
+                  alt={`Community UGC 00${i + 1}`} 
+                  variants={{
+                    rest: { filter: "grayscale(100%)", opacity: 0.6, scale: 1.02 },
+                    hover: { filter: "grayscale(0%)", opacity: 1, scale: 1.1, mixBlendMode: "normal" }
+                  }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="w-full h-full object-cover mix-blend-luminosity"
                   loading="lazy"
                 />
-                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <motion.div 
+                  variants={{
+                    rest: { opacity: 0, y: 10 },
+                    hover: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/80 to-transparent"
+                >
                   <p className="font-mono text-xs text-[#CCFF00] tracking-widest uppercase mb-1.5">[{new Date().getFullYear()}]</p>
-                  <p className="font-['Impact'] text-base md:text-lg text-white tracking-widest uppercase">@AGENT_{100 + i * 37}</p>
-                </div>
-              </div>
+                  <p className="font-['Impact'] text-base md:text-lg text-white tracking-widest uppercase">@user_unknown_0{i + 1}</p>
+                </motion.div>
+              </motion.div>
             ))}
           </div>
         </div>
