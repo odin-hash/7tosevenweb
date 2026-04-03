@@ -19,7 +19,7 @@ const pageVariants = {
 const pageTransition = {
   type: 'tween',
   ease: 'anticipate',
-  duration: 0.5,
+  duration: 0.25,
 };
 
 export default function PageTransition({ children }) {

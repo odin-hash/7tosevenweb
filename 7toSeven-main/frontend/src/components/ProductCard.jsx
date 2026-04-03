@@ -51,24 +51,37 @@ export default function ProductCard({ product }) {
         )}
 
         {/* Scarcity Radar Indicator */}
-        <div className="absolute top-2 right-2 bg-black border border-white/10 flex items-center gap-2 px-3 py-1.5 z-30 rounded-none shadow-xl">
-          <div className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse shadow-[0_0_8px_rgba(163,230,53,0.8)]"></div>
-          <span className="text-white font-mono text-[9px] uppercase tracking-widest pt-0.5">
-            LIVE
-          </span>
-        </div>
+        {product.stock > 0 && (
+          <div className="absolute top-2 right-2 bg-black border border-white/10 flex items-center gap-2 px-3 py-1.5 z-30 rounded-none shadow-xl">
+            <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${product.stock <= 5 ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]" : "bg-lime-400 shadow-[0_0_8px_rgba(163,230,53,0.8)]"}`}></div>
+            <span className="text-white font-mono text-[9px] uppercase tracking-widest pt-0.5">
+              {product.stock <= 5 ? "ALMOST GONE" : "LIVE"}
+            </span>
+          </div>
+        )}
+
+        {/* Sold Out Overlay */}
+        {product.stock === 0 && (
+          <div className="absolute inset-0 bg-[#0A0A0A]/70 flex items-center justify-center z-30 backdrop-blur-[2px]">
+            <span className="font-['Impact'] text-3xl md:text-4xl text-white/90 uppercase tracking-widest border-2 border-white/20 px-6 py-2 shadow-2xl">
+              SOLD OUT
+            </span>
+          </div>
+        )}
 
         {/* Quick Add Overlay */}
-        <motion.div 
-          initial={false}
-          animate={{ y: isHovered ? "0%" : "100%" }}
-          transition={{ duration: 0.4, ease: [0.2, 1, 0.2, 1] }}
-          className="absolute bottom-0 left-0 w-full m-0 h-[12%] min-h-[35px] md:min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)] md:translate-y-0"
-        >
-          <span className="font-['Impact'] font-bold text-[10px] md:text-xs uppercase tracking-widest text-black">
-            QUICK ADD +
-          </span>
-        </motion.div>
+        {product.stock !== 0 && (
+          <motion.div 
+            initial={false}
+            animate={{ y: isHovered ? "0%" : "100%" }}
+            transition={{ duration: 0.4, ease: [0.2, 1, 0.2, 1] }}
+            className="absolute bottom-0 left-0 w-full m-0 h-[12%] min-h-[35px] md:min-h-[40px] bg-white/95 backdrop-blur-md flex items-center justify-center z-30 border-t border-white shadow-[0_-10px_20px_rgba(0,0,0,0.2)] md:translate-y-0"
+          >
+            <span className="font-['Impact'] font-bold text-[10px] md:text-xs uppercase tracking-widest text-black">
+              QUICK ADD +
+            </span>
+          </motion.div>
+        )}
       </motion.div>
 
       {/* Industrial Spec-Sheet Info Block */}

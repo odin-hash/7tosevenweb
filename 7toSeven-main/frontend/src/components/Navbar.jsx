@@ -53,18 +53,18 @@ export default function Navbar() {
           </div>
 
           {/* Right — Icons */}
-          <div className="flex items-center gap-4 md:gap-5">
+          <div className="flex items-center gap-2 md:gap-5">
 
-            <button data-testid="nav-cart-btn" onClick={() => setIsCartOpen(true)} className="  text-white/60 hover:text-white transition-colors duration-300 relative">
+            <button data-testid="nav-cart-btn" onClick={() => setIsCartOpen(true)} className="text-white/60 hover:text-white transition-colors duration-300 relative min-w-[44px] min-h-[44px] flex items-center justify-center p-2">
               <ShoppingBag size={19} strokeWidth={1.5} />
               {itemCount > 0 && (
-                <span className="absolute -top-1.5 -right-2   bg-white text-[#0A0A0A]  font-bold min-w-[16px] h-4 flex items-center justify-center rounded-full px-1">
+                <span className="absolute top-1 right-1 bg-white text-[#0A0A0A] font-bold min-w-[16px] h-4 flex items-center justify-center rounded-full px-1 text-[10px]">
                   {itemCount}
                 </span>
               )}
             </button>
-            <button data-testid="nav-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden   text-white/60 hover:text-white transition-colors duration-300">
-              {mobileOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
+            <button data-testid="nav-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-white/60 hover:text-white transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center p-2">
+              {mobileOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
             </button>
           </div>
         </div>
@@ -74,14 +74,14 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[45]  bg-[#0A0A0A]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-10" data-testid="mobile-menu">
           <button 
             onClick={() => setMobileOpen(false)} 
-            className="absolute top-5 right-5 md:top-6 md:right-8 text-white/60 hover:text-[#CCFF00] transition-colors p-2 flex items-center justify-center"
+            className="absolute top-5 right-5 md:top-6 md:right-8 text-white/60 hover:text-[#CCFF00] transition-colors flex items-center justify-center min-w-[44px] min-h-[44px] p-2"
             aria-label="Close Mobile Menu"
           >
-            <X size={24} strokeWidth={1.5} />
+            <X size={28} strokeWidth={1.5} />
           </button>
-          <Link to="/shop" data-testid="mobile-shop" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl">SHOP</Link>
-          <Link to="/our-story" data-testid="mobile-story" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl">MANIFESTO</Link>
-          <Link to="/lookbook" data-testid="mobile-lookbook" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl">LOOKBOOK</Link>
+          <Link to="/shop" data-testid="mobile-shop" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl min-h-[44px] flex items-center">SHOP</Link>
+          <Link to="/our-story" data-testid="mobile-story" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl min-h-[44px] flex items-center">MANIFESTO</Link>
+          <Link to="/lookbook" data-testid="mobile-lookbook" className="font-['Impact']  uppercase tracking-wider   text-white/80 hover:text-[#CCFF00] transition-colors text-2xl min-h-[44px] flex items-center">LOOKBOOK</Link>
         </div>
       )}
     </>

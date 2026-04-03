@@ -53,9 +53,9 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mx-auto max-w-3xl flex flex-col items-center"
+            className="mx-auto max-w-4xl flex flex-col items-center"
           >
-            <p className="font-['Impact'] text-3xl md:text-5xl lg:text-6xl uppercase tracking-widest text-white leading-tight transition-colors duration-500">
+            <p className="font-['Impact'] text-4xl md:text-6xl lg:text-7xl uppercase tracking-widest text-white leading-tight transition-colors duration-500">
               NOT FOR EVERYONE.<br/>
               <span className="text-red-500 drop-shadow-sm block mt-2">NEVER WAS.</span>
             </p>
@@ -83,17 +83,17 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="flex items-end justify-between mb-10 md:mb-12">
             <div>
-              <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Curated</p>
-              <h2 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
+              <p className="font-['Impact'] text-xs md:text-sm uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Curated</p>
+              <h2 className="font-['Impact'] text-4xl md:text-5xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
                 Featured
               </h2>
             </div>
             <Link
               to="/shop"
               data-testid="view-all-products"
-              className="flex items-center gap-2 font-['Impact']  uppercase tracking-[0.2em]   text-white/40 hover:text-white/70 transition-colors duration-300"
+              className="flex items-center gap-2 font-['Impact'] text-sm md:text-base uppercase tracking-[0.2em] text-white/40 hover:text-white/70 transition-colors duration-300"
             >
-              View All <ArrowRight size={12} />
+              View All <ArrowRight size={16} />
             </Link>
           </div>
           {loading ? (
@@ -141,8 +141,8 @@ export default function HomePage() {
         <section className="py-16 md:py-24 transition-colors duration-500">
           <div className="max-w-[1400px] mx-auto px-6 md:px-16">
             <div className="mb-10 md:mb-12">
-              <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Explore</p>
-              <h2 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
+              <p className="font-['Impact'] text-xs md:text-sm uppercase tracking-[0.3em]  text-white/30 transition-colors duration-500 mb-2">Explore</p>
+              <h2 className="font-['Impact'] text-4xl md:text-5xl uppercase tracking-tight  text-white transition-colors duration-500 leading-[1.1]">
                 Collections
               </h2>
             </div>
@@ -179,11 +179,11 @@ export default function HomePage() {
                       />
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8">
-                      <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-1.5">Collection</p>
-                      <h3 className="font-['Impact'] text-xl md:text-2xl uppercase tracking-tight text-white leading-[1.15]">
+                      <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-2">Collection</p>
+                      <h3 className="font-['Impact'] text-2xl md:text-3xl uppercase tracking-tight text-white leading-[1.15]">
                         {col.name}
                       </h3>
-                      <p className="text-xs text-white/40 mt-2 max-w-[240px] leading-relaxed">{col.description}</p>
+                      <p className="text-sm text-white/40 mt-3 max-w-[260px] leading-relaxed">{col.description}</p>
                     </div>
                   </Link>
                 </motion.div>
@@ -202,8 +202,8 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-16">
           <div className="flex items-end justify-between mb-8 md:mb-12">
             <div>
-              <p className="font-['Impact'] text-[10px] uppercase tracking-[0.3em] text-white/30 transition-colors duration-500 mb-2">Editorial</p>
-              <h2 className="font-['Impact'] text-3xl md:text-4xl uppercase tracking-tight text-white transition-colors duration-500 leading-[1.1]">
+              <p className="font-['Impact'] text-xs md:text-sm uppercase tracking-[0.3em] text-white/30 transition-colors duration-500 mb-2">Editorial</p>
+              <h2 className="font-['Impact'] text-4xl md:text-5xl uppercase tracking-tight text-white transition-colors duration-500 leading-[1.1]">
                 LOOKBOOK PREVIEW
               </h2>
             </div>
@@ -230,7 +230,7 @@ export default function HomePage() {
           {/* Edge-to-edge horizontal scroll container */}
           <div 
             ref={lookbookRef}
-            className="flex w-full overflow-x-auto snap-x snap-mandatory scroll-smooth"
+            className="flex gap-4 md:gap-6 w-full overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 md:px-16 pb-8"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             {/* 
@@ -241,8 +241,8 @@ export default function HomePage() {
               div::-webkit-scrollbar { display: none; }
             `}} />
 
-            {['/lookbook_1.png', '/lookbook_2.png', '/lookbook_3.png'].map((src, idx) => (
-              <div key={idx} className="flex-none h-[80vh] aspect-[4/5] snap-center bg-[#111] overflow-hidden">
+            {['/lookbook_1.png', '/lookbook_2.png', '/lookbook_3.png', '/visual_strip_2.png'].map((src, idx) => (
+              <div key={idx} className="flex-none w-[75vw] md:w-[22vw] aspect-[4/5] snap-center bg-[#111] overflow-hidden">
                 <img 
                   src={src} 
                   alt={`Lookbook Archive 00${idx + 1}`} 
@@ -256,7 +256,7 @@ export default function HomePage() {
 
           {/* Persistent overlay text */}
           <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 z-20 pointer-events-none">
-            <p className="bg-white text-black font-mono text-xs md:text-sm tracking-widest uppercase rounded-none px-4 py-2 shadow-lg">
+            <p className="bg-white text-black font-mono text-sm md:text-base tracking-widest uppercase rounded-none px-5 py-3 shadow-lg">
               <span className="md:hidden">SWIPE</span><span className="hidden md:inline">SCROLL</span> TO EXPLORE [→]
             </p>
           </div>
@@ -266,11 +266,56 @@ export default function HomePage() {
       {/* Trust & Origin Anchor */}
       <section className="pt-16 pb-8 md:pt-20 md:pb-10 bg-black flex flex-col items-center justify-center text-center px-4 md:px-6 border-t border-white/5 overflow-hidden w-full">
         <h2 
-          className="text-[clamp(1.5rem,6vw,8rem)] font-black uppercase text-white/90 leading-tight whitespace-nowrap w-full"
+          className="text-[clamp(2rem,7vw,9.5rem)] font-black uppercase text-white/90 leading-tight whitespace-nowrap w-full"
           style={{ fontFamily: "'Syne', sans-serif" }}
         >
           MADE FOR INDIAN STREETS.
         </h2>
+      </section>
+
+      {/* UGC / Community Grid */}
+      <section className="pt-16 pb-24 md:pt-32 md:pb-32 bg-black border-t border-white/5">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-16 mb-12 md:mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6">
+            <div>
+              <p className="font-['Impact'] text-xs md:text-sm uppercase tracking-[0.4em] text-[#CCFF00] mb-4">
+                COMMUNITY
+              </p>
+              <h2 className="font-['Impact'] text-5xl md:text-7xl uppercase tracking-widest text-white leading-[0.9]">
+                CULT
+              </h2>
+            </div>
+            <Link to="/archive" className="font-sans font-bold text-sm md:text-base uppercase tracking-[0.2em] text-white/50 hover:text-white transition-colors underline pb-2">
+              ENTER ARCHIVE
+            </Link>
+          </div>
+        </div>
+
+        <div className="w-full px-4 md:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4 pb-8">
+            {[
+              '/visual_strip_2.png',
+              '/lookbook_1.png', 
+              '/product_model_1.png', 
+              '/lookbook_3.png', 
+              '/visual_strip_1.png',
+              '/lookbook_2.png'
+            ].map((src, i) => (
+              <div key={i} className={`relative aspect-[4/5] overflow-hidden bg-zinc-950 group ${i % 2 !== 0 ? 'lg:-translate-y-8' : ''}`}>
+                <img 
+                  src={src} 
+                  alt={`Cult UGC 00${i + 1}`} 
+                  className="w-full h-full object-cover grayscale opacity-60 mix-blend-luminosity group-hover:grayscale-0 group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700 ease-out scale-[1.02] group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="font-mono text-xs text-[#CCFF00] tracking-widest uppercase mb-1.5">[{new Date().getFullYear()}]</p>
+                  <p className="font-['Impact'] text-base md:text-lg text-white tracking-widest uppercase">@AGENT_{100 + i * 37}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* CTA Close */}

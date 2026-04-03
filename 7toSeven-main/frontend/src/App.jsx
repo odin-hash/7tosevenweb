@@ -19,13 +19,14 @@ import ShippingPolicyPage from '@/pages/ShippingPolicyPage';
 import OrderConfirmedPage from '@/pages/OrderConfirmedPage';
 import ReturnsExchangesPage from '@/pages/ReturnsExchangesPage';
 import LookbookPage from '@/pages/LookbookPage';
+import ArchivePage from '@/pages/ArchivePage';
 import ComingSoonCategoryPage from '@/pages/ComingSoonCategoryPage';
 import PageTransition from '@/components/PageTransition';
 
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
         <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
@@ -38,6 +39,7 @@ function AnimatedRoutes() {
         <Route path="/returns" element={<PageTransition><ReturnsExchangesPage /></PageTransition>} />
         <Route path="/order-confirmed" element={<PageTransition><OrderConfirmedPage /></PageTransition>} />
         <Route path="/lookbook" element={<PageTransition><LookbookPage /></PageTransition>} />
+        <Route path="/archive" element={<PageTransition><ArchivePage /></PageTransition>} />
         <Route path="/category/:name" element={<PageTransition><ComingSoonCategoryPage /></PageTransition>} />
       </Routes>
     </AnimatePresence>

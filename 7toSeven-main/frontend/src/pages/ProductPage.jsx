@@ -31,14 +31,14 @@ export default function ProductPage() {
     setSelectedSize('');
     setQuantity(1);
     setSelectedImage(0);
-    
+
     const slowTimeout = setTimeout(() => {
       setLoadingSlow(true);
     }, 4000);
 
     axios.get(`${API}/products/${slug}`)
       .then(r => { setProduct(r.data.product); setRelated(r.data.related); })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => {
         clearTimeout(slowTimeout);
         setLoading(false);
@@ -71,7 +71,7 @@ export default function ProductPage() {
     setZoomLevel(1);
     setIsLightboxOpen(true);
   };
-  
+
   const closeLightbox = () => {
     setIsLightboxOpen(false);
     setZoomLevel(1);
@@ -139,13 +139,13 @@ export default function ProductPage() {
               {/* Image Navigation Arrows */}
               {product.images.length > 1 && (
                 <>
-                  <button 
+                  <button
                     onClick={handlePrevImage}
                     className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80"
                   >
                     <ChevronLeft size={20} strokeWidth={2} />
                   </button>
-                  <button 
+                  <button
                     onClick={handleNextImage}
                     className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/80"
                   >
@@ -161,9 +161,8 @@ export default function ProductPage() {
                     key={i}
                     data-testid={`product-thumbnail-${i}`}
                     onClick={() => setSelectedImage(i)}
-                    className={`w-20 aspect-square overflow-hidden transition-all duration-300 ${
-                      selectedImage === i ? 'opacity-100 ring-1 ring-black ring-white' : 'opacity-50 hover:opacity-100'
-                    }`}
+                    className={`w-20 aspect-square overflow-hidden transition-all duration-300 ${selectedImage === i ? 'opacity-100 ring-1 ring-black ring-white' : 'opacity-50 hover:opacity-100'
+                      }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />
                   </button>
@@ -174,7 +173,7 @@ export default function ProductPage() {
 
           {/* Right - Product Info */}
           <div className="py-2 lg:py-10 flex flex-col justify-start w-full max-w-lg">
-            
+
             {/* Header */}
             <p className="font-sans font-bold uppercase tracking-[0.3em] text-white/40 mb-4 text-xs">{product.collection}</p>
             <h1 data-testid="product-name" className="font-['Impact'] md:text-[4rem] text-4xl uppercase tracking-widest text-white leading-[1] mb-4">
@@ -188,18 +187,39 @@ export default function ProductPage() {
             </div>
 
             {/* Short Identity Text */}
-            <p className="font-sans text-white/60 leading-relaxed text-sm line-clamp-3 mt-6 mb-10">
+            <p className="font-sans text-white/60 leading-relaxed text-sm line-clamp-3 mt-6 mb-8">
               {product.description}
             </p>
+
+            {/* Model & Fit Info */}
+            <div className="flex flex-col gap-5 mb-8 border border-white/10 p-5 bg-black/40">
+              <div className="font-mono text-[10px] text-white/50 bg-white/5 p-3 uppercase tracking-widest flex items-center justify-between">
+                <span>[ SPEC ] MODEL: 6'1" | 165LBS | WEARING: L</span>
+                <span className="text-[#CCFF00]">FIT: BOXY / OVERSIZED</span>
+              </div>
+
+              <div className="flex flex-col gap-2 mt-2">
+                <div className="flex justify-between font-mono text-[10px] text-white/40 tracking-widest uppercase px-1">
+                  <span>Tight</span>
+                  <span className="text-white">True To Size</span>
+                  <span>Boxy</span>
+                </div>
+                <div className="relative w-full h-1 bg-white/10">
+                  <div className="absolute top-1/2 left-[80%] w-2 h-4 bg-white -translate-x-1/2 -translate-y-1/2 border border-black shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
+                </div>
+              </div>
+            </div>
 
             {/* Size Selector */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <p className="font-sans font-bold uppercase tracking-[0.2em] text-white/50 text-sm">
                   SELECT SIZE {selectedSize && <span className="text-white">— {selectedSize}</span>}
+                  {product.stock <= 5 && product.stock > 0 && <span className="text-red-500 ml-3">· ONLY {product.stock} LEFT</span>}
+                  {product.stock === 0 && <span className="text-red-500 ml-3">· SOLD OUT</span>}
                 </p>
-                <button 
-                  onClick={() => setIsSizeGuideOpen(true)} 
+                <button
+                  onClick={() => setIsSizeGuideOpen(true)}
                   className="font-sans font-bold uppercase tracking-[0.1em] text-white/40 hover:text-white transition-colors underline text-xs"
                 >
                   SIZE GUIDE
@@ -211,11 +231,10 @@ export default function ProductPage() {
                     key={size}
                     data-testid={`size-option-${size}`}
                     onClick={() => setSelectedSize(size)}
-                    className={`w-14 h-14 flex items-center justify-center font-sans font-bold uppercase tracking-widest border transition-all duration-300 ${
-                      selectedSize === size
+                    className={`w-14 h-14 flex items-center justify-center font-sans font-bold uppercase tracking-widest border transition-all duration-300 ${selectedSize === size
                         ? 'border-white bg-white text-black'
                         : 'border-white/10 text-white hover:border-white'
-                    }`}
+                      }`}
                   >
                     {size}
                   </button>
@@ -239,21 +258,21 @@ export default function ProductPage() {
                 <button
                   data-testid="add-to-cart-btn"
                   onClick={handleAddToCart}
-                  disabled={!selectedSize}
-                  className={`flex-1 font-sans font-bold rounded-none uppercase tracking-[0.2em] h-14 border transition-all duration-300 ${
-                    selectedSize
-                      ? 'border-white bg-white text-black hover:bg-white/90'
-                      : 'border-white/10 bg-white/5 text-white/30 cursor-not-allowed'
-                  }`}
+                  disabled={!selectedSize || product.stock === 0}
+                  className={`flex-1 font-sans font-bold rounded-none uppercase tracking-[0.2em] h-14 border transition-all duration-300 ${product.stock === 0
+                      ? 'border-red-500/50 bg-red-500/10 text-red-500 cursor-not-allowed'
+                      : selectedSize
+                        ? 'border-white bg-white text-black hover:bg-white/90'
+                        : 'border-white/10 bg-white/5 text-white/30 cursor-not-allowed'
+                    }`}
                 >
-                  {selectedSize ? 'ADD TO CART' : 'SELECT SIZE'}
+                  {product.stock === 0 ? 'SOLD OUT' : selectedSize ? 'ADD TO CART' : 'SELECT SIZE'}
                 </button>
                 <button
                   data-testid="wishlist-btn"
                   onClick={() => setWishlisted(!wishlisted)}
-                  className={`w-14 h-14 shrink-0 flex items-center justify-center rounded-none border transition-all duration-300 hover:bg-white hover:text-black hover:border-white ${
-                    wishlisted ? 'border-white bg-white text-black' : 'border-white/10 text-white'
-                  }`}
+                  className={`w-14 h-14 shrink-0 flex items-center justify-center rounded-none border transition-all duration-300 hover:bg-white hover:text-black hover:border-white ${wishlisted ? 'border-white bg-white text-black' : 'border-white/10 text-white'
+                    }`}
                 >
                   <Heart size={20} strokeWidth={wishlisted ? 2 : 1.5} fill={wishlisted ? 'currentColor' : 'none'} />
                 </button>
@@ -300,15 +319,15 @@ export default function ProductPage() {
         </div>
       </div>
 
-      {/* Related */}
+      {/* Complete The Look */}
       {related.length > 0 && (
-        <section className="py-16 md:py-24  bg-[#0A0A0A]">
+        <section className="py-16 md:py-24 border-t border-white/10 mt-12 bg-[#0A0A0A]">
           <div className="max-w-[1400px] mx-auto px-6 md:px-16">
-            <h2 className="font-['Impact']  md:text-5xl uppercase tracking-widest  text-white mb-16  md:text-left leading-[0.9]">
-              YOU MAY ALSO LIKE
+            <h2 className="font-['Impact'] md:text-5xl text-4xl uppercase tracking-widest text-white mb-12 md:text-left leading-[0.9]">
+              COMPLETE THE LOOK
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-              {related.map((p) => <ProductCard key={p.id} product={p} />)}
+              {related.slice(0, 4).map((p) => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>
         </section>
@@ -337,15 +356,15 @@ export default function ProductPage() {
 
           {/* Main Content */}
           <div className="relative w-full h-[90vh] flex items-center justify-center overflow-auto" onClick={closeLightbox}>
-            <div 
+            <div
               className={`relative transition-transform duration-300 ease-out ${zoomLevel > 1 ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
               style={{ transform: `scale(${zoomLevel})` }}
               onClick={(e) => { e.stopPropagation(); setZoomLevel(prev => prev === 1 ? 2 : 1); }}
             >
-              <img 
-                src={product.images[selectedImage]} 
-                alt={product.name} 
-                className="max-w-full max-h-[90vh] object-contain"
+              <img
+                src={product.images[selectedImage]}
+                alt={product.name}
+                className="max-h-full max-w-full object-contain pointer-events-none"
               />
             </div>
           </div>
@@ -353,47 +372,78 @@ export default function ProductPage() {
           {/* Navigation Arrows */}
           {product.images.length > 1 && (
             <>
-              <button 
-                onClick={handlePrevImage}
-                className="absolute left-4 sm:left-10 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center bg-white/5 text-white hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-md z-50 rounded-full"
-              >
-                <ChevronLeft size={28} strokeWidth={2} />
-              </button>
-              <button 
-                onClick={handleNextImage}
-                className="absolute right-4 sm:right-10 top-1/2 -translate-y-1/2 w-14 h-14 flex items-center justify-center bg-white/5 text-white hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-md z-50 rounded-full"
-              >
-                <ChevronRight size={28} strokeWidth={2} />
-              </button>
+              <button onClick={handlePrevImage} className="absolute left-4 sm:left-12 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50"><ChevronLeft size={48} strokeWidth={1} /></button>
+              <button onClick={handleNextImage} className="absolute right-4 sm:right-12 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-50"><ChevronRight size={48} strokeWidth={1} /></button>
             </>
           )}
         </div>
       )}
 
-      {/* Size Guide Modal */}
+      {/* Sizing Guide Modal */}
       {isSizeGuideOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-[2px] flex items-center justify-center p-4">
-          <div className="bg-[#111] border border-white/10 w-full max-w-sm p-8 relative">
-            <button 
-              onClick={() => setIsSizeGuideOpen(false)}
-              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
-            >
-              <X size={20} />
-            </button>
-            <h2 className="font-sans font-bold uppercase tracking-[0.2em] text-white mb-6">SIZE GUIDE</h2>
-            
-            <p className="font-sans text-white/50 text-sm mb-8 uppercase tracking-widest">MODEL IS 5’10" WEARING M</p>
-            
-            <ul className="font-sans text-white/80 space-y-4 mb-8 text-sm tracking-wide">
-              <li className="flex justify-between border-b border-white/5 pb-2"><span>S</span> <span className="text-white/40">Chest 38"</span></li>
-              <li className="flex justify-between border-b border-white/5 pb-2"><span>M</span> <span className="text-white/40">Chest 40"</span></li>
-              <li className="flex justify-between border-b border-white/5 pb-2"><span>L</span> <span className="text-white/40">Chest 42"</span></li>
-              <li className="flex justify-between border-b border-white/5 pb-2"><span>XL</span> <span className="text-white/40">Chest 44"</span></li>
-            </ul>
+        <div className="fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#0A0A0A] border border-white/20 w-full max-w-3xl max-h-[90vh] overflow-y-auto brutal-scrollbar relative">
+            <div className="sticky top-0 bg-[#0A0A0A] border-b border-white/10 p-6 flex justify-between items-center z-10">
+              <h2 className="font-['Impact'] text-2xl uppercase tracking-widest text-white">SIZING GUIDE</h2>
+              <button onClick={() => setIsSizeGuideOpen(false)} className="text-white/50 hover:text-white transition-colors">
+                <X size={28} />
+              </button>
+            </div>
 
-            <div className="font-sans text-xs text-white/40 uppercase tracking-widest space-y-2">
-              <p>• Relaxed fit</p>
-              <p>• Size down for tighter fit</p>
+            <div className="p-6 md:p-10">
+              <p className="font-mono text-white/50 text-xs tracking-widest uppercase mb-8">
+                All measurements are in INCHES. Tolerance +/- 0.5". Garments are measured flat.
+              </p>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse min-w-[500px]">
+                  <thead>
+                    <tr className="border-b border-white/20">
+                      <th className="py-4 font-mono text-[#CCFF00] tracking-widest text-xs font-bold uppercase">SIZE</th>
+                      <th className="py-4 font-mono text-white tracking-widest text-xs font-bold uppercase">CHEST</th>
+                      <th className="py-4 font-mono text-white tracking-widest text-xs font-bold uppercase">LENGTH</th>
+                      <th className="py-4 font-mono text-white tracking-widest text-xs font-bold uppercase">SHOULDER</th>
+                      <th className="py-4 font-mono text-white tracking-widest text-xs font-bold uppercase">SLEEVE</th>
+                    </tr>
+                  </thead>
+                  <tbody className="font-sans text-sm text-white/70">
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="py-4 font-bold text-white">S</td>
+                      <td className="py-4">22.5</td>
+                      <td className="py-4">27.0</td>
+                      <td className="py-4">20.5</td>
+                      <td className="py-4">9.0</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors bg-white/5">
+                      <td className="py-4 font-bold text-white">M</td>
+                      <td className="py-4">23.5</td>
+                      <td className="py-4">28.0</td>
+                      <td className="py-4">21.5</td>
+                      <td className="py-4">9.5</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td className="py-4 font-bold text-white">L</td>
+                      <td className="py-4">24.5</td>
+                      <td className="py-4">29.0</td>
+                      <td className="py-4">22.5</td>
+                      <td className="py-4">10.0</td>
+                    </tr>
+                    <tr className="border-b border-white/10 hover:bg-white/5 transition-colors bg-white/5">
+                      <td className="py-4 font-bold text-white">XL</td>
+                      <td className="py-4">25.5</td>
+                      <td className="py-4">30.0</td>
+                      <td className="py-4">23.5</td>
+                      <td className="py-4">10.5</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-10 font-sans text-white/50 text-xs border-t border-white/10 pt-6">
+                <p className="mb-2"><strong className="text-white">CHEST:</strong> Measured 1" below armpit straight across.</p>
+                <p className="mb-2"><strong className="text-white">LENGTH:</strong> Measured from highest point of shoulder to bottom hem.</p>
+                <p className="mb-2"><strong className="text-white">SHOULDER:</strong> Measured from shoulder seam to shoulder seam.</p>
+              </div>
             </div>
           </div>
         </div>

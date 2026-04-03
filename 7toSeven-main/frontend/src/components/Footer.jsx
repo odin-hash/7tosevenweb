@@ -36,6 +36,7 @@ export default function Footer() {
           <div>
             <h4 className="font-['Impact']  uppercase tracking-[0.25em]  text-white/50 mb-8 transition-colors duration-500">Info</h4>
             <div className="space-y-5">
+              <Link to="/archive" className="block font-mono text-sm text-[#CCFF00] hover:text-white uppercase transition-colors duration-300">ARCHIVE MUSEUM</Link>
               <Link to="/our-story" data-testid="footer-story" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">MANIFESTO</Link>
               <Link to="/faq" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">FAQ</Link>
               <Link to="/shipping" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">ORDER PROCESSING</Link>

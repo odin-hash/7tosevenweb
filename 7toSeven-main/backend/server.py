@@ -61,10 +61,25 @@ async def supa_post(table: str, data):
 
 def normalize_product(p: dict) -> dict:
     """Normalize Supabase product row for frontend consumption."""
+    
+    # Generate a deterministic mock stock based on integer ID if it exists
+    stock = 50
+    if p.get("id"):
+        id_val = int(p["id"])
+        if id_val % 4 == 0:
+            stock = 0 # Sold out
+        elif id_val % 4 == 1:
+            stock = 3 # Almost gone
+        else:
+            stock = 50
+    else:
+        stock = 25
+        
     return {
         **p,
         "original_price": p.get("compare_price"),
         "is_new": p.get("is_featured", False),
+        "stock": stock
     }
 
 

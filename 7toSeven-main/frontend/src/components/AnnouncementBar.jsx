@@ -11,8 +11,8 @@ export default function AnnouncementBar() {
       data-testid="announcement-bar"
       className="fixed top-0 left-0 right-0 z-[60] bg-black py-2 overflow-hidden whitespace-nowrap"
     >
-      <div className="animate-marquee inline-flex">
-        <span className="font-['Impact'] text-[10px] uppercase tracking-[0.25em] text-white/70">
+      <div className="animate-marquee inline-flex flex items-center">
+        <span className="font-['Impact'] text-xs min-h-[16px] md:text-sm uppercase tracking-[0.25em] text-white/70">
           {textBlock}{textBlock}{textBlock}{textBlock}
         </span>
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '@/components/ProductCard';
+import DropPasswordScreen from '@/components/DropPasswordScreen';
 import {
   Select,
   SelectContent,
@@ -30,6 +31,10 @@ export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Mock DROP State
+  const IS_DROP_LOCKED = true;
+  const [unlocked, setUnlocked] = useState(false);
 
   const category = searchParams.get('category') || 'all';
   const sort = searchParams.get('sort') || 'newest';
@@ -59,6 +64,10 @@ export default function ShopPage() {
     }
     setSearchParams(newParams);
   };
+
+  if (IS_DROP_LOCKED && !unlocked) {
+    return <DropPasswordScreen onUnlock={() => setUnlocked(true)} />;
+  }
 
   return (
     <div data-testid="shop-page" className="min-h-screen pt-32 md:pt-36  bg-[#0A0A0A] transition-colors duration-500">
