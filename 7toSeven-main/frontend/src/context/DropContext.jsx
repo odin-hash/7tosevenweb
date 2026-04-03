@@ -12,6 +12,7 @@ export function DropProvider({ children }) {
   });
 
   const unlockDrop = (password) => {
+    if (!password) return false;
     if (password.toUpperCase() === '7TOSEVEN') {
       sessionStorage.setItem('7toSeven_unlocked', 'true');
       setIsUnlocked(true);

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Lock, X } from 'lucide-react';
+import { ArrowRight, Lock, X, Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function DropPasswordScreen({ onUnlock }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password.toUpperCase() === '7TOSEVEN') {
-      onUnlock();
-    } else {
+    const success = onUnlock(password);
+    if (!success) {
       setError(true);
       setTimeout(() => setError(false), 2000);
     }
@@ -54,18 +54,26 @@ export default function DropPasswordScreen({ onUnlock }) {
 
         <form onSubmit={handleSubmit} className="relative group">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
               setError(false);
             }}
             placeholder="ENTER PASSWORD"
-            className={`w-full bg-transparent border-b-2 ${error ? 'border-red-500 text-red-500' : 'border-white/20 text-white focus:border-white'} pb-4 px-2 font-['Impact'] text-xl tracking-[0.2em] text-center outline-none transition-colors duration-300 placeholder:text-white/20`}
+            className={`w-full bg-transparent border-b-2 ${error ? 'border-red-500 text-red-500' : 'border-white/20 text-white focus:border-white'} pb-4 px-12 font-['Impact'] text-xl tracking-[0.2em] text-center outline-none transition-colors duration-300 placeholder:text-white/20`}
           />
           <button 
+            type="button"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute left-0 top-0 bottom-0 px-2 pb-4 flex items-center justify-center text-white/40 hover:text-white transition-colors duration-300"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
+          <button 
             type="submit"
-            className="absolute right-0 top-0 bottom-0 px-4 text-white/40 hover:text-white transition-colors duration-300"
+            className="absolute right-0 top-0 bottom-0 px-2 pb-4 flex items-center justify-center text-white/40 hover:text-white transition-colors duration-300"
           >
             <ArrowRight size={24} />
           </button>
