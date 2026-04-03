@@ -112,7 +112,7 @@ export default function TermsPage() {
               <p className=" font-sans font-bold uppercase tracking-[0.2em]  text-white/40 mb-8 max-w-lg mx-auto">
                 For any legal inquiries, official notices, or privacy-related concerns, please reach out to our legal department directly.
               </p>
-              <a href="mailto:legal@7toseven.com" className="inline-block border  border-white px-8 py-4 font-sans font-bold  uppercase tracking-[0.2em]  text-white   hover:bg-white hover:text-black transition-all duration-300">
+              <a href="mailto:legal@7toseven.com" className="inline-block border break-all md:break-normal border-white px-8 py-4 font-sans font-bold  uppercase tracking-[0.2em]  text-white   hover:bg-white hover:text-black transition-all duration-300">
                 LEGAL@7TOSEVEN.COM
               </a>
             </div>

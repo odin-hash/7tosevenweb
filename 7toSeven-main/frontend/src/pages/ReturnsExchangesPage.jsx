@@ -50,7 +50,7 @@ export default function ReturnsExchangesPage() {
                 Ready to make a return or exchange? Follow these instructions:
               </p>
               <ol className="list-decimal pl-5 space-y-3 mt-4  text-white">
-                <li><span className=" text-white/50">Email us at <strong className=" text-white">returns@7toseven.com</strong> with your Order Number in the subject line.</span></li>
+                <li><span className=" text-white/50">Email us at <strong className="text-white break-all md:break-normal">returns@7toseven.com</strong> with your Order Number in the subject line.</span></li>
                 <li><span className=" text-white/50">State clearly whether you are requesting a <em className=" text-white opacity-80 not-italic">Return</em> or an <em className=" text-white opacity-80 not-italic">Exchange</em> (and specify the new size if exchanging).</span></li>
                 <li><span className=" text-white/50">Attach a clear photo of the garment establishing its unworn condition with tags on.</span></li>
               </ol>

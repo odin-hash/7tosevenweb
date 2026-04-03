@@ -54,15 +54,6 @@ export default function Footer() {
               <a href="https://x.com/7tosevenoffic" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">
                 <Twitter size={18} strokeWidth={1.5} /> X / TWITTER
               </a>
-              <a href="mailto:support@7toseven.com" className="block font-mono text-sm text-zinc-400 hover:text-white break-all md:break-normal uppercase transition-colors duration-300">
-                SUPPORT@7TOSEVEN.COM
-              </a>
-              <a href="mailto:shipping@7toseven.com" className="block font-mono text-sm text-zinc-400 hover:text-white break-all md:break-normal uppercase transition-colors duration-300">
-                SHIPPING@7TOSEVEN.COM
-              </a>
-              <a href="mailto:legal@7toseven.com" className="block font-mono text-sm text-zinc-400 hover:text-white break-all md:break-normal uppercase transition-colors duration-300">
-                LEGAL@7TOSEVEN.COM
-              </a>
             </div>
           </div>
         </div>

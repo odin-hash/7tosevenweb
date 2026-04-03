@@ -80,7 +80,7 @@ export default function ShippingPolicyPage() {
               <p className=" font-sans font-bold uppercase tracking-[0.2em]  text-white/40 mb-8 max-w-lg mx-auto">
                 If your tracking link has not updated in 72 hours, or if you received an RTO notification in error, contact our logistics support team immediately.
               </p>
-              <a href="mailto:shipping@7toseven.com" className="inline-block border  border-white px-8 py-4 font-sans font-bold  uppercase tracking-[0.2em]  text-white   hover:bg-white hover:text-black transition-all duration-300">
+              <a href="mailto:shipping@7toseven.com" className="inline-block border break-all md:break-normal border-white px-8 py-4 font-sans font-bold  uppercase tracking-[0.2em]  text-white   hover:bg-white hover:text-black transition-all duration-300">
                 SHIPPING@7TOSEVEN.COM
               </a>
             </div>

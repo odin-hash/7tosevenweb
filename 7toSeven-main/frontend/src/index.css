@@ -63,6 +63,7 @@
         background-color: #F9F9F9;
         color: #111111;
         font-family: 'Arial', sans-serif;
+        letter-spacing: 0.05em;
         transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 500ms;
