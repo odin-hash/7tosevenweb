@@ -26,9 +26,9 @@ export default function Footer() {
             <h4 className="font-['Impact']  uppercase tracking-[0.25em]  text-white/50 mb-8 transition-colors duration-500">Shop</h4>
             <div className="space-y-5">
               <Link to="/shop?category=tees" data-testid="footer-shop-tees" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">TEES</Link>
-              <Link to="/shop?category=hoodies" data-testid="footer-shop-hoodies" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">HOODIES</Link>
-              <Link to="/shop?category=bottoms" data-testid="footer-shop-bottoms" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">BOTTOMS</Link>
-              <Link to="/shop?category=accessories" data-testid="footer-shop-accessories" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">ACCESSORIES</Link>
+              <Link to="/category/hoodies" data-testid="footer-shop-hoodies" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">HOODIES</Link>
+              <Link to="/category/bottoms" data-testid="footer-shop-bottoms" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">BOTTOMS</Link>
+              <Link to="/category/accessories" data-testid="footer-shop-accessories" className="block font-mono text-sm text-zinc-400 hover:text-white uppercase transition-colors duration-300">ACCESSORIES</Link>
             </div>
           </div>
 
