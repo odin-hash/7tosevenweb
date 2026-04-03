@@ -226,11 +226,11 @@ export default function ProductPage() {
             {/* CTA & Quantity Group */}
             <div className="flex flex-col sm:flex-row items-stretch gap-4 mb-10 z-10 w-full">
               <div className="flex items-center border border-white/10 bg-transparent h-14 shrink-0" data-testid="quantity-selector">
-                <button data-testid="qty-minus" onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-14 h-full flex items-center justify-center text-white/50 hover:text-white transition-colors border-r border-white/10">
+                <button data-testid="qty-minus" onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-14 h-full flex items-center justify-center text-white/50 hover:text-white transition-colors border-r border-white/10 shrink-0 p-0">
                   <Minus size={16} strokeWidth={2} />
                 </button>
-                <span className="w-14 h-full flex items-center justify-center font-sans font-bold text-white">{quantity}</span>
-                <button data-testid="qty-plus" onClick={() => setQuantity(q => q + 1)} className="w-14 h-full flex items-center justify-center text-white/50 hover:text-white transition-colors border-l border-white/10">
+                <span className="w-14 h-full flex items-center justify-center font-sans font-bold text-white shrink-0 p-0">{quantity}</span>
+                <button data-testid="qty-plus" onClick={() => setQuantity(q => q + 1)} className="w-14 h-full flex items-center justify-center text-white/50 hover:text-white transition-colors border-l border-white/10 shrink-0 p-0">
                   <Plus size={16} strokeWidth={2} />
                 </button>
               </div>

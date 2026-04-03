@@ -71,19 +71,19 @@ export default function CartDrawer() {
                     <p className="font-mono text-[10px] uppercase tracking-widest text-[#CCFF00] mt-1">SIZE: // {item.size}</p>
                     <p className="font-mono text-xs font-bold text-white mt-3 pb-2 border-b border-white/10">RS. {item.price.toLocaleString('en-IN')}</p>
                     <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-center border  border-white/20">
+                      <div className="flex items-center border  border-white/20 shrink-0">
                         <button
                           data-testid={`cart-qty-minus-${item.product_id}`}
                           onClick={() => updateQuantity(item.product_id, item.size, item.quantity - 1)}
-                          className="w-7 h-7 flex items-center justify-center  text-white/50  hover:bg-white/[0.06] transition-colors"
+                          className="w-7 h-7 flex items-center justify-center  text-white/50  hover:bg-white/[0.06] transition-colors shrink-0 p-0"
                         >
                           <Minus size={12} />
                         </button>
-                        <span className="w-6 font-mono text-xs text-center text-white">{item.quantity}</span>
+                        <span className="w-6 font-mono text-xs text-center text-white shrink-0 p-0">{item.quantity}</span>
                         <button
                           data-testid={`cart-qty-plus-${item.product_id}`}
                           onClick={() => updateQuantity(item.product_id, item.size, item.quantity + 1)}
-                          className="w-7 h-7 flex items-center justify-center  text-white/50  hover:bg-white/[0.06] transition-colors"
+                          className="w-7 h-7 flex items-center justify-center  text-white/50  hover:bg-white/[0.06] transition-colors shrink-0 p-0"
                         >
                           <Plus size={12} />
                         </button>
