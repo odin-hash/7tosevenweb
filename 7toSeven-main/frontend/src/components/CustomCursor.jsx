@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-export default function CustomCursor() {
+// Evaluated once at module load — no flash of cursor dot on mobile
+function detectTouchDevice() {
+  if (typeof window === 'undefined') return false;
+  return (
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0 ||
+    window.matchMedia('(pointer: coarse)').matches
+  );
+}
+
+const IS_TOUCH = detectTouchDevice();
+
+function CursorInner() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      setIsVisible(false);
-    } else {
-      setIsVisible(true);
-    }
-
     const updatePosition = (e) => {
       setIsVisible(true);
       setPosition({ x: e.clientX, y: e.clientY });
@@ -19,7 +25,7 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e) => {
       const target = e.target;
-      const isInteractive = 
+      const isInteractive =
         target.tagName.toLowerCase() === 'a' ||
         target.tagName.toLowerCase() === 'button' ||
         target.closest('a') ||
@@ -30,6 +36,7 @@ export default function CustomCursor() {
       setIsHovering(!!isInteractive);
     };
 
+    // Failsafe: if a touchstart fires on a hybrid device, hide immediately
     const handleTouch = () => {
       setIsVisible(false);
     };
@@ -55,11 +62,17 @@ export default function CustomCursor() {
         willChange: 'transform'
       }}
     >
-      <div 
+      <div
         className={`bg-white transition-all duration-300 ease-[cubic-bezier(0.2,1,0.2,1)] ${
           isHovering ? 'w-6 h-6 rotate-45 scale-125' : 'w-3 h-3 rotate-0 scale-100'
         }`}
       />
     </div>
   );
+}
+
+export default function CustomCursor() {
+  // Touch device? Return absolutely nothing — zero DOM, zero listeners.
+  if (IS_TOUCH) return null;
+  return <CursorInner />;
 }

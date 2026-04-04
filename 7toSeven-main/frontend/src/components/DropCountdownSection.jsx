@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useCountdown } from '@/hooks/useCountdown';
 import { ArrowRight } from 'lucide-react';
+import axios from 'axios';
+
+const API = `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'}/api`;
 
 // Set target date 1 month from now for testing
 const TARGET_DATE = new Date();
@@ -15,9 +18,17 @@ export default function DropCountdownSection() {
 
   useEffect(() => setMounted(true), []);
 
-  const handleNotifySubmit = (e) => {
+  const handleNotifySubmit = async (e) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    try {
+      await axios.post(`${API}/waitlist`, { email_or_phone: email });
+      setSubmitted(true);
+    } catch (err) {
+      console.error('Waitlist submission failed:', err);
+      // Give them a brutalist error feedback
+      alert('SYSTEM ERROR: UNABLE TO JOIN. TRY LATER.');
+    }
   };
 
   if (isExpired) return null;

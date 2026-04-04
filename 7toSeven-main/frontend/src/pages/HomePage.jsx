@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useProducts } from '@/hooks/useProducts';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import HeroSection from '@/components/HeroSection';
@@ -8,14 +9,16 @@ import MarqueeBanner from '@/components/MarqueeBanner';
 import DropCountdownSection from '@/components/DropCountdownSection';
 import ProductCard from '@/components/ProductCard';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'}/api`;
 const LOGO_ICON = "/logo-icon.png";
 
 export default function HomePage() {
-  const [products, setProducts] = useState([]);
+  const { products, loading: productsLoading } = useProducts();
   const [stories, setStories] = useState([]);
   const [collections, setCollections] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [otherLoading, setOtherLoading] = useState(true);
+
+  const loading = productsLoading || otherLoading;
   const lookbookRef = useRef(null);
 
   const scrollLookbook = (direction) => {
@@ -24,14 +27,13 @@ export default function HomePage() {
     }
   };
   useEffect(() => {
-    setLoading(true);
+    setOtherLoading(true);
 
     Promise.all([
-      axios.get(`${API}/products`).then(r => setProducts(r.data.products)).catch(() => {}),
       axios.get(`${API}/drop-stories`).then(r => setStories(r.data.stories)).catch(() => {}),
       axios.get(`${API}/collections`).then(r => setCollections(r.data.collections)).catch(() => {})
     ]).finally(() => {
-      setLoading(false);
+      setOtherLoading(false);
     });
   }, []);
 
@@ -98,11 +100,9 @@ export default function HomePage() {
           </div>
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 gap-6">
-              <div className="relative flex items-center justify-center w-12 h-12">
-                <div className="absolute inset-0   border-white/10 rounded-full" />
-                <div className="absolute inset-0   border-white rounded-full animate-spin " />
-                <div className="w-2 h-2  bg-white rounded-full animate-pulse" />
-              </div>
+               <p className="font-mono text-[#CCFF00] uppercase tracking-widest text-sm animate-pulse">
+                  // FETCHING_DATA...
+               </p>
             </div>
           ) : (
             <motion.div 

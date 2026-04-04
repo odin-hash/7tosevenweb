@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import { useProducts } from '@/hooks/useProducts';
 import ProductCard from '@/components/ProductCard';
 import DropPasswordScreen from '@/components/DropPasswordScreen';
 import { useDrop } from '@/context/DropContext';
@@ -12,7 +12,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const CATEGORIES = [
   { value: 'all', label: 'All' },
@@ -30,30 +29,12 @@ const SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
 
 export default function ShopPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  // Use global Drop context
   const { isDropLocked, isUnlocked, unlockDrop } = useDrop();
-
   const category = searchParams.get('category') || 'all';
   const sort = searchParams.get('sort') || 'newest';
   const sizeFilter = searchParams.get('size') || '';
 
-  useEffect(() => {
-    setLoading(true);
-
-    const params = new URLSearchParams();
-    if (category !== 'all') params.set('category', category);
-    if (sort) params.set('sort', sort);
-    if (sizeFilter) params.set('size', sizeFilter);
-    axios.get(`${API}/products?${params.toString()}`)
-      .then(r => setProducts(r.data.products))
-      .catch(() => { })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [category, sort, sizeFilter]);
+  const { products, loading } = useProducts({ category, sort, size: sizeFilter });
 
   const updateFilter = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
@@ -133,11 +114,9 @@ export default function ShopPage() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 pb-32">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32 gap-6 min-h-[400px]">
-            <div className="relative flex items-center justify-center w-12 h-12">
-              <div className="absolute inset-0   border-white/10 rounded-full" />
-              <div className="absolute inset-0   border-white rounded-full animate-spin " />
-              <div className="w-2 h-2  bg-white rounded-full animate-pulse" />
-            </div>
+             <p className="font-mono text-[#CCFF00] uppercase tracking-widest text-sm animate-pulse">
+                // FETCHING_DATA...
+             </p>
           </div>
         ) : products.length === 0 ? (
           <div className="flex items-center justify-center py-24">

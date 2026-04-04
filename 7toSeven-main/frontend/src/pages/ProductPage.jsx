@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import axios from 'axios';
+import { useProduct } from '@/hooks/useProducts';
 import { Heart, Minus, Plus, ChevronLeft, ChevronRight, X, ZoomIn, ZoomOut, Zap, RefreshCw, Shield } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useDrop } from '@/context/DropContext';
@@ -10,44 +10,36 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from '@/components/ui/accordion';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function ProductPage() {
   const { slug } = useParams();
   const { addToCart } = useCart();
   const { isDropLocked, isUnlocked } = useDrop();
-  const [product, setProduct] = useState(null);
-  const [related, setRelated] = useState([]);
+  const { product, related, loading } = useProduct(slug);
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const [wishlisted, setWishlisted] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [loadingSlow, setLoadingSlow] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setLoadingSlow(false);
     setSelectedSize('');
     setQuantity(1);
     setSelectedImage(0);
+    setLoadingSlow(false);
 
-    const slowTimeout = setTimeout(() => {
-      setLoadingSlow(true);
-    }, 4000);
+    let slowTimeout;
+    if (loading) {
+      slowTimeout = setTimeout(() => {
+        setLoadingSlow(true);
+      }, 4000);
+    }
 
-    axios.get(`${API}/products/${slug}`)
-      .then(r => { setProduct(r.data.product); setRelated(r.data.related); })
-      .catch(() => { })
-      .finally(() => {
-        clearTimeout(slowTimeout);
-        setLoading(false);
-        setLoadingSlow(false);
-      });
-  }, [slug]);
+    return () => clearTimeout(slowTimeout);
+  }, [slug, loading]);
 
   useEffect(() => {
     if (isLightboxOpen) {
@@ -93,11 +85,9 @@ export default function ProductPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center pt-32 pb-40 gap-8  bg-[#0A0A0A] transition-colors duration-500">
         <div className="flex flex-col items-center justify-center gap-8">
-          <div className="relative flex items-center justify-center w-12 h-12">
-            <div className="absolute inset-0   border-white/10 rounded-full" />
-            <div className="absolute inset-0   border-white rounded-full animate-spin " />
-            <div className="w-2 h-2  bg-white rounded-full animate-pulse" />
-          </div>
+          <p className="font-mono text-[#CCFF00] uppercase tracking-widest text-sm animate-pulse">
+            // FETCHING_DATA...
+          </p>
           {loadingSlow && (
             <div className="text-center animate-pulse mt-4">
               <p className="font-sans font-bold  md:text-[12px] uppercase tracking-[0.3em]  text-white/60 mb-2">

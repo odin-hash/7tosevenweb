@@ -1,15 +1,15 @@
-from fastapi import FastAPI, APIRouter, HTTPException
-from dotenv import load_dotenv
-from starlette.middleware.cors import CORSMiddleware
-import os
-import logging
-import httpx
-from pathlib import Path
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from pydantic import BaseModel
 from typing import List, Optional
+import os
+import logging
 import uuid
 from datetime import datetime, timezone
 import razorpay
+from supabase import create_client, Client
+from dotenv import load_dotenv
+from pathlib import Path
+from starlette.middleware.cors import CORSMiddleware
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -17,99 +17,27 @@ load_dotenv(ROOT_DIR / '.env')
 SUPABASE_URL = os.environ.get('SUPABASE_URL', '')
 SUPABASE_KEY = os.environ.get('SUPABASE_KEY', '')
 
+# Initialize Supabase Python Client
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
+
 RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID', '')
 RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', '')
 
+# Initialize Razorpay Client
 razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET)) if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET else None
-
-HEADERS = {
-    "apikey": SUPABASE_KEY,
-    "Authorization": f"Bearer {SUPABASE_KEY}",
-    "Content-Type": "application/json",
-    "Prefer": "return=representation",
-}
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
 logger = logging.getLogger(__name__)
 
-# In-memory order store — used ONLY when Supabase RLS blocks inserts.
-# Orders migrate to Supabase automatically once policies allow inserts.
-_order_store: dict = {}
-
-
-# ── SUPABASE HELPERS ───────────────────────────────────────────────
-async def supa_get(table: str, params: str = ""):
-    if not SUPABASE_URL: return None
-    async with httpx.AsyncClient(timeout=15) as c:
-        r = await c.get(f"{SUPABASE_URL}/rest/v1/{table}?{params}", headers=HEADERS)
-        if r.status_code == 200:
-            return r.json()
-        logger.warning(f"supa_get {table}: {r.status_code} {r.text[:200]}")
-        return None
-
-
-async def supa_post(table: str, data):
-    if not SUPABASE_URL: return None
-    async with httpx.AsyncClient(timeout=15) as c:
-        r = await c.post(f"{SUPABASE_URL}/rest/v1/{table}", headers=HEADERS, json=data)
-        if r.status_code in (200, 201):
-            return r.json()
-        logger.warning(f"supa_post {table}: {r.status_code} {r.text[:300]}")
-        return None
-
-
-def normalize_product(p: dict) -> dict:
-    """Normalize Supabase product row for frontend consumption."""
-    
-    # Generate a deterministic mock stock based on integer ID if it exists
-    stock = 50
-    fitProfile = "True To Size"
-    if p.get("id"):
-        id_val = int(p["id"])
-        if id_val % 4 == 0:
-            stock = 0 # Sold out
-        elif id_val % 4 == 1:
-            stock = 3 # Almost gone
-        else:
-            stock = 50
-            
-        fit_val = id_val % 3
-        if fit_val == 0:
-            fitProfile = "Cropped"
-        elif fit_val == 1:
-            fitProfile = "True To Size"
-        else:
-            fitProfile = "Boxy / Oversized"
-    else:
-        stock = 25
-        fitProfile = "True To Size"
-        
-    return {
-        **p,
-        "original_price": p.get("compare_price"),
-        "is_new": p.get("is_featured", False),
-        "stock": stock,
-        "modelSpecs": "MODEL: 6'1\" (185cm) | 165LBS | WEARING: L",
-        "fitProfile": fitProfile,
-        "measurements": [
-            {"size": "S", "chest": 22.5, "length": 27.0, "shoulder": 20.5, "sleeve": 9.0},
-            {"size": "M", "chest": 23.5, "length": 28.0, "shoulder": 21.5, "sleeve": 9.5},
-            {"size": "L", "chest": 24.5, "length": 29.0, "shoulder": 22.5, "sleeve": 10.0},
-            {"size": "XL", "chest": 25.5, "length": 30.0, "shoulder": 23.5, "sleeve": 10.5}
-        ]
-    }
-
-
 # ── PYDANTIC MODELS ────────────────────────────────────────────────
 class OrderItemModel(BaseModel):
-    product_id: int
+    product_id: str
     product_name: str
     size: str
     quantity: int
     price: float
     image: str
-
 
 class OrderCreate(BaseModel):
     items: List[OrderItemModel]
@@ -127,220 +55,312 @@ class OrderCreate(BaseModel):
 class RazorpayOrderRequest(BaseModel):
     items: List[OrderItemModel]
 
-
 # ── API ROUTES ─────────────────────────────────────────────────────
 @api_router.get("/")
-async def root():
-    return {"message": "7toSEVEN API", "status": "running"}
-
+def root():
+    return {"message": "7toSEVEN API (Supabase + Razorpay)", "status": "running"}
 
 @api_router.get("/products")
-async def get_products(
-    category: Optional[str] = None,
-    size: Optional[str] = None,
-    sort: Optional[str] = None,
-):
-    params = "select=*"
-    filters = []
-    if category and category != "all":
-        filters.append(f"category=ilike.{category}")
-    if filters:
-        params += "&" + "&".join(filters)
-    if sort == "price-low":
-        params += "&order=price.asc"
-    elif sort == "price-high":
-        params += "&order=price.desc"
-    else:
-        params += "&order=created_at.desc"
-
-    data = await supa_get("products", params)
-    if data is None:
-        return {"products": [], "total": 0}
-
-    if size:
-        data = [p for p in data if size in (p.get("sizes") or [])]
-
-    products = [normalize_product(p) for p in data]
-    return {"products": products, "total": len(products)}
-
+def get_products(category: Optional[str] = None):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Supabase not configured")
+        
+    try:
+        # Fetch products and powerfully join with the new inventory table
+        query = supabase.table('products').select('*, inventory(size, stock_count)')
+        if category and category != "all":
+            query = query.ilike("category", f"%{category}%")
+            
+        response = query.execute()
+        
+        products = []
+        for p in response.data:
+            inventory = p.get('inventory', [])
+            total_stock = sum(item.get('stock_count', 0) for item in inventory)
+            
+            # Map available sizes array for easy frontend consumption
+            available_sizes = [item.get('size') for item in inventory if item.get('stock_count', 0) > 0]
+            
+            products.append({
+                **p,
+                "stock": total_stock, 
+                "inventory": inventory, 
+                "sizes": available_sizes
+            })
+            
+        return {"products": products, "total": len(products)}
+    except Exception as e:
+        logger.error(f"Error fetching products: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to fetch products")
 
 @api_router.get("/products/{slug}")
-async def get_product(slug: str):
-    data = await supa_get("products", f"select=*&slug=eq.{slug}")
-    if not data or len(data) == 0:
-        raise HTTPException(status_code=404, detail="Product not found")
-
-    product = normalize_product(data[0])
-
-    related_data = await supa_get(
-        "products",
-        f"select=*&category=ilike.{product['category']}&id=neq.{product['id']}&limit=4",
-    )
-    related = [normalize_product(p) for p in (related_data or [])]
-
-    return {"product": product, "related": related}
-
-
-@api_router.get("/collections")
-async def get_collections():
-    data = await supa_get("collections", "select=*&order=created_at.asc")
-    return {"collections": data or []}
-
-
-@api_router.get("/drop-stories")
-async def get_drop_stories():
-    return {
-        "stories": [
-            {"id": "ds_1", "title": "THE MAKING OF DROP 001", "image": "/drop-stories/making_of_drop_001.png"},
-            {"id": "ds_2", "title": "BEHIND THE FABRIC", "image": "/drop-stories/behind_the_fabric.png"},
-            {"id": "ds_3", "title": "STREET CULTURE", "image": "/drop-stories/street_culture_v3.png"},
-            {"id": "ds_4", "title": "THE 7toSEVEN ETHOS", "image": "/drop-stories/the_7toseven_ethos.png"},
-            {"id": "ds_5", "title": "NOCTURNAL LOOKBOOK", "image": "/drop-stories/nocturnal_lookbook_v2.png"},
-            {"id": "ds_6", "title": "ENGINEERED UTILITY", "image": "/drop-stories/engineered_utility.png"},
-        ]
-    }
-
+def get_product(slug: str):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Supabase not configured")
+        
+    try:
+        response = supabase.table('products').select('*, inventory(size, stock_count)').eq('slug', slug).execute()
+        if not response.data:
+            raise HTTPException(status_code=404, detail="Product not found")
+            
+        p = response.data[0]
+        inventory = p.get('inventory', [])
+        total_stock = sum(item.get('stock_count', 0) for item in inventory)
+        available_sizes = [item.get('size') for item in inventory if item.get('stock_count', 0) > 0]
+        
+        product_data = {
+            **p,
+            "stock": total_stock,
+            "inventory": inventory,
+            "sizes": available_sizes
+        }
+        
+        # Related products fallback
+        try:
+            related_res = supabase.table('products').select('*, inventory(size, stock_count)').neq('id', p['id']).ilike('category', p.get('category', '')).limit(4).execute()
+            related = related_res.data
+        except:
+            related = []
+            
+        return {"product": product_data, "related": related}
+    except Exception as e:
+        logger.error(f"Error fetching product: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error fetching product")
 
 @api_router.post("/create-razorpay-order")
-async def create_razorpay_order(req: RazorpayOrderRequest):
+def create_razorpay_order(req: RazorpayOrderRequest):
+    if not razorpay_client:
+        raise HTTPException(status_code=500, detail="Razorpay is not configured on the backend.")
+        
+    # Security: Calculate total entirely on the backend to prevent frontend tampering
     subtotal = sum(item.price * item.quantity for item in req.items)
     shipping_fee = 0 if subtotal >= 899 else 99
     total = subtotal + shipping_fee
     
-    if not razorpay_client:
-        raise HTTPException(status_code=500, detail="Razorpay is not configured on the backend.")
-        
+    import json
     try:
+        # We compress the cart into notes so the webhook can recover it if client disconnects
+        compact_cart = [{"id": i.product_id, "sz": i.size, "q": i.quantity} for i in req.items]
         order_data = {
-            "amount": int(total * 100), # Amount in paise
+            "amount": int(total * 100), # Razorpay expects the amount in paise (1 INR = 100 paise)
             "currency": "INR",
-            "receipt": "rcpt_" + str(uuid.uuid4())[:8]
+            "receipt": f"rcpt_{uuid.uuid4().hex[:8]}",
+            "notes": {
+                "cart_data": json.dumps(compact_cart)[:254]
+            }
         }
         rzp_order = razorpay_client.order.create(data=order_data)
-        return {"id": rzp_order["id"], "amount": rzp_order["amount"], "currency": rzp_order["currency"]}
+        
+        return {
+            "id": rzp_order["id"], 
+            "amount": rzp_order["amount"], 
+            "currency": rzp_order["currency"]
+        }
     except Exception as e:
-        logger.error(f"Razorpay error: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to create Razorpay order")
+        logger.error(f"Razorpay order creation failed: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create Razorpay Order")
 
-@api_router.post("/orders")
-async def create_order(order: OrderCreate):
-    order_number = str(uuid.uuid4())[:8].upper()
-    subtotal = sum(item.price * item.quantity for item in order.items)
-    shipping_fee = 0 if subtotal >= 899 else 99
-    total = subtotal + shipping_fee
+@api_router.post("/verify-payment")
+def verify_payment(req: OrderCreate):
+    if not supabase or not razorpay_client:
+        raise HTTPException(status_code=500, detail="Backend misconfigured")
+        
+    try:
+        # 1. Verify Razorpay Signature
+        params_dict = {
+            'razorpay_order_id': req.razorpay_order_id,
+            'razorpay_payment_id': req.razorpay_payment_id,
+            'razorpay_signature': req.razorpay_signature
+        }
+        # Throws SignatureVerificationError if invalid
+        razorpay_client.utility.verify_payment_signature(params_dict)
+        
+        # 2. Calculate Final Total (Anti-tamper)
+        subtotal = sum(item.price * item.quantity for item in req.items)
+        shipping_fee = 0 if subtotal >= 899 else 99
+        total = subtotal + shipping_fee
+        
+        # 3. Insert core order record
+        order_res = supabase.table('orders').insert({
+            'razorpay_order_id': req.razorpay_order_id,
+            'razorpay_payment_id': req.razorpay_payment_id,
+            'customer_name': req.customer_name,
+            'customer_email': req.customer_email,
+            'customer_phone': req.customer_phone,
+            'address': req.address,
+            'city': req.city,
+            'state': req.state,
+            'pincode': req.pincode,
+            'total_amount': total,
+            'status': 'PAID'
+        }).execute()
+        
+        order_id = order_res.data[0]['id']
+        
+        # 4. Insert Order Items & Decrement Inventory
+        for item in req.items:
+            supabase.table('order_items').insert({
+                'order_id': order_id,
+                'product_id': item.product_id,
+                'size': item.size,
+                'quantity': item.quantity,
+                'price': item.price
+            }).execute()
+            
+            # Fetch current stock to decrement safely
+            inv_res = supabase.table('inventory').select('stock_count').eq('product_id', item.product_id).eq('size', item.size).execute()
+            if inv_res.data:
+                current_stock = inv_res.data[0].get('stock_count', 0)
+                new_stock = max(0, current_stock - item.quantity)
+                supabase.table('inventory').update({'stock_count': new_stock}).eq('product_id', item.product_id).eq('size', item.size).execute()
+        
+        return {"status": "success", "order_id": order_id}
+        
+    except razorpay.errors.SignatureVerificationError:
+        logger.error("Razorpay Signature Invalid")
+        raise HTTPException(status_code=400, detail="Invalid Payment Signature")
+    except Exception as e:
+        logger.error(f"Fulfillment failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Fulfillment Failed")
 
-    # Verify Razorpay Signature if Razorpay is configured
-    if razorpay_client and order.razorpay_payment_id and order.razorpay_signature and order.razorpay_order_id:
-        try:
-            razorpay_client.utility.verify_payment_signature({
-                'razorpay_order_id': order.razorpay_order_id,
-                'razorpay_payment_id': order.razorpay_payment_id,
-                'razorpay_signature': order.razorpay_signature
-            })
-        except Exception as e:
-            logger.error(f"Payment verification failed: {str(e)}")
-            raise HTTPException(status_code=400, detail="Payment verification failed")
+@api_router.post("/webhook/razorpay")
+async def razorpay_webhook(request: Request):
+    if not supabase or not razorpay_client:
+        return {"status": "ignored"}
+        
+    try:
+        body_bytes = await request.body()
+        body_str = body_bytes.decode('utf-8')
+        signature = request.headers.get("x-razorpay-signature")
+        webhook_secret = os.environ.get('RAZORPAY_WEBHOOK_SECRET', '')
+        
+        # Verify signature if secret is mapped
+        if webhook_secret and signature:
+            razorpay_client.utility.verify_webhook_signature(body_str, signature, webhook_secret)
+        
+        payload = await request.json()
+        event_type = payload.get("event")
+        
+        if event_type in ["order.paid", "payment.captured"]:
+            payment_entity = payload.get('payload', {}).get('payment', {}).get('entity', {})
+            order_id = payment_entity.get('order_id')
+            
+            if order_id:
+                # Check if this order has already been processed by the client
+                existing = supabase.table('orders').select('id').eq('razorpay_order_id', order_id).execute()
+                
+                if not existing.data:
+                    import json
+                    logger.warning(f"Failsafe inserting missing order payload: {order_id}")
+                    
+                    order_res = supabase.table('orders').insert({
+                        'razorpay_order_id': order_id,
+                        'razorpay_payment_id': payment_entity.get('id'),
+                        'customer_email': payment_entity.get('email', 'unknown'),
+                        'customer_phone': payment_entity.get('contact', '0000000000'),
+                        'customer_name': 'WEBHOOK_RECOVERY',
+                        'address': 'PENDING',
+                        'city': 'PENDING',
+                        'state': 'PENDING',
+                        'pincode': '000000',
+                        'total_amount': payment_entity.get('amount', 0) / 100,
+                        'status': 'PAID_FAILSAFE'
+                    }).execute()
+                    
+                    db_order_id = order_res.data[0]['id']
+                    
+                    # Decrypt injected cart notes to decrement safely
+                    notes = payment_entity.get('notes', {})
+                    if 'cart_data' in notes:
+                        try:
+                            cart = json.loads(notes['cart_data'])
+                            for item in cart:
+                                supabase.table('order_items').insert({
+                                    'order_id': db_order_id,
+                                    'product_id': item['id'],
+                                    'size': item['sz'],
+                                    'quantity': item['q'],
+                                    'price': 0 
+                                }).execute()
+                                
+                                inv_res = supabase.table('inventory').select('stock_count').eq('product_id', item['id']).eq('size', item['sz']).execute()
+                                if inv_res.data:
+                                    current_stock = inv_res.data[0].get('stock_count', 0)
+                                    supabase.table('inventory').update({'stock_count': max(0, current_stock - item['q'])}).eq('product_id', item['id']).eq('size', item['sz']).execute()
+                        except:
+                            pass
+                            
+        return {"status": "success"}
 
-    order_doc = {
-        "order_number": order_number,
-        "customer_name": order.customer_name,
-        "customer_email": order.customer_email,
-        "customer_phone": order.customer_phone,
-        "shipping_address": {
-            "address": order.address,
-            "city": order.city,
-            "state": order.state,
-            "pincode": order.pincode,
-        },
-        "items": [item.model_dump() for item in order.items],
-        "subtotal": float(subtotal),
-        "shipping_fee": float(shipping_fee),
-        "total": float(total),
-        "status": "paid" if order.razorpay_payment_id else "pending",
-        "razorpay_payment_id": order.razorpay_payment_id,
-        "razorpay_order_id": order.razorpay_order_id,
-    }
+    except Exception as e:
+        logger.error(f"Webhook processing error: {e}")
+        return {"status": "ignored"}
 
-    # Attempt Supabase insert
-    result = await supa_post("orders", order_doc)
-
-    if result and len(result) > 0:
-        saved = result[0]
-        logger.info(f"Order {order_number} saved to Supabase")
-    else:
-        # Supabase insert blocked by RLS — store locally
-        order_doc["created_at"] = datetime.now(timezone.utc).isoformat()
-        _order_store[order_number] = order_doc
-        logger.warning(f"Order {order_number} stored in memory (Supabase RLS blocked insert)")
-
-    return {
-        "order_id": order_number,
-        "order_number": order_number,
-        "items": order_doc["items"],
-        "customer_name": order.customer_name,
-        "customer_email": order.customer_email,
-        "customer_phone": order.customer_phone,
-        "address": order.address,
-        "city": order.city,
-        "state": order.state,
-        "pincode": order.pincode,
-        "subtotal": subtotal,
-        "shipping": shipping_fee,
-        "total": total,
-        "status": "pending",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-    }
-
+@api_router.post("/waitlist")
+def join_waitlist(data: dict):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Supabase not configured")
+        
+    email_or_phone = data.get('email_or_phone')
+    if not email_or_phone:
+        raise HTTPException(status_code=400, detail="Email or phone is required")
+        
+    try:
+        # Insert into the waitlist table we created in the schema
+        supabase.table('waitlist').insert({"email_or_phone": email_or_phone}).execute()
+        return {"status": "success", "message": "Added to waitlist"}
+    except Exception as e:
+        logger.error(f"Waitlist insert error: {e}")
+        raise HTTPException(status_code=500, detail="Could not add to waitlist")
 
 @api_router.get("/orders/{order_id}")
-async def get_order(order_id: str):
-    # Try Supabase first
-    data = await supa_get("orders", f"select=*&order_number=eq.{order_id}")
-    if data and len(data) > 0:
-        o = data[0]
-        addr = o.get("shipping_address") or {}
-        return {
-            "order_id": o.get("order_number"),
-            "items": o.get("items", []),
-            "customer_name": o.get("customer_name"),
-            "customer_email": o.get("customer_email"),
-            "customer_phone": o.get("customer_phone"),
-            "address": addr.get("address", ""),
-            "city": addr.get("city", ""),
-            "state": addr.get("state", ""),
-            "pincode": addr.get("pincode", ""),
-            "subtotal": o.get("subtotal", 0),
-            "shipping": o.get("shipping_fee", 0),
-            "total": o.get("total", 0),
-            "status": o.get("status"),
-            "created_at": o.get("created_at"),
-        }
+def get_order(order_id: str):
+    if not supabase:
+        raise HTTPException(status_code=500, detail="Supabase not configured")
+        
+    try:
+        # Fetch the order and join with order_items
+        order_res = supabase.table('orders').select('*, order_items(*)').eq('id', order_id).execute()
+        
+        if not order_res.data:
+            raise HTTPException(status_code=404, detail="Order not found")
+            
+        order_data = order_res.data[0]
+        
+        # Hydrate product details for the receipt (like name and image)
+        hydrated_items = []
+        for item in order_data.get('order_items', []):
+            product_res = supabase.table('products').select('name, image_url').eq('id', item['product_id']).execute()
+            if product_res.data:
+                item['product_name'] = product_res.data[0]['name']
+                item['image'] = product_res.data[0]['image_url']
+            hydrated_items.append(item)
+            
+        order_data['items'] = hydrated_items
+        return {"order": order_data}
+        
+    except Exception as e:
+        logger.error(f"Error fetching order {order_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error fetching order")
 
-    # Fallback to local store
-    if order_id in _order_store:
-        o = _order_store[order_id]
-        addr = o.get("shipping_address") or {}
-        return {
-            "order_id": o.get("order_number"),
-            "items": o.get("items", []),
-            "customer_name": o.get("customer_name"),
-            "customer_email": o.get("customer_email"),
-            "customer_phone": o.get("customer_phone"),
-            "address": addr.get("address", ""),
-            "city": addr.get("city", ""),
-            "state": addr.get("state", ""),
-            "pincode": addr.get("pincode", ""),
-            "subtotal": o.get("subtotal", 0),
-            "shipping": o.get("shipping_fee", 0),
-            "total": o.get("total", 0),
-            "status": o.get("status"),
-            "created_at": o.get("created_at"),
-        }
+@api_router.get("/collections")
+def get_collections():
+    if not supabase: return {"collections": []}
+    try:
+        res = supabase.table('collections').select('*').execute()
+        return {"collections": res.data}
+    except:
+        return {"collections": []}
 
-    raise HTTPException(status_code=404, detail="Order not found")
+@api_router.get("/drop-stories")
+def get_drop_stories():
+    return {
+        "stories": [
+            {"id": "ds_1", "title": "NOCTURNAL LOOKBOOK", "image": "/drop-stories/nocturnal_lookbook_v2.png"},
+            {"id": "ds_2", "title": "ENGINEERED UTILITY", "image": "/drop-stories/engineered_utility.png"}
+        ]
+    }
 
-
-# ── APP SETUP ──────────────────────────────────────────────────────
 app.include_router(api_router)
 
 app.add_middleware(

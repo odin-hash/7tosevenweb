@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '@/context/CartContext';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'}/api`;
 
 export default function CheckoutPage() {
   const { items, subtotal, shipping, total, clearCart } = useCart();
@@ -16,11 +16,28 @@ export default function CheckoutPage() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (items.length === 0) return;
     setSubmitting(true);
     try {
+      const resLoad = await loadRazorpayScript();
+      if (!resLoad) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        setSubmitting(false);
+        return;
+      }
+      
       // Step 1: Tell backend to generate a Razorpay order ID
       const orderPayload = {
         items: items.map(i => ({
@@ -34,7 +51,7 @@ export default function CheckoutPage() {
 
       // Step 2: Open Razorpay Payment Popup
       const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY_ID, // Passed through Vite
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Passed through Vite
         amount: amount,
         currency: currency,
         name: "7toSEVEN",
@@ -44,7 +61,7 @@ export default function CheckoutPage() {
           // Step 3: Send verification to backend and final database save
           setSubmitting(true);
           try {
-            const res = await axios.post(`${API}/orders`, {
+            const res = await axios.post(`${API}/verify-payment`, {
               ...form,
               ...orderPayload,
               razorpay_payment_id: response.razorpay_payment_id,

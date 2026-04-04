@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { CheckCircle2, Package, ArrowRight } from 'lucide-react';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'}/api`;
 
 export default function OrderConfirmedPage() {
   const [searchParams] = useSearchParams();
@@ -14,7 +14,14 @@ export default function OrderConfirmedPage() {
   useEffect(() => {
     if (orderId) {
       axios.get(`${API}/orders/${orderId}`)
-        .then(r => setOrder(r.data))
+        .then(r => {
+          const o = r.data.order;
+          if (o) {
+            const subtotal = o.items?.reduce((acc, item) => acc + (item.price * item.quantity), 0) || 0;
+            const shipping = o.total_amount - subtotal;
+            setOrder({ ...o, subtotal, shipping });
+          }
+        })
         .catch(() => {})
         .finally(() => setLoading(false));
     } else { setLoading(false); }
@@ -23,11 +30,9 @@ export default function OrderConfirmedPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-32 pb-40">
-        <div className="relative flex items-center justify-center w-12 h-12">
-          <div className="absolute inset-0   border-white/10 rounded-full" />
-          <div className="absolute inset-0   border-white rounded-full animate-spin " />
-          <div className="w-2 h-2  bg-white rounded-full animate-pulse" />
-        </div>
+        <p className="font-mono text-[#CCFF00] uppercase tracking-widest text-sm animate-pulse">
+           // FETCHING_DATA...
+        </p>
       </div>
     );
   }
@@ -53,7 +58,7 @@ export default function OrderConfirmedPage() {
               <Package size={20} strokeWidth={2} className=" text-white/50" />
               <div>
                 <p className="font-sans font-bold  uppercase tracking-[0.2em]  text-white/40">ORDER ID</p>
-                <p data-testid="order-id" className="font-['Impact']  uppercase tracking-widest  text-white">#{order.order_id}</p>
+                <p data-testid="order-id" className="font-['Impact']  uppercase tracking-widest  text-white">#{order.id.split('-')[0]}</p>
               </div>
             </div>
 
@@ -92,7 +97,7 @@ export default function OrderConfirmedPage() {
               <div className="flex justify-between"><span>SUBTOTAL</span><span>{'\u20B9'}{order.subtotal.toLocaleString('en-IN')}</span></div>
               <div className="flex justify-between"><span>SHIPPING</span><span>{order.shipping === 0 ? 'FREE' : `\u20B9${order.shipping}`}</span></div>
               <div className="flex justify-between font-['Impact']  uppercase tracking-widest  text-white pt-6   border-white/10 mt-6">
-                <span>TOTAL</span><span>{'\u20B9'}{order.total.toLocaleString('en-IN')}</span>
+                <span>TOTAL</span><span>{'\u20B9'}{order.total_amount.toLocaleString('en-IN')}</span>
               </div>
             </div>
           </div>
